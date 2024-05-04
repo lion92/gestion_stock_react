@@ -7,12 +7,24 @@ function Connexion(props) {
 
     const [nom, setNom] = useState('');
     const [description, setDescription] = useState('');
-    const [value, onChange] = useState(new Date());
     const [prix, setPrix] = useState(0);
-    const onSubmit = (e) => {
+    const [dateCalendar, setDateCalendar] = useState(new Date());
+    const ajouter = (e) => {
         e.preventDefault();
 
-        alert(`Submitted ${nom} ${description}`);
+        alert(`Submitted ${nom} ${description} ${prix} ${dateCalendar}`);
+    };
+
+    const modifier = (e) => {
+        e.preventDefault();
+
+        alert(`Submitted ${nom} ${description} ${prix} ${dateCalendar}`);
+    };
+
+    const supprimer = (e) => {
+        e.preventDefault();
+
+        alert(`Submitted ${nom} ${description} ${prix} ${dateCalendar}`);
     };
 
     return (
@@ -23,10 +35,14 @@ function Connexion(props) {
                 <label htmlFor="description">Description</label>
                 <input value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <label htmlFor="prix">Prix</label>
-                <input value={prix} onChange={(e) => setPrix(parseFloat(e.target.value))}/>
+                <input type="number" value={prix} onChange={(e) => setPrix(parseFloat(e.target.value))}/>
+                <div className="calendrier">
                 <label htmlFor="calendar">Calendrier</label>
-                <Calendar onChange={onChange} value={value} />
-                <button onClick={onSubmit}>Submit</button>
+                <Calendar value={dateCalendar} onChange={setDateCalendar} />
+                </div>
+                    <button onClick={ajouter}>Ajouter</button>
+                    <button onClick={modifier}>Modifier</button>
+                    <button onClick={supprimer}>Supprimer</button>
             </form>
         </div>
     );

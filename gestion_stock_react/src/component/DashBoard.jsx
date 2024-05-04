@@ -1,7 +1,6 @@
 import React from 'react';
 import "../css/dashboard.css"
 import {NavLink} from "react-router-dom";
-import DashBoardConnexion from "./DashBoardConnexion";
 
 function DashBoard(props) {
 
@@ -13,9 +12,16 @@ function DashBoard(props) {
                     <NavLink to={"/"}>
                         <li>Bienvenue</li>
                     </NavLink>
+                    <NavLink to={"/inscription"}>
+                    <li>Inscription</li>
+                </NavLink>
                     <NavLink to={"/article"}>
                         <li>Article</li>
                     </NavLink>
+                    <NavLink to={"/stock"}>
+                        <li>Stock</li>
+                    </NavLink>
+
                 </ul>
 
             </div>
