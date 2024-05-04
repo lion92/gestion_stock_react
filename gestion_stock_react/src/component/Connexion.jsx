@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-
-function Article(props) {
+import '../css/form.css'
+function Connexion(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const onSubmit = (e) => {
@@ -8,12 +8,14 @@ function Article(props) {
 
         alert(`Submitted ${email} ${password}`);
     };
-    
+
     return (
         <div>
-            <form>
-                <label htmlFor={email}></label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <h1>Connexion</h1>
+            <form className="form">
+                <label htmlFor="email">Email</label>
+                <input onChange={(e) => setEmail(e.target.value)}/>
+                <label htmlFor="password">Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 <button onClick={onSubmit}>Submit</button>
             </form>
@@ -21,4 +23,4 @@ function Article(props) {
     );
 }
 
-export default Article;
+export default Connexion;

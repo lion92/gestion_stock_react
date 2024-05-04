@@ -1,10 +1,10 @@
 import './App.css';
-import DashBoard from "./component/DashBoard";
+import DashBoardConnection from "./component/DashBoardConnection";
 
 function App() {
   return (
     <div className="App">
-      <DashBoard></DashBoard>
+      <DashBoardConnection></DashBoardConnection>
     </div>
   );
 }
