@@ -11,7 +11,6 @@ function Connexion(props) {
 
     return (
         <div>
-            <h1>Connexion</h1>
             <form className="form">
                 <label htmlFor="email">Email</label>
                 <input onChange={(e) => setEmail(e.target.value)}/>
