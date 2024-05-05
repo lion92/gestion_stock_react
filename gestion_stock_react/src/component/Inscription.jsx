@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../css/form.css'
 import Calendar from 'react-calendar';
-function Connexion(props) {
+function Inscription(props) {
 
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
@@ -38,4 +38,4 @@ function Connexion(props) {
     );
 }
 
-export default Connexion;
+export default Inscription;

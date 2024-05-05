@@ -3,7 +3,7 @@ import '../css/form.css'
 import Calendar from 'react-calendar';
 
 
-function Connexion(props) {
+function Stock(props) {
 
     const [idArticle, setIdArticle] = useState(0);
     const [unite, setUnite] = useState(0);
@@ -38,4 +38,4 @@ function Connexion(props) {
     );
 }
 
-export default Connexion;
+export default Stock;

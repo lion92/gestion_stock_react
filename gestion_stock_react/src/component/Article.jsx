@@ -3,7 +3,7 @@ import '../css/form.css'
 import Calendar from 'react-calendar';
 
 
-function Connexion(props) {
+function Article(props) {
 
     const [nom, setNom] = useState('');
     const [description, setDescription] = useState('');
@@ -48,4 +48,4 @@ function Connexion(props) {
     );
 }
 
-export default Connexion;
+export default Article;
