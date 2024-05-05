@@ -12,7 +12,7 @@ const Root = () => (
     <Router>
         <Switch>
             <Route exact path="/" component={DashBoardConnexion}/>
-            <Route exact path="/article" component={DashBoardArticle}/>
+            <Route exact path="/ajoutArticle" component={DashBoardArticle}/>
             <Route exact path="/stock" component={DashBoardStock}/>
             <Route exact path="/inscription" component={DashBoardInscription}/>
             <Route component={NotFound}/>

@@ -1,6 +1,7 @@
 import React from 'react';
-import Connexion from "./Connexion";
+
 import DashBoard from "./DashBoard";
+import Connexion from "./Connexion";
 
 function DashBoardConnexion(props) {
     let titre = "Connexion"

@@ -32,8 +32,8 @@
 li{
     color: wheat;
 }
-.body{
-    max-width: none;
+body{
+    max-width: 1900px;
 }
 .calendrier{
     width: 40em;
