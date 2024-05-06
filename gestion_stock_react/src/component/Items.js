@@ -1,8 +1,7 @@
 // Example items, to simulate fetching from another resources.
-import React, {useCallback, useState} from "react";
-import lien from "../Lien";
+import React from "react";
 
- function Items({ currentItems }) {
+function Items({ currentItems }) {
 
     return (
         <>

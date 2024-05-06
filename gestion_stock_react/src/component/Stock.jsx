@@ -1,16 +1,16 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
 
 
 function Stock(props) {
-
+    const [listStock, setListStock] = useState([]);
     const [idArticle, setIdArticle] = useState(0);
     const [idStock, setIdStock] = useState(0);
     const [unite, setUnite] = useState(0);
     const [dateCalendar, setDateCalendar] = useState(new Date());
-
+    const [article, setArticle] = useState([])
 
     let fetchAPIupdate = useCallback(async (e) => {
         e.preventDefault();
@@ -20,9 +20,9 @@ function Stock(props) {
                 method: "PUT",
                 body: JSON.stringify({
                     quantite: unite,
-                    article:idArticle,
-                    dateAjout:dateCalendar,
-                    idArticle:idArticle,
+                    article: idArticle,
+                    dateAjout: dateCalendar,
+                    idArticle: idArticle,
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -31,6 +31,25 @@ function Stock(props) {
         );
         const resbis = await response;
     });
+
+
+
+    const fetchAPIStock = useCallback(async () => {
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/stockBy/" + idUser);
+        const resbis = await response.json();
+        await setListStock(resbis);
+        return resbis;
+    }, [setListStock]);
+    const fetchAPIArticle = useCallback(async () => {
+        let str = "" + localStorage.getItem('jwt2')
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/byuser/" + idUser, {headers: {Authorization: `Bearer ${str}`}});
+        const resbis = await response.json();
+        await setArticle(resbis);
+
+        return resbis;
+    }, [setArticle]);
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
         e.preventDefault();
@@ -40,8 +59,8 @@ function Stock(props) {
                 method: "POST",
                 body: JSON.stringify({
                     quantite: unite,
-                    article:idArticle,
-                    dateAjout:dateCalendar,
+                    article: idArticle,
+                    dateAjout: dateCalendar,
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -49,18 +68,6 @@ function Stock(props) {
             }
         );
     });
-    const ajouter = (e) => {
-        e.preventDefault();
-
-        alert(`Submitted ${idArticle} ${unite} ${dateCalendar}`);
-    };
-
-    const supprimer = (e) => {
-        e.preventDefault();
-
-        alert(`Submitted ${idArticle} ${unite} ${dateCalendar}`);
-    };
-
     return (
         <div>
             <form className="form">
@@ -78,7 +85,8 @@ function Stock(props) {
                 <button onClick={fetchAPIupdate}>Modifier</button>
             </form>
         </div>
-    );
+    )
+        ;
 }
 
 export default Stock;

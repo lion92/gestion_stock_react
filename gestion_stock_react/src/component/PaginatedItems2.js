@@ -1,13 +1,10 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
+import React, {useCallback, useState} from 'react';
 import ReactPaginate from 'react-paginate';
-import Items from "./Items";
 import lien from "../Lien";
+import '../css/pagination.css'
 import Items2 from "./Items2";
 
-
-
-export function PaginatedItems2({ itemsPerPage=3 }) {
+export function PaginatedItems2({itemsPerPage = 3}) {
 
     let [listStock, setListStock] = useState([]);
 
@@ -42,9 +39,11 @@ export function PaginatedItems2({ itemsPerPage=3 }) {
     };
 
     return (
-        <>
-            <button style={{backgroundColor:"blue"}} onClick={fetchAPIStock}>Actualiser stock</button>
-            <Items2 currentItems={currentItems}/>
+        <div style={{color: "black"}}>
+            <button style={{backgroundColor: "blue"}} onClick={async () =>
+                await fetchAPIStock()
+            }>Actualiser stock</button>
+                <Items2 currentItems={currentItems}/>
             <ReactPaginate
                 breakLabel="..."
                 nextLabel="next >"
@@ -54,6 +53,6 @@ export function PaginatedItems2({ itemsPerPage=3 }) {
                 previousLabel="< previous"
                 renderOnZeroPageCount={null}
             />
-        </>
+        </div>
     );
 }

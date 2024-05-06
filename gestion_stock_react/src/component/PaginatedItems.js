@@ -1,9 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
+import React, {useCallback, useState} from 'react';
 import ReactPaginate from 'react-paginate';
 import Items from "./Items";
 import lien from "../Lien";
-
+import '../css/pagination.css'
 
 
 export function PaginatedItems({ itemsPerPage=3}) {
@@ -37,7 +36,7 @@ export function PaginatedItems({ itemsPerPage=3}) {
     };
 
     return (
-        <>
+        <div style={{color:"black"}}>
             <button style={{backgroundColor:"blue"}}  onClick={fetchAPI}>Actualiser Article</button>
             <Items currentItems={currentItems} />
             <ReactPaginate
@@ -49,6 +48,6 @@ export function PaginatedItems({ itemsPerPage=3}) {
                 previousLabel="< previous"
                 renderOnZeroPageCount={null}
             />
-        </>
+        </div>
     );
 }

@@ -38,3 +38,38 @@ body{
 .calendrier{
     width: 40em;
 }
+
+@media only screen and (max-width : 667px) {
+    .parent {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .div1{
+        background-color: #404040;
+        width: 100%;
+        height: 35%;
+    }
+
+    .div2{
+        background-color:#87AADD;
+        width: 100%;
+        height: 35%;
+    }
+
+    .div3{
+        background-color:#C56761;
+        width: 100%;
+        height: 30%;
+    }
+
+    li{
+        color: wheat;
+    }
+    body{
+        max-width: 1900px;
+    }
+    .calendrier{
+        width: 40em;
+    }
+}

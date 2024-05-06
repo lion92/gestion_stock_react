@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
@@ -11,14 +11,18 @@ function Article(props) {
     const [prix, setPrix] = useState(0);
     const [dateCalendar, setDateCalendar] = useState(new Date());
     const [article, setArticle]=useState([])
-    const [id, setId]=useState(-1)
+    const [idArticle, setIdArticle]=useState(-1)
 
+
+    useEffect(async ()=>{
+        await fetchAPI()
+    }, [])
     ///////////////////////////appel delete
     let fetchdelete = useCallback(async (e) => {
         e.preventDefault();
         let str = "" + localStorage.getItem('jwt2')
         const response = await fetch(
-            lien.url + "article/" + id,
+            lien.url + "article/" + idArticle,
             {
                 method: "DELETE",
                 body: JSON.stringify({
@@ -42,6 +46,29 @@ function Article(props) {
 
         return resbis;
     }, [setArticle]);
+
+    let fetchAPIupdate = useCallback(async (e) => {
+        let str = "" + localStorage.getItem('jwt2')
+        e.preventDefault();
+        const response = await fetch(
+            lien.url + "article/" + idArticle,
+            {
+                method: "PUT",
+                body: JSON.stringify({
+                    nom: nom,
+                    description: description,
+                    prix: prix,
+                    user: parseInt("" + localStorage.getItem("utilisateur")),
+                    dateAjout:dateCalendar,
+                    jwt: str
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        const resbis = await response;
+    });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
         e.preventDefault();
@@ -73,8 +100,14 @@ function Article(props) {
     return (
         <div>
             <form className="form">
-                <label htmlFor="nom">Id</label>
-                <input type="number" onChange={(e) => setId(parseInt(e.target.value,10))}/>
+                <label htmlFor="id">idArticle</label>
+
+                <select onChange={(e) => setIdArticle(parseInt(e.target.value))}>
+                    {article.map(value => {
+                            return <option value={value.id}>{value.nom}</option>
+                        }
+                    )}
+                </select>
                 <label htmlFor="nom">Nom</label>
                 <input onChange={(e) => setNom(e.target.value)}/>
                 <label htmlFor="description">Description</label>
@@ -86,7 +119,7 @@ function Article(props) {
                     <Calendar value={dateCalendar} onChange={setDateCalendar}/>
                 </div>
                 <button onClick={fetchCreer}>Ajouter</button>
-                <button>Modifier</button>
+                <button onClick={fetchAPIupdate}>Modifier</button>
                 <button onClick={fetchdelete}>Supprimer</button>
             </form>
         </div>
