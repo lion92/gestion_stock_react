@@ -2,27 +2,12 @@ import React, {useCallback, useEffect, useState} from 'react';
 import "../css/dashboard.css"
 import {NavLink} from "react-router-dom";
 import lien from "../Lien";
+import {PaginatedItems} from "./PaginatedItems";
+import {PaginatedItems2} from "./PaginatedItems2";
 
 
 function DashBoard(props) {
-    let [listArticle, setListArticle] = useState([]);
-    let [listStock, setListStock] = useState([]);
 
-    const fetchAPI = useCallback(async () => {
-        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
-        const response = await fetch(lien.url + "article/byuser/" + idUser);
-        const resbis = await response.json();
-        await setListArticle(resbis);
-        return resbis;
-    }, [setListArticle]);
-
-    const fetchAPIStock = useCallback(async () => {
-        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
-        const response = await fetch(lien.url + "article/stockBy/" + idUser);
-        const resbis = await response.json();
-        await setListStock(resbis);
-        return resbis;
-    }, [setListStock]);
     return (
         <div className="parent">
             <div className="div1">
@@ -46,72 +31,18 @@ function DashBoard(props) {
             </div>
             <div className="div2">
                 <h1>{props.titre}</h1>
-                <button onClick={fetchAPI}>>Actualiser</button>
-                <button onClick={fetchAPIStock}>>Actualiser</button>
 
                 {props.contenue}</div>
             <div className="div3">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>IdArticle</th>
-                        <th>UserId</th>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Prix</th>
-                        <th>Date d'ajout</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <PaginatedItems></PaginatedItems>
 
-                    {listArticle?.map((item, index) => {
-                        return <>
-                            <tr>
-                                <th>{item.id}</th>
-                                <th>{item.userId}</th>
-                                <th>{item.nom}</th>
-                                <th>{item.description}</th>
-                                <th>{item.prix}</th>
-                                <th>{item.dateAjout}</th>
+                <br/>
+                <br/>
+                <br/>
 
-                            </tr>
-                        </>;
-                    })}
-                    </tbody>
-                </table>
+                <PaginatedItems2></PaginatedItems2>
 
-                <table>
-                    <thead>
-                    <tr>
-                        <th>IdStock</th>
-                        <th>IdArticle</th>
-                        <th>UserId</th>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>quantite</th>
-                        <th>Prix</th>
-                        <th>Date d'ajout</th>
-                    </tr>
-                    </thead>
-                    <tbody>
 
-                    {listStock?.map((item, index) => {
-                        return <>
-                            <tr>
-                                <th>{item.stockref}</th>
-                                <th>{item.id}</th>
-                                <th>{item.userId}</th>
-                                <th>{item.nom}</th>
-                                <th>{item.description}</th>
-                                <th>{item.quantite}</th>
-                                <th>{item.prix}</th>
-                                <th>{item.dateAjout}</th>
-
-                            </tr>
-                        </>;
-                    })}
-                    </tbody>
-                </table>
             </div>
         </div>
     );
