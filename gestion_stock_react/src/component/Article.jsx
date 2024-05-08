@@ -5,7 +5,6 @@ import lien from "../Lien";
 
 
 function Article(props) {
-
     const [nom, setNom] = useState('');
     const [description, setDescription] = useState('');
     const [prix, setPrix] = useState(0);
@@ -14,8 +13,8 @@ function Article(props) {
     const [idArticle, setIdArticle]=useState(-1)
 
 
-    useEffect(async ()=>{
-        await fetchAPI()
+    useEffect( ()=>{
+        fetchAPI()
     }, [])
     ///////////////////////////appel delete
     let fetchdelete = useCallback(async (e) => {
@@ -46,6 +45,7 @@ function Article(props) {
 
         return resbis;
     }, [setArticle]);
+
 
     let fetchAPIupdate = useCallback(async (e) => {
         let str = "" + localStorage.getItem('jwt2')
@@ -102,14 +102,15 @@ function Article(props) {
             <form className="form">
                 <label htmlFor="id">idArticle</label>
 
-                <select onChange={(e) => setIdArticle(parseInt(e.target.value))}>
+                <select value={idArticle} onChange={(e) => {console.log(e.target.value);setIdArticle(parseInt(e.target.value))}}>
+                    <option value="-1">selectionner une valeur</option>
                     {article.map(value => {
-                            return <option value={value.id}>{value.nom}</option>
+                            return <option value={""+value.id}>{value.nom}</option>
                         }
                     )}
                 </select>
                 <label htmlFor="nom">Nom</label>
-                <input onChange={(e) => setNom(e.target.value)}/>
+                <input value={nom} onChange={(e) => setNom(e.target.value)}/>
                 <label htmlFor="description">Description</label>
                 <input value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <label htmlFor="prix">Prix</label>

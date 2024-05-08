@@ -40,9 +40,7 @@ export function PaginatedItems2({itemsPerPage = 3}) {
 
     return (
         <div style={{color: "black"}}>
-            <button style={{backgroundColor: "blue"}} onClick={async () =>
-                await fetchAPIStock()
-            }>Actualiser stock</button>
+            <button style={{backgroundColor: "blue"}} onClick={fetchAPIStock}>Actualiser stock</button>
                 <Items2 currentItems={currentItems}/>
             <ReactPaginate
                 breakLabel="..."
