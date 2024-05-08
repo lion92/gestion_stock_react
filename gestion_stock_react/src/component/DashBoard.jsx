@@ -21,7 +21,7 @@ function DashBoard(props) {
             .then(res => res.blob())
             .then(blob => {
                 var file = window.URL.createObjectURL(blob);
-                window.location.assign(file);
+                window.open(file, "_blank")
             });
     }
 
@@ -33,7 +33,7 @@ function DashBoard(props) {
             .then(res => res.blob())
             .then(blob => {
                 var file = window.URL.createObjectURL(blob);
-                window.location.assign(file);
+                window.open(file, "_blank")
             });
     }
 
