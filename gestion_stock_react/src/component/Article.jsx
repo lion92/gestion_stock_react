@@ -8,6 +8,7 @@ function Article(props) {
     const [nom, setNom] = useState('');
     const [description, setDescription] = useState('');
     const [prix, setPrix] = useState(0);
+
     const [dateCalendar, setDateCalendar] = useState(new Date());
     const [article, setArticle]=useState([])
     const [idArticle, setIdArticle]=useState(-1)
@@ -15,6 +16,7 @@ function Article(props) {
 
     useEffect( ()=>{
         fetchAPI()
+
     }, [])
     ///////////////////////////appel delete
     let fetchdelete = useCallback(async (e) => {
@@ -47,6 +49,8 @@ function Article(props) {
     }, [setArticle]);
 
 
+
+
     let fetchAPIupdate = useCallback(async (e) => {
         let str = "" + localStorage.getItem('jwt2')
         e.preventDefault();
@@ -68,6 +72,7 @@ function Article(props) {
             }
         );
         const resbis = await response;
+        await fetchAPI();
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
@@ -99,6 +104,7 @@ function Article(props) {
 
     return (
         <div>
+
             <form className="form">
                 <label htmlFor="id">idArticle</label>
 
