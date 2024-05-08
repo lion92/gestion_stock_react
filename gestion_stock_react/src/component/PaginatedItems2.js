@@ -17,6 +17,22 @@ export function PaginatedItems2({itemsPerPage = 3}) {
         return resbis;
     }, [setListStock]);
 
+
+    const fetchAPIStockByName = useCallback(async () => {
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/byuser-stock-name/" + idUser);
+        const resbis = await response.json();
+        await setListStock(resbis);
+        return resbis;
+    }, [setListStock]);
+
+    const fetchAPIStockByQuantite = useCallback(async () => {
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/byuser-stock-quantite/" + idUser);
+        const resbis = await response.json();
+        await setListStock(resbis);
+        return resbis;
+    }, [setListStock]);
     // Here we use item offsets; we could also use page offsets
     // following the API or data you're working with.
     const [itemOffset, setItemOffset] = useState(0);
@@ -41,6 +57,8 @@ export function PaginatedItems2({itemsPerPage = 3}) {
     return (
         <div style={{color: "black"}}>
             <button style={{backgroundColor: "blue"}} onClick={fetchAPIStock}>Actualiser stock</button>
+            <button style={{backgroundColor: "blue"}} onClick={fetchAPIStockByName}>Actualiser Nom</button>
+            <button style={{backgroundColor: "blue"}} onClick={fetchAPIStockByQuantite}>Actualiser Quantite</button>
                 <Items2 currentItems={currentItems}/>
             <ReactPaginate
                 breakLabel="..."

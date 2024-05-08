@@ -14,6 +14,38 @@ export function PaginatedItems({ itemsPerPage=3}) {
         await setListArticle(resbis);
         return resbis;
     }, [setListArticle]);
+
+    const fetchAPIByNom = useCallback(async () => {
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/byuserName/" + idUser);
+        const resbis = await response.json();
+        await setListArticle(resbis);
+        return resbis;
+    }, [setListArticle]);
+
+    const fetchAPIByDescription = useCallback(async () => {
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/byuserDescription/" + idUser);
+        const resbis = await response.json();
+        await setListArticle(resbis);
+        return resbis;
+    }, [setListArticle]);
+
+    const fetchAPIByPrice = useCallback(async () => {
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/byuserPrix/" + idUser);
+        const resbis = await response.json();
+        await setListArticle(resbis);
+        return resbis;
+    }, [setListArticle]);
+
+    const fetchAPIByDescriptionByDate = useCallback(async () => {
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/byuserDate/" + idUser);
+        const resbis = await response.json();
+        await setListArticle(resbis);
+        return resbis;
+    }, [setListArticle]);
     // Here we use item offsets; we could also use page offsets
     // following the API or data you're working with.
     const [itemOffset, setItemOffset] = useState(0);
@@ -36,9 +68,15 @@ export function PaginatedItems({ itemsPerPage=3}) {
     };
 
     return (
-        <div style={{color:"black"}}>
-            <button style={{backgroundColor:"blue"}}  onClick={fetchAPI}>Actualiser Article</button>
-            <Items currentItems={currentItems} />
+        <div style={{color: "black"}}>
+            <button style={{backgroundColor: "blue"}} onClick={fetchAPI}>Actualiser Article</button>
+            <button style={{backgroundColor: "blue"}} onClick={fetchAPIByNom}>Filtrer ordre alphabetique: Nom</button>
+            <button style={{backgroundColor: "blue"}} onClick={fetchAPIByDescription}>Filtrer ordre alphabetique:
+                Description
+            </button>
+            <button style={{backgroundColor: "blue"}} onClick={fetchAPIByPrice}>Filtrer Prix</button>
+            <button style={{backgroundColor: "blue"}} onClick={fetchAPIByDescriptionByDate}>Filtrer Date</button>
+            <Items currentItems={currentItems}/>
             <ReactPaginate
                 breakLabel="..."
                 nextLabel="next >"
