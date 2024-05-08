@@ -29,7 +29,10 @@ function Items2({ currentItems }) {
                                         <th>{item.userId}</th>
                                         <th>{item.nom}</th>
                                         <th>{item.description}</th>
-                                        <th>{item.quantite}</th>
+                                        {
+                                            item.quantite > 0 ? <th style={{backgroundColor:"green"}}>{item.quantite}</th> : <th style={{backgroundColor:"red"}}>{item.quantite}</th>
+                                        }
+
                                         <th>{item.prix}</th>
                                         <th>{item.dateAjout}</th>
 

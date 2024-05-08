@@ -13,6 +13,29 @@ function DashBoard(props) {
         fetchAPITotal()
     }, [setTotal]);
 
+    const getExportExcel = async (e) => {
+        e.preventDefault();
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"));
+        fetch(lien.url + "article/export/" + idUser)
+            .then(res => res.blob())
+            .then(blob => {
+                var file = window.URL.createObjectURL(blob);
+                window.location.assign(file);
+            });
+    }
+
+
+    const getDataPdf = async (e) => {
+        e.preventDefault();
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"));
+        fetch(lien.url + "article/generate-pdf/" + idUser)
+            .then(res => res.blob())
+            .then(blob => {
+                var file = window.URL.createObjectURL(blob);
+                window.location.assign(file);
+            });
+    }
+
     const fetchAPITotal = useCallback(async () => {
         let str = "" + localStorage.getItem('jwt2')
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
@@ -27,6 +50,8 @@ function DashBoard(props) {
 
             <div className="div1">
                 <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
+                <button className="raise" onClick={getExportExcel}>Download</button>
+                <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
                 <h1>Kriss CLOTILDE Stock</h1>
                 <ul className="nav-list">
                     <NavLink to={"/"}>
@@ -46,7 +71,7 @@ function DashBoard(props) {
 
             </div>
             <div className="div2">
-            <h1>{props.titre}</h1>
+                <h1>{props.titre}</h1>
 
                 {props.contenue}</div>
             <div className="div3">

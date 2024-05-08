@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import ReactPaginate from 'react-paginate';
 import Items from "./Items";
 import lien from "../Lien";
@@ -7,6 +7,9 @@ import '../css/pagination.css'
 
 export function PaginatedItems({ itemsPerPage=3}) {
     let [listArticle, setListArticle] = useState([]);
+    useEffect(() => {
+        fetchAPI()
+    }, []);
     const fetchAPI = useCallback(async () => {
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
         const response = await fetch(lien.url + "article/byuser/" + idUser);
