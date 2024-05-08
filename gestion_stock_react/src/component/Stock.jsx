@@ -22,6 +22,28 @@ function Stock(props) {
         await setListStock(resbis);
         return resbis;
     }, [setListStock]);
+
+    let fetchdelete = useCallback(async (e) => {
+        e.preventDefault();
+        let str = "" + localStorage.getItem('jwt2')
+        const response = await fetch(
+            lien.url + "stock/" + idStock,
+            {
+                method: "DELETE",
+                body: JSON.stringify({
+                    jwt: str
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        await fetchAPI();
+        await fetchAPIStock();
+
+        const resbis = await response;
+    });
+
     let fetchAPIupdate = useCallback(async (e) => {
         e.preventDefault();
         const response = await fetch(
@@ -40,6 +62,8 @@ function Stock(props) {
             }
         );
         const resbis = await response;
+        await fetchAPI();
+        await fetchAPIStock();
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
@@ -58,6 +82,9 @@ function Stock(props) {
                 },
             }
         );
+        await fetchAPI();
+        await fetchAPIStock();
+
     });
     const fetchAPI = useCallback(async () => {
         let str = "" + localStorage.getItem('jwt2')
@@ -115,6 +142,7 @@ function Stock(props) {
                 </div>
                 <button onClick={fetchCreer}>Ajouter</button>
                 <button onClick={fetchAPIupdate}>Modifier</button>
+                <button onClick={fetchdelete}>Supprimer</button>
             </form>
         </div>
     );
