@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
+import BarGraph from "./BarGraph";
 
 
 function Stock(props) {
@@ -9,8 +10,10 @@ function Stock(props) {
     const [idStock, setIdStock] = useState(0);
     const [unite, setUnite] = useState(0);
     const [dateCalendar, setDateCalendar] = useState(new Date());
-    let [listStock, setListStock] = useState([]);
+    const [listStock, setListStock] = useState([]);
     const [article, setArticle]=useState([])
+
+
     useEffect(() => {
         fetchAPI()
         fetchAPIStock()
@@ -109,6 +112,7 @@ function Stock(props) {
 
     return (
         <div>
+
             <form className="form">
                 <label htmlFor="id">idArticle</label>
 
@@ -144,6 +148,8 @@ function Stock(props) {
                 <button onClick={fetchAPIupdate}>Modifier</button>
                 <button onClick={fetchdelete}>Supprimer</button>
             </form>
+
+
         </div>
     );
 }

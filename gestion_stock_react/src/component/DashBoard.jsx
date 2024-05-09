@@ -4,15 +4,46 @@ import {NavLink} from "react-router-dom";
 import lien from "../Lien";
 import {PaginatedItems} from "./PaginatedItems";
 import {PaginatedItems2} from "./PaginatedItems2";
+import BarGraph from "./BarGraph";
 
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
-
+    const [listStock, setListStock] = useState([]);
     useEffect(() => {
         fetchAPITotal()
         fetchUerToken()
+        fetchAPIStock()
     }, [setTotal]);
+    const fetchAPIStock = useCallback(async () => {
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch(lien.url + "article/stockBy/" + idUser);
+        const resbis = await response.json();
+        await setListStock(resbis);
+        return resbis;
+    }, [setListStock]);
+
+    const data = {
+        labels: listStock?.length > 0 ? listStock.map(value => value?.nom) : [],
+        datasets: [
+            {
+                label: 'Quantite',
+                data: listStock?.length > 0 ? listStock.map(value => value.quantite) : [],
+                backgroundColor: listStock?.length > 0 ? listStock.map(value => "red") : [],
+                borderColor: 'black',
+
+
+            },
+            {
+                label: 'Prix',
+                data: listStock?.length > 0 ? listStock.map(value => value.prix) : [],
+                backgroundColor: listStock?.length > 0 ? listStock.map(value => "orange") : [],
+                borderColor: 'green',
+
+
+            }
+        ]
+    };
 
     const getExportExcel = async (e) => {
         e.preventDefault();
@@ -80,48 +111,54 @@ function DashBoard(props) {
         })
     });
     return (
-        <div className="parent">
+        <>
 
-            <div className="div1">
-                <h2>Utilisateur: { "" + localStorage.getItem('nom')}</h2>
+            <div className="parent">
 
-                <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
-                <button className="raise" onClick={getExportExcel}>Download Excel</button>
-                <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
-                <h1>Kriss CLOTILDE Stock</h1>
-                <ul className="nav-list">
-                    <NavLink to={"/"}>
-                        <li>Bienvenue</li>
-                    </NavLink>
-                    <NavLink to={"/inscription"}>
-                        <li>Inscription</li>
-                    </NavLink>
-                    <NavLink to={"/ajoutArticle"}>
-                        <li>Article</li>
-                    </NavLink>
-                    <NavLink to={"/stock"}>
-                        <li>Stock</li>
-                    </NavLink>
+                <div className="div1">
+                    <h2>Utilisateur: {"" + localStorage.getItem('nom')}</h2>
 
-                </ul>
+                    <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
+
+                    <button className="raise" onClick={getExportExcel}>Download Excel</button>
+                    <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
+                    <h1>Kriss CLOTILDE Stock</h1>
+                    <ul className="nav-list">
+                        <NavLink to={"/"}>
+                            <li>Bienvenue</li>
+                        </NavLink>
+                        <NavLink to={"/inscription"}>
+                            <li>Inscription</li>
+                        </NavLink>
+                        <NavLink to={"/ajoutArticle"}>
+                            <li>Article</li>
+                        </NavLink>
+                        <NavLink to={"/stock"}>
+                            <li>Stock</li>
+                        </NavLink>
+
+                    </ul>
+
+                </div>
+                <div className="div2">
+                    <h1>{props.titre}</h1>
+
+                    {props.contenue}</div>
+                <div className="div3">
+                    <PaginatedItems></PaginatedItems>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <PaginatedItems2></PaginatedItems2>
+
+
+                </div>
 
             </div>
-            <div className="div2">
-                <h1>{props.titre}</h1>
-
-                {props.contenue}</div>
-            <div className="div3">
-                <PaginatedItems></PaginatedItems>
-
-                <br/>
-                <br/>
-                <br/>
-
-                <PaginatedItems2></PaginatedItems2>
-
-
-            </div>
-        </div>
+            <div style={{backgroundColor: "white"}}><BarGraph data={data}></BarGraph></div>
+        </>
     );
 }
 
