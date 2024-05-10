@@ -12,4 +12,26 @@ input{
 }
 button{
     background-color: #C56761;
+    text-align: center;
+}
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: bisque;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    border-radius: 10px;
+
+}
+input{
+    width: 10em;
+    color: wheat;
+
+}
+th{
+    text-align: center;
 }

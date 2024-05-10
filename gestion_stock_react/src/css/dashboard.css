@@ -6,26 +6,27 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
-
+*{
+    margin: 3px;
+    padding: 3px;
+    text-align: center;
+}
 .div1 { grid-area: 1 / 1 / 6 / 2; }
 .div2 { grid-area: 1 / 2 / 6 / 4; }
 .div3 { grid-area: 1 / 4 / 6 / 6; }
 
 .div1{
     background-color: #404040;
-    height: 70em;
     width: 100%;
 }
 
 .div2{
     background-color:#87AADD;
-    height: 70em;
     width: 100%;
 }
 
 .div3{
     background-color:#C56761;
-    height: 70em;
     width: 100%;
 }
 
@@ -39,37 +40,46 @@ body{
     width: 40em;
 }
 
+th{
+    background-color: #413838;
+    color: bisque;
+}
+thead th{
+    color: #b29345;
+}
 @media only screen and (max-width : 667px) {
     .parent {
         display: flex;
         flex-direction: column;
     }
 
-    .div1{
+    .div1 {
         background-color: #404040;
         width: 100%;
         height: 35%;
     }
 
-    .div2{
-        background-color:#87AADD;
+    .div2 {
+        background-color: #87AADD;
         width: 100%;
         height: 35%;
     }
 
-    .div3{
-        background-color:#C56761;
+    .div3 {
+        background-color: #C56761;
         width: 100%;
         height: 30%;
     }
 
-    li{
+    li {
         color: wheat;
     }
-    body{
+
+    body {
         max-width: 1900px;
     }
-    .calendrier{
-        width: 40em;
+
+    .calendrier {
+        width: 20em;
     }
 }

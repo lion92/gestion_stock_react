@@ -13,11 +13,22 @@ function Stock(props) {
     const [listStock, setListStock] = useState([]);
     const [article, setArticle]=useState([])
 
+    const [modalDescription, setModalDescription] = useState(false);
 
     useEffect(() => {
         fetchAPI()
         fetchAPIStock()
     }, []);
+    const toggleDescription = (e) => {
+        e.preventDefault()
+        setModalDescription(!modalDescription);
+    };
+
+    if (modalDescription) {
+        document.body.classList.add('active-modal')
+    } else {
+        document.body.classList.remove('active-modal')
+    }
     const fetchAPIStock = useCallback(async () => {
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
         const response = await fetch(lien.url + "article/stockBy/" + idUser);
@@ -121,34 +132,46 @@ function Stock(props) {
                     setIdArticle(parseInt(e.target.value))
                 }}>
                     <option value="-1">selectionner une valeur</option>
-                    {article.map(value => {
+                    {article.length > 0 ? article?.map(value => {
                             return <option value={"" + value.id}>{value.nom}</option>
                         }
-                    )}
+                    ) : []}
                 </select>
                 <label htmlFor="idstock">idStock</label>
 
                 <select value={idStock} onChange={(e) => {
                     console.log(e.target.value);
-                    setIdStock(   parseInt(e.target.value))
+                    setIdStock(parseInt(e.target.value))
                 }}>
                     <option value="-1">selectionner une valeur</option>
-                    {listStock.map(value => {
+                    {listStock?.length > 0 ? listStock?.map(value => {
                             return <option value={"" + value?.stockref}>{value.nom}</option>
                         }
-                    )}
+                    ) : []}
                 </select>
                 <label htmlFor="quantite">Quantite</label>
                 <input type="number" value={unite} onChange={(e) => setUnite(parseInt(e.target.value))}/>
-                <div className="calendrier">
-                    <label htmlFor="calendar">Calendrier</label>
-                    <Calendar value={dateCalendar} onChange={setDateCalendar}/>
-                </div>
+                {modalDescription && <div className="modal">
+                    <div onClick={toggleDescription} className="overlay"></div>
+                    <div className="modal-content containerButton">
+
+                        <div className="calendrier">
+                            <label htmlFor="calendar">Calendrier</label>
+                            <Calendar value={dateCalendar} onChange={setDateCalendar}/>
+                        </div>
+                        <div>
+
+                        </div>
+
+                    </div>
+                </div>}
+
+
                 <button onClick={fetchCreer}>Ajouter</button>
                 <button onClick={fetchAPIupdate}>Modifier</button>
                 <button onClick={fetchdelete}>Supprimer</button>
+                <button onClick={toggleDescription}>Calendrier</button>
             </form>
-
 
         </div>
     );

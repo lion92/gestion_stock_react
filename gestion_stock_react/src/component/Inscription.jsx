@@ -80,22 +80,22 @@ function Inscription(props) {
         <>
         <form className="form">
             <label htmlFor="nom">Nom</label>
-            <input onChange={(e) => setNom(e.target.value)}/>
+            <input placeholder="Nom" onChange={(e) => setNom(e.target.value)}/>
             <p>{nomError}</p>
             <label htmlFor="prenom">Prenom</label>
-            <input value={prenom} onChange={(e) => setPrenom(e.target.value)}/>
+            <input placeholder="Prenom" value={prenom} onChange={(e) => setPrenom(e.target.value)}/>
             <p>{prenomError}</p>
             <label htmlFor="email">Email</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             <p>{emailError}</p>
             <div className="calendrier">
                 <label htmlFor="calendar">Date de naissance</label>
                 <Calendar value={dateNaissance} onChange={setDateNaissance}/>
             </div>
             <label htmlFor="mdp">Mot de passe</label>
-            <input value={mdp} onChange={(e) => setMdp(e.target.value)}/>
+            <input type="password" value={mdp} onChange={(e) => setMdp(e.target.value)}/>
             <label htmlFor="confirPassword"> confirmation mot de passe</label>
-            <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
             <p>{confirError}</p>
             <button onClick={fetchInscription}>Inscrire</button>
         </form>

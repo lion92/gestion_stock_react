@@ -3,7 +3,7 @@ import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
 
-
+import'../css/article.css'
 function Article(props) {
     const [nom, setNom] = useState('');
     const [description, setDescription] = useState('');
@@ -13,11 +13,21 @@ function Article(props) {
     const [article, setArticle]=useState([])
     const [idArticle, setIdArticle]=useState(-1)
 
-
+    const [modalDescription, setModalDescription] = useState(false);
     useEffect( ()=>{
         fetchAPI()
 
     }, [])
+    const toggleDescription = (e) => {
+        e.preventDefault()
+        setModalDescription(!modalDescription);
+    };
+
+    if (modalDescription) {
+        document.body.classList.add('active-modal')
+    } else {
+        document.body.classList.remove('active-modal')
+    }
     ///////////////////////////appel delete
     let fetchdelete = useCallback(async (e) => {
         e.preventDefault();
@@ -105,15 +115,20 @@ function Article(props) {
     return (
         <div>
 
+
             <form className="form">
+
                 <label htmlFor="id">idArticle</label>
 
-                <select value={idArticle} onChange={(e) => {console.log(e.target.value);setIdArticle(parseInt(e.target.value))}}>
+                <select value={idArticle} onChange={(e) => {
+                    console.log(e.target.value);
+                    setIdArticle(parseInt(e.target.value))
+                }}>
                     <option value="-1">selectionner une valeur</option>
-                    {article.map(value => {
-                            return <option value={""+value.id}>{value.nom}</option>
+                    {article.length > 0 ? article?.map(value => {
+                            return <option value={"" + value.id}>{value.nom}</option>
                         }
-                    )}
+                    ) : []}
                 </select>
                 <label htmlFor="nom">Nom</label>
                 <input value={nom} onChange={(e) => setNom(e.target.value)}/>
@@ -121,14 +136,29 @@ function Article(props) {
                 <input value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <label htmlFor="prix">Prix</label>
                 <input type="number" value={prix} onChange={(e) => setPrix(parseFloat(e.target.value))}/>
-                <div className="calendrier">
-                    <label htmlFor="calendar">Calendrier</label>
-                    <Calendar value={dateCalendar} onChange={setDateCalendar}/>
-                </div>
+
+                {modalDescription && <div className="modal">
+                    <div onClick={toggleDescription} className="overlay"></div>
+                    <div className="modal-content containerButton">
+
+                        <div className="calendrier">
+                            <label htmlFor="calendar">Calendrier</label>
+                            <Calendar value={dateCalendar} onChange={setDateCalendar}/>
+                        </div>
+                        <div>
+
+                        </div>
+
+                    </div>
+                </div>}
+
+
                 <button onClick={fetchCreer}>Ajouter</button>
                 <button onClick={fetchAPIupdate}>Modifier</button>
                 <button onClick={fetchdelete}>Supprimer</button>
+                <button onClick={toggleDescription}>Calendrier</button>
             </form>
+
         </div>
     );
 }

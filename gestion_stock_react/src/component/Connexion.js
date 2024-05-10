@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import lien from "../Lien";
 import Article from "./Article";
-
+import '../css/form.css'
 const Connexion = () => {
     const [messageLog, setMessageLog] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -107,7 +107,7 @@ const Connexion = () => {
                 <>
                     <div>
 
-                        <div className="container2">
+                        <form className="form">
                             {"" + probleme}
                             <div>{messageLog}</div>
                             <div id="iconLogin"/>
@@ -119,7 +119,7 @@ const Connexion = () => {
                             }}
                                    type={'text'}/>
                             <p className="error">{mailError}</p>
-                            <input id='password' value={password} placeholder={'password'}
+                            <input id='password'  value={password} placeholder={'password'}
                                    onChange={e => {
                                        if (e.target.value.length < 3) {
                                            setPassword(e.target.value);
@@ -128,7 +128,7 @@ const Connexion = () => {
                                            setPasswordError("")
                                            setPassword(e.target.value)
                                        }
-                                   }} type={'text'}/>
+                                   }} type={'password'}/>
 
                             <p className="error">{passwordError}</p>
 
@@ -137,7 +137,7 @@ const Connexion = () => {
 
                            <button onClick={fetchConnection} id='btnLogin'>LOGIN</button>
                             <h1>{(probleme !== 'connecte' ? '' : 'connecte')}</h1>
-                        </div>
+                        </form>
                     </div>
                 </>
 

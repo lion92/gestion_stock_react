@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import "../css/dashboard.css"
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import lien from "../Lien";
 import {PaginatedItems} from "./PaginatedItems";
 import {PaginatedItems2} from "./PaginatedItems2";
@@ -9,11 +9,13 @@ import BarGraph from "./BarGraph";
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
+    const [utilisa, setUtilisa] = useState("Déconnnecté");
     const [listStock, setListStock] = useState([]);
     useEffect(() => {
         fetchAPITotal()
         fetchUerToken()
         fetchAPIStock()
+        setUtilisa(""+localStorage.getItem("nom"))
     }, [setTotal]);
     const fetchAPIStock = useCallback(async () => {
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
@@ -111,12 +113,19 @@ function DashBoard(props) {
         })
     });
     return (
-        <>
-
+        <div style={{display:"flex", flexDirection:"column"}}>
+            <Link style={{width: '20px', margin: '0'}} onClick={() => {
+                localStorage.removeItem('jwt2');
+                localStorage.removeItem("utilisateur");
+                setUtilisa("Deconnecté");
+                localStorage.removeItem("nom");
+            }} to="/">
+                <button>Deconnexion</button>
+            </Link>
             <div className="parent">
 
                 <div className="div1">
-                    <h2>Utilisateur: {"" + localStorage.getItem('nom')}</h2>
+                    <h2>Utilisateur: {utilisa}</h2>
 
                     <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
 
@@ -157,8 +166,8 @@ function DashBoard(props) {
                 </div>
 
             </div>
-            <div style={{backgroundColor: "white"}}><BarGraph data={data}></BarGraph></div>
-        </>
+            <div style={{marginTop:"5em",backgroundColor: "white"}}><BarGraph data={data}></BarGraph></div>
+        </div>
     );
 }
 

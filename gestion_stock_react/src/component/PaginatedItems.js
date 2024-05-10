@@ -14,6 +14,7 @@ export function PaginatedItems({ itemsPerPage=3}) {
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
         const response = await fetch(lien.url + "article/byuser/" + idUser);
         const resbis = await response.json();
+
         await setListArticle(resbis);
         return resbis;
     }, [setListArticle]);
@@ -58,12 +59,12 @@ export function PaginatedItems({ itemsPerPage=3}) {
     // from an API endpoint with useEffect and useState)
     const endOffset = itemOffset + itemsPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    const currentItems = listArticle.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(listArticle.length / itemsPerPage);
+    const currentItems = listArticle?.length>0?listArticle?.slice(itemOffset, endOffset):[];
+    const pageCount = Math.ceil(listArticle?.length / itemsPerPage);
 
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % listArticle.length;
+        const newOffset = (event.selected * itemsPerPage) % listArticle?.length;
         console.log(
             `User requested page number ${event.selected}, which is offset ${newOffset}`
         );
