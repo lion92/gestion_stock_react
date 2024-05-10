@@ -7,6 +7,7 @@ import DashBoardConnexion from "./component/DashBoardConnexion";
 import DashBoardArticle from "./component/DashBoardArticle";
 import DashBoardStock from "./component/DashBoardStock";
 import DashBoardInscription from "./component/DashBoardInscription";
+import DashBoardVente from "./component/DashBoardVente";
 
 const Root = () => (
     <Router>
@@ -15,6 +16,7 @@ const Root = () => (
             <Route exact path="/ajoutArticle" component={DashBoardArticle}/>
             <Route exact path="/stock" component={DashBoardStock}/>
             <Route exact path="/inscription" component={DashBoardInscription}/>
+            <Route exact path="/vente" component={DashBoardVente}/>
             <Route component={NotFound}/>
         </Switch>
     </Router>

@@ -145,6 +145,9 @@ function DashBoard(props) {
                         <NavLink to={"/stock"}>
                             <li>Stock</li>
                         </NavLink>
+                        <NavLink to={"/vente"}>
+                            <li>Vente</li>
+                        </NavLink>
 
                     </ul>
 
