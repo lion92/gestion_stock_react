@@ -73,13 +73,13 @@ export function PaginatedItems({ itemsPerPage=3}) {
 
     return (
         <div style={{color: "black"}}>
-            <button style={{backgroundColor: "blue"}} onClick={fetchAPI}>Actualiser Article</button>
-            <button style={{backgroundColor: "blue"}} onClick={fetchAPIByNom}>Filtrer ordre alphabetique: Nom</button>
-            <button style={{backgroundColor: "blue"}} onClick={fetchAPIByDescription}>Filtrer ordre alphabetique:
+            <button  onClick={fetchAPI}>Actualiser Article</button>
+            <button  onClick={fetchAPIByNom}>Filtrer ordre alphabetique: Nom</button>
+            <button  onClick={fetchAPIByDescription}>Filtrer ordre alphabetique:
                 Description
             </button>
-            <button style={{backgroundColor: "blue"}} onClick={fetchAPIByPrice}>Filtrer Prix</button>
-            <button style={{backgroundColor: "blue"}} onClick={fetchAPIByDescriptionByDate}>Filtrer Date</button>
+            <button  onClick={fetchAPIByPrice}>Filtrer Prix</button>
+            <button onClick={fetchAPIByDescriptionByDate}>Filtrer Date</button>
             <Items currentItems={currentItems}/>
             <ReactPaginate
                 breakLabel="..."

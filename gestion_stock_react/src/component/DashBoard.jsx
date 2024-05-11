@@ -15,7 +15,7 @@ function DashBoard(props) {
         fetchAPITotal()
         fetchUerToken()
         fetchAPIStock()
-        setUtilisa(""+localStorage.getItem("nom"))
+        setUtilisa(""+localStorage.getItem("nom")=="null"?"Veuillez vous connecter":""+localStorage.getItem("nom"))
     }, [setTotal]);
     const fetchAPIStock = useCallback(async () => {
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
@@ -113,63 +113,72 @@ function DashBoard(props) {
         })
     });
     return (
-        <div style={{display:"flex", flexDirection:"column"}}>
-            <Link style={{width: '20px', margin: '0'}} onClick={() => {
-                localStorage.removeItem('jwt2');
-                localStorage.removeItem("utilisateur");
-                setUtilisa("Deconnecté");
-                localStorage.removeItem("nom");
-            }} to="/">
-                <button>Deconnexion</button>
-            </Link>
-            <div className="parent">
+        <div>
+            <header style={{borderRadius:"10px",
+                color: "mediumaquamarine", fontSize: "5em", textAlign: "center"
+            }}><h1 style={{fontSize:"1em"}}>Bienvenue</h1>
+            </header>
+            <div><a style={{color: "black"}} rel="kriss" href="https://projet.krissclotilde.com/" target="_blank">Qui suis
+                je?</a></div>
 
-                <div className="div1">
-                    <h2>Utilisateur: {utilisa}</h2>
+            <div style={{display: "flex", flexDirection: "column"}}>
+                <Link style={{width: '20px', margin: '0'}} onClick={() => {
+                    localStorage.removeItem('jwt2');
+                    localStorage.removeItem("utilisateur");
+                    setUtilisa("Deconnecté");
+                    localStorage.removeItem("nom");
+                }} to="/">
+                    <button>Deconnexion</button>
+                </Link>
+                <div className="parent">
 
-                    <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
+                    <div className="div1">
+                        <h2>Utilisateur: {utilisa}</h2>
 
-                    <button className="raise" onClick={getExportExcel}>Download Excel</button>
-                    <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
-                    <h1>Kriss CLOTILDE Stock</h1>
-                    <ul className="nav-list">
-                        <NavLink to={"/"}>
-                            <li>Bienvenue</li>
-                        </NavLink>
-                        <NavLink to={"/inscription"}>
-                            <li>Inscription</li>
-                        </NavLink>
-                        <NavLink to={"/ajoutArticle"}>
-                            <li>Article</li>
-                        </NavLink>
-                        <NavLink to={"/stock"}>
-                            <li>Stock</li>
-                        </NavLink>
-                        <NavLink to={"/vente"}>
-                            <li>Vente</li>
-                        </NavLink>
+                        <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
 
-                    </ul>
+                        <button className="raise" onClick={getExportExcel}>Download Excel</button>
+                        <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
+                        <h1>Kriss CLOTILDE Stock</h1>
+                        <ul className="nav-list">
+                            <NavLink to={"/"}>
+                                <li>Bienvenue</li>
+                            </NavLink>
+                            <NavLink to={"/inscription"}>
+                                <li>Inscription</li>
+                            </NavLink>
+                            <NavLink to={"/ajoutArticle"}>
+                                <li>Article</li>
+                            </NavLink>
+                            <NavLink to={"/stock"}>
+                                <li>Stock</li>
+                            </NavLink>
+                            <NavLink to={"/vente"}>
+                                <li>Vente</li>
+                            </NavLink>
+
+                        </ul>
+
+                    </div>
+                    <div className="div2">
+                        <h1>{props.titre}</h1>
+
+                        {props.contenue}</div>
+                    <div className="div3">
+                        <PaginatedItems></PaginatedItems>
+
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <PaginatedItems2></PaginatedItems2>
+
+
+                    </div>
 
                 </div>
-                <div className="div2">
-                    <h1>{props.titre}</h1>
-
-                    {props.contenue}</div>
-                <div className="div3">
-                    <PaginatedItems></PaginatedItems>
-
-                    <br/>
-                    <br/>
-                    <br/>
-
-                    <PaginatedItems2></PaginatedItems2>
-
-
-                </div>
-
+                <div style={{marginTop: "5em", backgroundColor: "white"}}><BarGraph data={data}></BarGraph></div>
             </div>
-            <div style={{marginTop:"5em",backgroundColor: "white"}}><BarGraph data={data}></BarGraph></div>
         </div>
     );
 }

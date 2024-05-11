@@ -7,31 +7,34 @@
     grid-row-gap: 0px;
 }
 *{
-    margin: 3px;
-    padding: 3px;
     text-align: center;
+    color: black;
 }
 .div1 { grid-area: 1 / 1 / 6 / 2; }
 .div2 { grid-area: 1 / 2 / 6 / 4; }
 .div3 { grid-area: 1 / 4 / 6 / 6; }
 
+body{
+    background-image: url("../image/bleue.png")
+}
+
 .div1{
-    background-color: #404040;
+
     width: 100%;
 }
 
 .div2{
-    background-color:#87AADD;
+
     width: 100%;
 }
 
 .div3{
-    background-color:#C56761;
+
     width: 100%;
 }
 
 li{
-    color: wheat;
+    color: #a1998b;
 }
 body{
     max-width: 1900px;
@@ -39,40 +42,40 @@ body{
 .calendrier{
     width: 40em;
 }
-
+h1,h2{color: black}
 th{
-    background-color: #413838;
-    color: bisque;
+    color: #7c6f60;
 }
 thead th{
     color: #b29345;
 }
 @media only screen and (max-width : 667px) {
+    h1{font-size: 0.5em;border-radius: 10px}
     .parent {
         display: flex;
         flex-direction: column;
     }
 
     .div1 {
-        background-color: #404040;
+
         width: 100%;
         height: 35%;
     }
 
     .div2 {
-        background-color: #87AADD;
+
         width: 100%;
         height: 35%;
     }
 
     .div3 {
-        background-color: #C56761;
+
         width: 100%;
         height: 30%;
     }
 
     li {
-        color: wheat;
+        color: #696359;
     }
 
     body {
@@ -82,4 +85,13 @@ thead th{
     .calendrier {
         width: 20em;
     }
+
+    th{
+        font-size: 0.5em;
+    }
+    .divCentrer{
+        display: none;
+    }
+
+
 }

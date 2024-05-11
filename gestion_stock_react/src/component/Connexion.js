@@ -41,8 +41,6 @@ const Connexion = () => {
                     "Content-Type": "application/json",
                 },
             })
-
-
         await response?.json().then(data => {
             if(!data?.id) {
 
@@ -59,7 +57,7 @@ const Connexion = () => {
             }else{
                 console.log("error token")
             }
-        })
+        }).catch(e=>console.log(e))
     });
 
 

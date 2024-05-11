@@ -11,7 +11,7 @@ input{
     width: 10em;
 }
 button{
-    background-color: #C56761;
+    background-color: #583975;
     text-align: center;
 }
 .form{
@@ -20,16 +20,15 @@ button{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    color: bisque;
+    color: #310a55;
     width: 100%;
     text-align: center;
-    height: 100%;
     border-radius: 10px;
 
 }
 input{
     width: 10em;
-    color: wheat;
+    color: #1c1455;
 
 }
 th{

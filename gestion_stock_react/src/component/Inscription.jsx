@@ -15,8 +15,21 @@ function Inscription(props) {
     const [nomError, setNomError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [confirError, setConfirmError] = useState("");
+    const [modalDescription, setModalDescription] = useState(false);
 
 
+
+
+    const toggleDescription = (e) => {
+        e.preventDefault()
+        setModalDescription(!modalDescription);
+    };
+
+    if (modalDescription) {
+        document.body.classList.add('active-modal')
+    } else {
+        document.body.classList.remove('active-modal')
+    }
     function validateEmail(mail) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             setEmailError("")
@@ -78,27 +91,42 @@ function Inscription(props) {
 
     return (
         <>
-        <form className="form">
-            <label htmlFor="nom">Nom</label>
-            <input placeholder="Nom" onChange={(e) => setNom(e.target.value)}/>
-            <p>{nomError}</p>
-            <label htmlFor="prenom">Prenom</label>
-            <input placeholder="Prenom" value={prenom} onChange={(e) => setPrenom(e.target.value)}/>
-            <p>{prenomError}</p>
-            <label htmlFor="email">Email</label>
-            <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <p>{emailError}</p>
-            <div className="calendrier">
-                <label htmlFor="calendar">Date de naissance</label>
-                <Calendar value={dateNaissance} onChange={setDateNaissance}/>
-            </div>
-            <label htmlFor="mdp">Mot de passe</label>
-            <input type="password" value={mdp} onChange={(e) => setMdp(e.target.value)}/>
-            <label htmlFor="confirPassword"> confirmation mot de passe</label>
-            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-            <p>{confirError}</p>
-            <button onClick={fetchInscription}>Inscrire</button>
-        </form>
+            <button onClick={toggleDescription}>Date de naissance</button>
+            <form className="form">
+                <label htmlFor="nom">Nom</label>
+                <input placeholder="Nom" onChange={(e) => setNom(e.target.value)}/>
+                <p>{nomError}</p>
+                <label htmlFor="prenom">Prenom</label>
+                <input placeholder="Prenom" value={prenom} onChange={(e) => setPrenom(e.target.value)}/>
+                <p>{prenomError}</p>
+                <label htmlFor="email">Email</label>
+                <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <p>{emailError}</p>
+
+                {modalDescription && <div className="modal">
+                    <div onClick={toggleDescription} className="overlay"></div>
+                    <div className="modal-content containerButton">
+
+                        <div className="calendrier">
+                            <label htmlFor="calendar">Date de naissance</label>
+                            <Calendar value={dateNaissance} onChange={setDateNaissance}/>
+                        </div>
+                        <div>
+
+                        </div>
+
+                    </div>
+                </div>}
+
+
+                <label htmlFor="mdp">Mot de passe</label>
+                <input type="password" value={mdp} onChange={(e) => setMdp(e.target.value)}/>
+                <label htmlFor="confirPassword"> confirmation mot de passe</label>
+                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+                <p>{confirError}</p>
+                <button onClick={fetchInscription}>Inscrire</button>
+            </form>
+
             {inscriptionError}
         </>
     );
