@@ -128,7 +128,7 @@ function DashBoard(props) {
                     setUtilisa("Deconnecté");
                     localStorage.removeItem("nom");
                 }} to="/">
-                    <button>Deconnexion</button>
+                            <button style={{backgroundColor:"red"}}>Deconnexion</button>
                 </Link>
                 <div className="parent">
 

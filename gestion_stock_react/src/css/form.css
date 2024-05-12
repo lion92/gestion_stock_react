@@ -1,4 +1,6 @@
-.form{
+
+
+.form {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -7,14 +9,22 @@
 
 
 }
-input{
+
+
+input {
     width: 10em;
 }
-button{
-    background-color: #583975;
+
+button {
+    background-image: url("../../src/image/bouton.png");
+    background-size: cover;
     text-align: center;
+    font-size: 0.9em;
+    color: black;
+    border: 3px solid darkcyan;
 }
-.form{
+
+.form {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,11 +36,13 @@ button{
     border-radius: 10px;
 
 }
-input{
+
+input {
     width: 10em;
     color: #1c1455;
 
 }
-th{
+
+th {
     text-align: center;
 }
