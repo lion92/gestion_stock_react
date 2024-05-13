@@ -102,32 +102,41 @@ function Vente(props) {
 
             <h2>Article</h2>
             <div style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                margin: "10px"
+                border: "1px solid black",
+                borderRadius: "10px",
+                fontSize:"0.8em"
             }}>
 
                 {listStock.length > 0 ? listStock?.map(value =>
-                    <div className="selectArticle" onClick={e => getId(e, value?.stockref, value?.prix)} style={{
-                        border: "1px solid black",
-                        margin: "10px",
-                        padding: "3px",
-                        borderRadius: "10px",
-                        height: "100%",
-                        width: "12em"
-                    }}>
-                        <p style={{backgroundColor: "red", opacity: "0.9"}}>Cliquez pour sélectionner l'article</p>
-                        <p>idStock:{value?.stockref}</p>
-                        <p>Nom article:{value?.nom}</p>
-                        <p>Description Article:{value?.description}</p>
-                        <p>Nom Vendeur: {value?.nomVendeur}</p>
-                        <p>Prenom Vendeur: {value?.prenomVendeur}</p>
-                        <p>IdUser: {value?.userId}</p>
-                        <p>Prix article: {value?.prix}</p>
-                        <p>quantite en stock: {value?.quantite}</p>
-                    </div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>IdStock</th>
+                                <th>Article</th>
+                                <th>Description</th>
+                                <th>Nom vendeur</th>
+                                <th>Prenom vendeur</th>
+                                <th>Id vendeur</th>
+                                <th>Prix</th>
+                                <th>Quantite</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr onClick={e=>getId(e,value?.stockref,value?.prix)}>
+                                <th><button>id
+                                </button>
+                                    idStock:{value?.stockref}</th>
+                                <th>Nom article:{value?.nom}</th>
+                                <th>Description Article:{value?.description}</th>
+                                <th>Nom Vendeur: {value?.nomVendeur}</th>
+                                <th>Prenom Vendeur: {value?.prenomVendeur}</th>
+                                <th>IdUser: {value?.userId}</th>
+                                <th>Prix article: {value?.prix}</th>
+                                <th>quantite en stock: {value?.quantite}</th>
+
+                            </tr>
+                            </tbody>
+                        </table>
                 ) : []
                 }
 
@@ -141,28 +150,42 @@ function Vente(props) {
             </div>
 
 
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                margin: "10px",
-                gap: "10px",
-            }}>
+            <div>
 
-                <h2>Panier</h2>
+                <h2>Achat</h2>
                 {listPanier.length > 0 ? listPanier?.map(value =>
-                    <div className="selectArticle" style={{
+                    <div style={{
                         border: "1px solid black",
-                        margin: "3px",
-                        padding: "3px",
                         borderRadius: "10px",
+                        fontSize:"0.8em"
                     }}>
 
-                        <p>Id Panier{value?.id}</p>
-                        <p>Prix: {value?.prix}</p>
-                        <p>Date ajout: Panier: {value?.dateAjout}</p>
-                        <p>quantite en achter: {value?.quantite}</p>
-                        <button onClick={e=>fetchdelete(e,value?.id)}>Supprimer</button>
+
+                        <table style={{}}>
+                            <thead>
+                            <tr>
+                                <th>IdPanier</th>
+                                <th>Prix</th>
+                                <th>Date</th>
+                                <th>Quantite acheté</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr onClick={e => getId(e, value?.stockref, value?.prix)}>
+
+                                <th> <button>id
+                                </button>{value?.id}</th>
+                                <th>Prix: {value?.prix}</th>
+                                <th>Date ajout: Panier: {new Date(""+value?.dateAjout).toLocaleDateString()}</th>
+                                <th>quantite en achter: {value?.quantite}</th>
+                                <th>
+                                    <button onClick={e => fetchdelete(e, value?.id)}>Supprimer</button></th>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+
                     </div>
                 ) : []
                 }

@@ -26,7 +26,7 @@ function Items({ currentItems }) {
                                         <th>{item.nom}</th>
                                         <th>{item.description}</th>
                                         <th>{item.prix}</th>
-                                        <th>{item.dateAjout}</th>
+                                        <th>{new Date(""+item?.dateAjout).toLocaleDateString()}</th>
 
                                     </tr>
                             </tbody>

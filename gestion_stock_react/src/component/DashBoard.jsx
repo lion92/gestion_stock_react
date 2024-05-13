@@ -5,7 +5,7 @@ import lien from "../Lien";
 import {PaginatedItems} from "./PaginatedItems";
 import {PaginatedItems2} from "./PaginatedItems2";
 import BarGraph from "./BarGraph";
-
+import {IoBasketOutline} from "react-icons/io5";
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
@@ -15,7 +15,7 @@ function DashBoard(props) {
         fetchAPITotal()
         fetchUerToken()
         fetchAPIStock()
-        setUtilisa(""+localStorage.getItem("nom")=="null"?"Veuillez vous connecter":""+localStorage.getItem("nom"))
+        setUtilisa("" + localStorage.getItem("nom") == "null" ? "Veuillez vous connecter" : "" + localStorage.getItem("nom"))
     }, [setTotal]);
     const fetchAPIStock = useCallback(async () => {
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
@@ -31,7 +31,7 @@ function DashBoard(props) {
             {
                 label: 'Quantite',
                 data: listStock?.length > 0 ? listStock.map(value => value.quantite) : [],
-                backgroundColor: listStock?.length > 0 ? listStock.map(value => "red") : [],
+                backgroundColor: listStock?.length > 0 ? listStock.map(value => "lightGreen") : [],
                 borderColor: 'black',
 
 
@@ -39,7 +39,7 @@ function DashBoard(props) {
             {
                 label: 'Prix',
                 data: listStock?.length > 0 ? listStock.map(value => value.prix) : [],
-                backgroundColor: listStock?.length > 0 ? listStock.map(value => "orange") : [],
+                backgroundColor: listStock?.length > 0 ? listStock.map(value => "lightBlue") : [],
                 borderColor: 'green',
 
 
@@ -73,7 +73,7 @@ function DashBoard(props) {
     const fetchAPITotal = useCallback(async () => {
         let str = "" + localStorage.getItem('jwt2')
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
-        const response = await fetch(lien.url + "article/byuserSum/" + idUser,{headers:{Authorization: `Bearer ${str}`}});
+        const response = await fetch(lien.url + "article/byuserSum/" + idUser, {headers: {Authorization: `Bearer ${str}`}});
         const resbis = await response.json();
         await setTotal(resbis);
 
@@ -98,7 +98,7 @@ function DashBoard(props) {
 
         await response?.json().then(data => {
 
-            if(!isNaN(data?.id)) {
+            if (!isNaN(data?.id)) {
 
                 if (!isNaN(data?.id)) {
                     localStorage.setItem("utilisateur", data?.id);
@@ -107,18 +107,25 @@ function DashBoard(props) {
                 } else {
 
                 }
-            }else{
+            } else {
                 console.log("error token")
             }
         })
     });
     return (
         <div>
-            <header style={{borderRadius:"10px",
-                color: "mediumaquamarine", fontSize: "5em", textAlign: "center"
-            }}><h1 style={{fontSize:"1em"}}>Bienvenue</h1>
+
+            <NavLink to={"/vente"}>
+                <div style={{position: "absolute", top: "10px", right: "30px"}}>Panier<IoBasketOutline/></div>
+            </NavLink>
+            <header style={{
+                borderRadius: "10px",
+                color: "mediumaquamarine", fontSize: "1em", textAlign: "center"
+            }}><h1>Bienvenue</h1>
+                <h2>Projet personnel</h2>
             </header>
-            <div><a style={{color: "black"}} rel="kriss" href="https://projet.krissclotilde.com/" target="_blank">Qui suis
+            <div><a style={{color: "black"}} rel="kriss" href="https://projet.krissclotilde.com/" target="_blank">Qui
+                suis
                 je?</a></div>
 
             <div style={{display: "flex", flexDirection: "column"}}>
@@ -128,7 +135,7 @@ function DashBoard(props) {
                     setUtilisa("Deconnecté");
                     localStorage.removeItem("nom");
                 }} to="/">
-                            <button style={{backgroundColor:"red"}}>Deconnexion</button>
+                    <button style={{backgroundColor: "red"}}>Deconnexion</button>
                 </Link>
                 <div className="parent">
 
@@ -147,34 +154,39 @@ function DashBoard(props) {
                             <NavLink to={"/inscription"}>
                                 <li>Inscription</li>
                             </NavLink>
+                            <NavLink to={"/changepass"}>
+                                <li>Changer son mot de passe</li>
+                            </NavLink>
                             <NavLink to={"/ajoutArticle"}>
                                 <li>Article</li>
                             </NavLink>
                             <NavLink to={"/stock"}>
                                 <li>Stock</li>
                             </NavLink>
-                            <NavLink to={"/vente"}>
-                                <li>Vente</li>
-                            </NavLink>
+
 
                         </ul>
 
                     </div>
-                    <div className="div2">
+                    <div className={props.titre!="Vente"?"div2":"div2"}>
                         <h1>{props.titre}</h1>
 
                         {props.contenue}</div>
-                    <div className="div3">
-                        <PaginatedItems></PaginatedItems>
 
-                        <br/>
-                        <br/>
-                        <br/>
+                    {props.titre !== 'Panier' ?
+                        <div className="div3">
+                            <PaginatedItems></PaginatedItems>
 
-                        <PaginatedItems2></PaginatedItems2>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <PaginatedItems2></PaginatedItems2>
 
 
-                    </div>
+                        </div> : ""
+                    }
+
 
                 </div>
                 <div style={{marginTop: "5em", backgroundColor: "white"}}><BarGraph data={data}></BarGraph></div>

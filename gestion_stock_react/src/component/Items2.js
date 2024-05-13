@@ -56,12 +56,10 @@ function Items2( {currentItems}) {
                                         <input type="number" style={{width:"3em", backgroundColor:"green",opacity:"0.5"}} value={unite} onChange={(e) => setUnite(parseInt(e.target.value))}/> : <input type="number" style={{width:"3em", backgroundColor:"red",opacity:"0.5"}} value={unite} onChange={(e) => setUnite(parseInt(e.target.value))}/>
 
                                 }
-                                <button style={{
-                                    width:"0.7em",
-                                }} onClick={(e)=>{FetchAPIupdate(e,item)}}>ok</button>
+                                <button onClick={(e)=>{FetchAPIupdate(e,item)}}>ok</button>
 
                                     <th>{item.prix}</th>
-                                        <th>{item.dateAjout}</th>
+                                        <th>{new Date(""+item?.dateAjout).toLocaleDateString()}</th>
 
                                     </tr>
                             </tbody>

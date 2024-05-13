@@ -4,7 +4,7 @@ import DashBoard from "./DashBoard";
 import Vente from "./Vente";
 
 function DashBoardVente(props) {
-    let titre = "Vente"
+    let titre = "Panier"
     let contenue = <Vente></Vente>
     return (
         <>

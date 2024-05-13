@@ -139,101 +139,89 @@ body {
 }
 
 button {
-    transition:
-            background-color 0.1s linear,
-            border-color 0.1s linear,
-            color 0.1s linear,
-            box-shadow 0.1s linear,
-            transform 0.1s ease;
-    transition:
-            background-color var(--animation-duration) linear,
-            border-color var(--animation-duration) linear,
-            color var(--animation-duration) linear,
-            box-shadow var(--animation-duration) linear,
-            transform var(--animation-duration) ease;
+    transition: background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+    transition: background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
 }
 
 @media (prefers-color-scheme: dark) {
 
     button {
-        transition:
-                background-color 0.1s linear,
-                border-color 0.1s linear,
-                color 0.1s linear,
-                box-shadow 0.1s linear,
-                transform 0.1s ease;
-        transition:
-                background-color var(--animation-duration) linear,
-                border-color var(--animation-duration) linear,
-                color var(--animation-duration) linear,
-                box-shadow var(--animation-duration) linear,
-                transform var(--animation-duration) ease;
+        transition: background-color 0.1s linear,
+        border-color 0.1s linear,
+        color 0.1s linear,
+        box-shadow 0.1s linear,
+        transform 0.1s ease;
+        transition: background-color var(--animation-duration) linear,
+        border-color var(--animation-duration) linear,
+        color var(--animation-duration) linear,
+        box-shadow var(--animation-duration) linear,
+        transform var(--animation-duration) ease;
     }
 }
 
 input {
-    transition:
-            background-color 0.1s linear,
-            border-color 0.1s linear,
-            color 0.1s linear,
-            box-shadow 0.1s linear,
-            transform 0.1s ease;
-    transition:
-            background-color var(--animation-duration) linear,
-            border-color var(--animation-duration) linear,
-            color var(--animation-duration) linear,
-            box-shadow var(--animation-duration) linear,
-            transform var(--animation-duration) ease;
+    transition: background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+    transition: background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
 }
 
 @media (prefers-color-scheme: dark) {
 
     input {
-        transition:
-                background-color 0.1s linear,
-                border-color 0.1s linear,
-                color 0.1s linear,
-                box-shadow 0.1s linear,
-                transform 0.1s ease;
-        transition:
-                background-color var(--animation-duration) linear,
-                border-color var(--animation-duration) linear,
-                color var(--animation-duration) linear,
-                box-shadow var(--animation-duration) linear,
-                transform var(--animation-duration) ease;
+        transition: background-color 0.1s linear,
+        border-color 0.1s linear,
+        color 0.1s linear,
+        box-shadow 0.1s linear,
+        transform 0.1s ease;
+        transition: background-color var(--animation-duration) linear,
+        border-color var(--animation-duration) linear,
+        color var(--animation-duration) linear,
+        box-shadow var(--animation-duration) linear,
+        transform var(--animation-duration) ease;
     }
 }
 
 textarea {
-    transition:
-            background-color 0.1s linear,
-            border-color 0.1s linear,
-            color 0.1s linear,
-            box-shadow 0.1s linear,
-            transform 0.1s ease;
-    transition:
-            background-color var(--animation-duration) linear,
-            border-color var(--animation-duration) linear,
-            color var(--animation-duration) linear,
-            box-shadow var(--animation-duration) linear,
-            transform var(--animation-duration) ease;
+    transition: background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+    transition: background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
 }
 
 @media (prefers-color-scheme: dark) {
 
     textarea {
-        transition:
-                background-color 0.1s linear,
-                border-color 0.1s linear,
-                color 0.1s linear,
-                box-shadow 0.1s linear,
-                transform 0.1s ease;
-        transition:
-                background-color var(--animation-duration) linear,
-                border-color var(--animation-duration) linear,
-                color var(--animation-duration) linear,
-                box-shadow var(--animation-duration) linear,
-                transform var(--animation-duration) ease;
+        transition: background-color 0.1s linear,
+        border-color 0.1s linear,
+        color 0.1s linear,
+        box-shadow 0.1s linear,
+        transform 0.1s ease;
+        transition: background-color var(--animation-duration) linear,
+        border-color var(--animation-duration) linear,
+        color var(--animation-duration) linear,
+        box-shadow var(--animation-duration) linear,
+        transform var(--animation-duration) ease;
     }
 }
 
@@ -591,11 +579,6 @@ button {
     padding-right: 30px;
     padding-left: 30px;
 }
-
-
-
-
-
 
 
 input[type='color'] {
@@ -1590,51 +1573,77 @@ body > footer {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
-*{
+
+* {
     text-align: center;
     color: black;
 }
-.div1 { grid-area: 1 / 1 / 6 / 2; }
-.div2 { grid-area: 1 / 2 / 6 / 4; }
-.div3 { grid-area: 1 / 4 / 6 / 6; }
 
-body{
+.div1 {
+    grid-area: 1 / 1 / 6 / 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div2 {
+    grid-area: 1 / 2 / 6 / 4;
+}
+
+.div3 {
+    grid-area: 1 / 4 / 6 / 6;
+}
+
+body {
     background-image: url("../image/bleue.png")
 }
 
-.div1{
+.div1 {
 
     width: 100%;
 }
 
-.div2{
+.div2 {
 
     width: 100%;
 }
 
-.div3{
+.div3 {
 
     width: 100%;
 }
 
-li{
+li {
     color: #a1998b;
 }
-body{
+
+body {
     max-width: 1900px;
 }
-.calendrier{
+
+.calendrier {
     width: 40em;
 }
-h1,h2{color: black}
-th{
+
+h1, h2 {
+    color: black;
+    font-size: 1.2em;
+}
+
+th {
     color: #7c6f60;
 }
-thead th{
+
+thead th {
     color: #b29345;
 }
-@media only screen and (max-width : 667px) {
-    h1{font-size: 0.5em;border-radius: 10px}
+
+@media only screen and (max-width: 667px) {
+h1,h2{
+    font-size: 1em;
+    font-weight: bold;
+}
+
     .parent {
         display: flex;
         flex-direction: column;
@@ -1670,14 +1679,18 @@ thead th{
         width: 20em;
     }
 
-    th{
+    th {
         font-size: 0.5em;
     }
-    .divCentrer{
+
+    .divCentrer {
         display: none;
     }
 
 
 }
 
-
+select, option{
+    color: white;
+}
+a{text-align: center}
