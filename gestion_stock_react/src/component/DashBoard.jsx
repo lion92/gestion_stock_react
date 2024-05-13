@@ -173,7 +173,7 @@ function DashBoard(props) {
 
                         {props.contenue}</div>
 
-                    {props.titre !== 'Panier' ?
+                    {!(props.titre === 'Panier'||props.titre === 'Connexion'||props.titre === 'Inscription'||props.titre === 'Changer son password') ?
                         <div className="div3">
                             <PaginatedItems></PaginatedItems>
 
