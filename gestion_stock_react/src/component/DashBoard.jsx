@@ -6,17 +6,19 @@ import {PaginatedItems} from "./PaginatedItems";
 import {PaginatedItems2} from "./PaginatedItems2";
 import BarGraph from "./BarGraph";
 import {IoBasketOutline} from "react-icons/io5";
+import {CiMenuBurger} from "react-icons/ci";
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
     const [utilisa, setUtilisa] = useState("Déconnnecté");
     const [listStock, setListStock] = useState([]);
-    useEffect(() => {
-        fetchAPITotal()
+    const [showMenu, setShowMenu] = useState(true);
+    const [showMenuClass, setShowMenuClass] = useState("menu showMenu");
+    useEffect(() => {fetchAPITotal()
         fetchUerToken()
         fetchAPIStock()
-        setUtilisa("" + localStorage.getItem("nom") == "null" ? "Veuillez vous connecter" : "" + localStorage.getItem("nom"))
-    }, [setTotal]);
+        setUtilisa("" + localStorage.getItem("nom") === "null" ? "Veuillez vous connecter" : "" + localStorage.getItem("nom"))
+    }, []);
     const fetchAPIStock = useCallback(async () => {
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
         const response = await fetch(lien.url + "article/stockBy/" + idUser);
@@ -111,20 +113,40 @@ function DashBoard(props) {
                 console.log("error token")
             }
         })
-    });
+    },[]);
     return (
         <div>
 
             <NavLink to={"/vente"}>
                 <div style={{position: "absolute", top: "10px", right: "30px"}}>Panier<IoBasketOutline/></div>
             </NavLink>
+
+            <ul className={showMenuClass}>
+                <li><NavLink to={"/"}>
+                    Bienvenue
+                </NavLink></li>
+                <li><NavLink to={"/inscription"}>
+                    Inscription
+                </NavLink></li>
+                <li><NavLink to={"/changepass"}>
+                    Changer son mot de passe
+                </NavLink></li>
+                <li><NavLink to={"/ajoutArticle"}>
+                    Article
+                </NavLink></li>
+                <li><NavLink to={"/stock"}>
+                    Sock
+                </NavLink></li>
+
+
+            </ul>
             <header style={{
                 borderRadius: "10px",
                 color: "mediumaquamarine", fontSize: "1em", textAlign: "center"
             }}><h1>Bienvenue</h1>
                 <h2>Projet personnel</h2>
             </header>
-            <div><a style={{color: "black"}} rel="kriss" href="https://projet.krissclotilde.com/" target="_blank">Qui
+            <div><a style={{color: "black"}} rel="noreferrer" href="https://projet.krissclotilde.com/" target="_blank">Qui
                 suis
                 je?</a></div>
 
@@ -147,33 +169,15 @@ function DashBoard(props) {
                         <button className="raise" onClick={getExportExcel}>Download Excel</button>
                         <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
                         <h1>Kriss CLOTILDE Stock</h1>
-                        <ul className="nav-list">
-                            <NavLink to={"/"}>
-                                <li>Bienvenue</li>
-                            </NavLink>
-                            <NavLink to={"/inscription"}>
-                                <li>Inscription</li>
-                            </NavLink>
-                            <NavLink to={"/changepass"}>
-                                <li>Changer son mot de passe</li>
-                            </NavLink>
-                            <NavLink to={"/ajoutArticle"}>
-                                <li>Article</li>
-                            </NavLink>
-                            <NavLink to={"/stock"}>
-                                <li>Stock</li>
-                            </NavLink>
 
-
-                        </ul>
 
                     </div>
-                    <div className={props.titre!="Vente"?"div2":"div2"}>
+                    <div className={props.titre !== "Vente" ? "div2" : "div2"}>
                         <h1>{props.titre}</h1>
 
                         {props.contenue}</div>
 
-                    {!(props.titre === 'Panier'||props.titre === 'Connexion'||props.titre === 'Inscription'||props.titre === 'Changer son password') ?
+                    {!(props.titre === 'Panier' || props.titre === 'Connexion' || props.titre === 'Inscription' || props.titre === 'Changer son password') ?
                         <div className="div3">
                             <PaginatedItems></PaginatedItems>
 

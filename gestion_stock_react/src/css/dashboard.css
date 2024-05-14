@@ -1638,7 +1638,66 @@ thead th {
     color: #b29345;
 }
 
+
+
+.menu {
+    background: linear-gradient(to bottom, #36368f, cyan,#4fa84f); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+    display: flex;
+    align-items: center;
+    flex-direction: column;/* Définissez la largeur de votre menu ici */
+    opacity: 0.7;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px;
+    color: white; /* Couleur du texte */
+    font-size: 18px; /* Taille de la police */
+}
+
+.menu li:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond au survol */
+}
+
+.hideMenu{
+    display: none;
+}
+
+.showMenu{
+    display: flex;
+}
+
 @media only screen and (max-width: 667px) {
+    .menu {
+        background: linear-gradient(to bottom, #36368f, cyan,#4fa84f); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+        display: flex;
+        align-items: center;
+        flex-direction: column;/* Définissez la largeur de votre menu ici */
+        opacity: 0.7;
+        margin: auto;
+        border-radius: 10px;
+    }
+
+    .menu ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .menu li {
+        padding: 10px;
+        color: white; /* Couleur du texte */
+        font-size: 18px; /* Taille de la police */
+    }
+
+    .menu li:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond au survol */
+    }
 h1,h2{
     font-size: 1em;
     font-weight: bold;
@@ -1694,3 +1753,4 @@ select, option{
     color: white;
 }
 a{text-align: center}
+
