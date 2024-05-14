@@ -1,0 +1,15 @@
+table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+
+th {
+  background-color: #f2f2f2;
+}
+
+
+

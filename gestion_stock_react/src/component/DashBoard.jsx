@@ -33,15 +33,15 @@ function DashBoard(props) {
             {
                 label: 'Quantite',
                 data: listStock?.length > 0 ? listStock.map(value => value.quantite) : [],
-                backgroundColor: listStock?.length > 0 ? listStock.map(value => "lightGreen") : [],
-                borderColor: 'black',
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'black',
 
 
             },
             {
                 label: 'Prix',
                 data: listStock?.length > 0 ? listStock.map(value => value.prix) : [],
-                backgroundColor: listStock?.length > 0 ? listStock.map(value => "lightBlue") : [],
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
                 borderColor: 'green',
 
 
@@ -116,12 +116,24 @@ function DashBoard(props) {
     },[]);
     return (
         <div>
-
+            <Link style={{width: '20px', margin: '0'}} onClick={() => {
+                localStorage.removeItem('jwt2');
+                localStorage.removeItem("utilisateur");
+                setUtilisa("Deconnecté");
+                localStorage.removeItem("nom");
+            }} to="/">
+                <button style={{backgroundColor: "red"}}>Deconnexion</button>
+            </Link>
             <NavLink to={"/vente"}>
-                <div style={{position: "absolute", top: "10px", right: "30px"}}>Panier<IoBasketOutline/></div>
+                <div style={{position: "absolute", fontSize:"2em", top: "10px", right: "30px", backgroundColor:"lightyellow"}}>Panier<IoBasketOutline/></div>
             </NavLink>
-
+            <div><a style={{color: "black"}} rel="noreferrer" href="https://projet.krissclotilde.com/" target="_blank">Qui
+                suis
+                je?</a></div>
             <ul className={showMenuClass}>
+                <h1>Bienvenue</h1>
+                <h2>Projet personnel</h2>
+                <h2>Menu</h2>
                 <li><NavLink to={"/"}>
                     Bienvenue
                 </NavLink></li>
@@ -140,28 +152,14 @@ function DashBoard(props) {
 
 
             </ul>
-            <header style={{
-                borderRadius: "10px",
-                color: "mediumaquamarine", fontSize: "1em", textAlign: "center"
-            }}><h1>Bienvenue</h1>
-                <h2>Projet personnel</h2>
-            </header>
-            <div><a style={{color: "black"}} rel="noreferrer" href="https://projet.krissclotilde.com/" target="_blank">Qui
-                suis
-                je?</a></div>
+
 
             <div style={{display: "flex", flexDirection: "column"}}>
-                <Link style={{width: '20px', margin: '0'}} onClick={() => {
-                    localStorage.removeItem('jwt2');
-                    localStorage.removeItem("utilisateur");
-                    setUtilisa("Deconnecté");
-                    localStorage.removeItem("nom");
-                }} to="/">
-                    <button style={{backgroundColor: "red"}}>Deconnexion</button>
-                </Link>
+
                 <div className="parent">
 
                     <div className="div1">
+
                         <h2>Utilisateur: {utilisa}</h2>
 
                         <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
@@ -187,13 +185,13 @@ function DashBoard(props) {
 
                             <PaginatedItems2></PaginatedItems2>
 
-
+                            <BarGraph data={data}></BarGraph>
                         </div> : ""
                     }
 
 
                 </div>
-                <div style={{marginTop: "5em", backgroundColor: "white"}}><BarGraph data={data}></BarGraph></div>
+
             </div>
         </div>
     );

@@ -1575,7 +1575,6 @@ body > footer {
 }
 
 * {
-    text-align: center;
     color: black;
 }
 
@@ -1641,13 +1640,14 @@ thead th {
 
 
 .menu {
-    background: linear-gradient(to bottom, #36368f, cyan,#4fa84f); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+    background: rgba(255, 255, 255, 0.6); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
     display: flex;
     align-items: center;
     flex-direction: column;/* Définissez la largeur de votre menu ici */
     opacity: 0.7;
     margin: auto;
     border-radius: 10px;
+    justify-content: center;
 }
 
 .menu ul {
@@ -1656,13 +1656,12 @@ thead th {
 }
 
 .menu li {
-    padding: 10px;
     color: white; /* Couleur du texte */
-    font-size: 18px; /* Taille de la police */
+    font-size: 15px; /* Taille de la police */
 }
 
 .menu li:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond au survol */
+    background-color: rgb(103, 213, 121); /* Couleur de fond au survol */
 }
 
 .hideMenu{
@@ -1675,7 +1674,7 @@ thead th {
 
 @media only screen and (max-width: 667px) {
     .menu {
-        background: linear-gradient(to bottom, #36368f, cyan,#4fa84f); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+        background: rgba(134, 232, 154, 0.1);  /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
         display: flex;
         align-items: center;
         flex-direction: column;/* Définissez la largeur de votre menu ici */
@@ -1690,9 +1689,8 @@ thead th {
     }
 
     .menu li {
-        padding: 10px;
         color: white; /* Couleur du texte */
-        font-size: 18px; /* Taille de la police */
+        font-size: 12px; /* Taille de la police */
     }
 
     .menu li:hover {
@@ -1753,4 +1751,3 @@ select, option{
     color: white;
 }
 a{text-align: center}
-

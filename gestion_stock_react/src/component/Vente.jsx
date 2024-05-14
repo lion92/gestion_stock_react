@@ -1,13 +1,16 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import lien from "../Lien";
 import "../css/vente.css"
-
+import {storeId} from "./store/StoreId";
+import '../css/catalogue.css';
 function Vente(props) {
     const [listStock, setListStock] = useState([]);
     const [quantiteParoduit, setQuantiteProduit] = useState(0);
     const [listPanier, setListPanier] = useState(0);
     const [idProduit, setIdProduit] = useState(0);
     const [prixProduit, setPrixProduit] = useState(0);
+    const {bears, increasePopulation} = storeId()
+    const { idList, addId, removeId, resetIds } = storeId();
     useEffect(() => {
         fetchAPIStock()
         fetchAPI()
@@ -146,6 +149,8 @@ function Vente(props) {
                 <label>Quantité à commander:</label>
                 <input type="number" placeholder="quantite" value={quantiteParoduit}
                        onChange={(e) => setQuantiteProduit(parseInt(e.target.value))}/>
+                <button onClick={() => addId(idProduit)}>Ajouter un ID</button>
+                <button onClick={resetIds}>Réinitialiser la liste</button>
                 <button onClick={e => acheter(e, idProduit, quantiteParoduit)}>Acheter</button>
             </div>
 
@@ -153,7 +158,7 @@ function Vente(props) {
             <div>
 
                 <h2>Achat</h2>
-                {listPanier.length > 0 ? listPanier?.map(value =>
+                {idList.length > 0 ? idList?.map(value =>
                     <div style={{
                         border: "1px solid black",
                         borderRadius: "10px",
@@ -164,24 +169,11 @@ function Vente(props) {
                         <table style={{}}>
                             <thead>
                             <tr>
-                                <th>IdPanier</th>
-                                <th>Prix</th>
-                                <th>Date</th>
-                                <th>Quantite acheté</th>
+                                <th>IdProduit</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr onClick={e => getId(e, value?.stockref, value?.prix)}>
-
-                                <th> <button>id
-                                </button>{value?.id}</th>
-                                <th>Prix: {value?.prix}</th>
-                                <th>Date ajout: Panier: {new Date(""+value?.dateAjout).toLocaleDateString()}</th>
-                                <th>quantite en achter: {value?.quantite}</th>
-                                <th>
-                                    <button onClick={e => fetchdelete(e, value?.id)}>Supprimer</button></th>
-
-                            </tr>
+                            <tr>{value}</tr>
                             </tbody>
                         </table>
 
