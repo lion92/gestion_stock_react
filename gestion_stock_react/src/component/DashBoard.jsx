@@ -6,16 +6,17 @@ import {PaginatedItems} from "./PaginatedItems";
 import {PaginatedItems2} from "./PaginatedItems2";
 import BarGraph from "./BarGraph";
 import {IoBasketOutline} from "react-icons/io5";
-import {CiMenuBurger} from "react-icons/ci";
 import PanierList from "./PanierList";
+import {MessageStore} from "./messageInfo/MessageStore";
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
     const [utilisa, setUtilisa] = useState("Déconnnecté");
     const [listStock, setListStock] = useState([]);
     const [showMenu, setShowMenu] = useState(true);
-    const [showMenuClass, setShowMenuClass] = useState("menu showMenu");
-    useEffect(() => {fetchAPITotal()
+    const { message, setMessage } = MessageStore()
+    useEffect(() => {
+        fetchAPITotal()
         fetchUerToken()
         fetchAPIStock()
         setUtilisa("" + localStorage.getItem("nom") === "null" ? "Veuillez vous connecter" : "" + localStorage.getItem("nom"))
@@ -35,7 +36,7 @@ function DashBoard(props) {
                 label: 'Quantite',
                 data: listStock?.length > 0 ? listStock.map(value => value.quantite) : [],
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'black',
+                borderColor: 'black',
 
 
             },
@@ -114,9 +115,31 @@ function DashBoard(props) {
                 console.log("error token")
             }
         })
-    },[]);
+    }, []);
     return (
         <div>
+            <h1 style={{color:"red", textAlign:"center"}}>{message}</h1>
+            <ul className="menu" >
+
+                <h2>Menu</h2>
+                <li><NavLink to={"/"}>
+                    Bienvenue
+                </NavLink></li>
+                <li><NavLink to={"/inscription"}>
+                    Inscription
+                </NavLink></li>
+                <li><NavLink to={"/changepass"}>
+                    Changer son mot de passe
+                </NavLink></li>
+                <li><NavLink to={"/ajoutArticle"}>
+                    Article
+                </NavLink></li>
+                <li><NavLink to={"/stock"}>
+                    Stock
+                </NavLink></li>
+
+
+            </ul>
             <Link style={{width: '20px', margin: '0'}} onClick={() => {
                 localStorage.removeItem('jwt2');
                 localStorage.removeItem("utilisateur");
@@ -126,40 +149,18 @@ function DashBoard(props) {
                 <button style={{backgroundColor: "red"}}>Deconnexion</button>
             </Link>
             <NavLink to={"/vente"}>
-                <div style={{position: "absolute", fontSize:"1.2em", height:"50%", top: "10px", right: "30px", width:"15%"}}>Panier <PanierList/><IoBasketOutline/></div>
+                <div style={{
+                    position: "absolute",
+                    fontSize: "1.2em",
+                    height: "50%",
+                    top: "5em",
+                    right: "30px",
+                    width: "15%"
+                }}>Panier <PanierList/><IoBasketOutline/></div>
             </NavLink>
 
-            <div><a style={{color: "black"}} rel="noreferrer" href="https://projet.krissclotilde.com/" target="_blank">Qui
-                suis
-                je?</a></div>
-            <div style={{alignItems:"center"}}>
-                <ul className={showMenuClass}>
-                    <h1>Bienvenue</h1>
-                    <h2>Projet personnel</h2>
-                    <h2>Menu</h2>
-                    <li><NavLink to={"/"}>
-                        Bienvenue
-                    </NavLink></li>
-                    <li><NavLink to={"/inscription"}>
-                        Inscription
-                    </NavLink></li>
-                    <li><NavLink to={"/changepass"}>
-                        Changer son mot de passe
-                    </NavLink></li>
-                    <li><NavLink to={"/ajoutArticle"}>
-                        Article
-                    </NavLink></li>
-                    <li><NavLink to={"/stock"}>
-                        Sock
-                    </NavLink></li>
 
-
-                </ul>
-
-            </div>
-
-
-            <div style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
+            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
 
                 <div className="parent">
 
@@ -171,12 +172,19 @@ function DashBoard(props) {
 
                         <button className="raise" onClick={getExportExcel}>Download Excel</button>
                         <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
-                        <h1>Kriss CLOTILDE Stock</h1>
+                        <h1 style={{textAlign: "center"}}>Kriss CLOTILDE Stock</h1>
+                        <a style={{color: "black", textAlign: "center"}} rel="noreferrer"
+                                href="https://projet.krissclotilde.com/"
+                                target="_blank">Qui
+                            suis
+                            je?</a>
+                        <h1>Bienvenue</h1>
+                        <h2>Projet personnel</h2>
 
 
                     </div>
                     <div className={props.titre !== "Vente" ? "div2" : "div2"}>
-                        <h1>{props.titre}</h1>
+                        <h1 style={{textAlign:"center"}}>{props.titre}</h1>
 
                         {props.contenue}</div>
 

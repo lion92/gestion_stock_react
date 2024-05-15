@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
+import {MessageStore} from "./messageInfo/MessageStore";
 function Inscription(props) {
 
     const [mdp, setMdp] = useState('');
@@ -16,7 +17,7 @@ function Inscription(props) {
     const [emailError, setEmailError] = useState("");
     const [confirError, setConfirmError] = useState("");
     const [modalDescription, setModalDescription] = useState(false);
-
+    const { message, setMessage } = MessageStore()
 
 
 
@@ -33,9 +34,11 @@ function Inscription(props) {
     function validateEmail(mail) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             setEmailError("")
+            setMessage("")
             return (true)
         }
         setEmailError("You have entered an invalid email address!")
+        setMessage("You have entered an invalid email address!")
         return (false)
     }
 
@@ -43,15 +46,18 @@ function Inscription(props) {
         e.preventDefault();
         if (nom === "") {
             setNomError("le nom est vide")
+            setMessage("le nom est vide")
             return
         }
         if (prenom === "") {
             setPrenomError("Le prenom est vide")
+            setMessage("Le prenom est vide")
             return
         }
 
         if (mdp !== confirmPassword) {
             setConfirmError("Les mots de passes doivent être semblables.")
+            setMessage("Les mots de passes doivent être semblables.")
             return
         }
 
@@ -61,6 +67,7 @@ function Inscription(props) {
 
         if (confirError.length > 8) {
             setConfirmError("Le password doit comporter au moins 9 caracteres")
+            setMessage("Le password doit comporter au moins 9 caracteres")
             return
         }
 
@@ -83,16 +90,19 @@ function Inscription(props) {
         );
         if (response.ok) {
             setInscriptionError("Inscription ok")
+            setMessage("Inscription ok")
         } else {
             setInscriptionError("une erreur s'est produite");
+            setMessage("une erreur s'est produite");
         }
     });
 
 
     return (
         <>
-            <button onClick={toggleDescription}>Date de naissance</button>
+
             <form className="form">
+                <button onClick={toggleDescription}>Date de naissance</button>
                 <label htmlFor="nom">Nom</label>
                 <input placeholder="Nom" onChange={(e) => setNom(e.target.value)}/>
                 <p>{nomError}</p>

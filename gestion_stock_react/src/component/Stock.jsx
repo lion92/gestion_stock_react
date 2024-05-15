@@ -3,6 +3,7 @@ import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
 import BarGraph from "./BarGraph";
+import {MessageStore} from "./messageInfo/MessageStore";
 
 
 function Stock(props) {
@@ -14,6 +15,7 @@ function Stock(props) {
     const [article, setArticle]=useState([])
 
     const [modalDescription, setModalDescription] = useState(false);
+    const { message, setMessage } = MessageStore()
 
     useEffect(() => {
         fetchAPI()
@@ -34,6 +36,7 @@ function Stock(props) {
         const response = await fetch(lien.url + "article/stockBy/" + idUser);
         const resbis = await response.json();
         await setListStock(resbis);
+        setMessage("Stock actualisé")
         return resbis;
     }, [setListStock]);
 
@@ -54,6 +57,7 @@ function Stock(props) {
         );
         await fetchAPI();
         await fetchAPIStock();
+        setMessage("Element du stock supprimé"+idStock)
 
         const resbis = await response;
     });
@@ -78,6 +82,7 @@ function Stock(props) {
         const resbis = await response;
         await fetchAPI();
         await fetchAPIStock();
+        setMessage("Element du stock modifié"+idStock)
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
@@ -98,6 +103,7 @@ function Stock(props) {
         );
         await fetchAPI();
         await fetchAPIStock();
+        setMessage("Element du stock crée")
 
     });
     const fetchAPI = useCallback(async () => {
@@ -106,7 +112,7 @@ function Stock(props) {
         const response = await fetch(lien.url + "article/byuser/" + idUser,{headers:{Authorization: `Bearer ${str}`}});
         const resbis = await response.json();
         await setArticle(resbis);
-
+        setMessage("List d'article actualisé")
         return resbis;
     }, [setArticle]);
     const ajouter = (e) => {

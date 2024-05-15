@@ -1591,6 +1591,7 @@ body > footer {
 
 .div3 {
     grid-area: 1 / 4 / 6 / 6;
+    margin-top: 5em;
 }
 
 body {
@@ -1638,49 +1639,25 @@ thead th {
 }
 
 
-
 .menu {
+    background: rgba(74, 220, 208, 0.5); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
     display: flex;
-    align-items: flex-start;
-    flex-direction: column;/* Définissez la largeur de votre menu ici */
-    margin: auto;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
     border-radius: 10px;
-    justify-content: center;
 
 }
 
-.menu ul {
-    list-style: none;
-    padding: 0;
-    height: 10em;
-}
-
-.menu li {
-    color: white; /* Couleur du texte */
-    font-size: 15px; /* Taille de la police */
-}
-
-.menu li:hover {
-    background-color: rgb(103, 213, 121); /* Couleur de fond au survol */
-}
-
-.hideMenu{
-    display: none;
-}
-
-.showMenu{
-    display: flex;
-}
-
-@media only screen and (max-width: 667px) {
+@media only screen and (max-width: 980px) {
     .menu {
-        background: rgba(134, 232, 154, 0.1);  /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+        background: rgba(74, 220, 208, 0.5); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
         display: flex;
         align-items: center;
-        flex-direction: column;/* Définissez la largeur de votre menu ici */
-        height: 10em;
-        margin: auto;
+        flex-direction: column;
+        justify-content: space-between;
         border-radius: 10px;
+
     }
 
     .menu ul {
@@ -1696,10 +1673,11 @@ thead th {
     .menu li:hover {
         background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond au survol */
     }
-h1,h2{
-    font-size: 1em;
-    font-weight: bold;
-}
+
+    h1, h2 {
+        font-size: 1em;
+        font-weight: bold;
+    }
 
     .parent {
         display: flex;
@@ -1737,7 +1715,7 @@ h1,h2{
     }
 
     th {
-        font-size: 0.5em;
+        font-size: 0.7em;
     }
 
     .divCentrer {
@@ -1747,7 +1725,14 @@ h1,h2{
 
 }
 
-select, option{
+select, option {
     color: white;
 }
-a{text-align: center}
+
+a {
+    text-align: center
+}
+
+li :hover {
+    background-color: darkcyan;
+}

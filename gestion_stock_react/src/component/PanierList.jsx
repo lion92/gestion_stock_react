@@ -19,9 +19,9 @@ function PanierList(props) {
                     <table style={{}}>
                         <thead>
                         <tr>
-                            <th>IdProduit</th>
-                            <th>Quantite</th>
-                            <th>Prix</th>
+                            <th>Id</th>
+                            <th>Qte</th>
+                            <th>Prx</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -29,7 +29,7 @@ function PanierList(props) {
 
                             >
                             <th>{value?.id}
-                                <button onClick={(e)=>removeId(e,value?.id)}>Remove id</button>
+                                <button onClick={(e)=>removeId(e,value?.id)}>X</button>
                             </th>
                             <th>{value?.quantite}</th>
                             <th>{value?.prix}</th>

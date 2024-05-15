@@ -3,6 +3,7 @@ import lien from "../Lien";
 import "../css/vente.css"
 import {storeId} from "./store/StoreId";
 import '../css/catalogue.css';
+import {MessageStore} from "./messageInfo/MessageStore";
 function Vente(props) {
     const [listStock, setListStock] = useState([]);
     const [quantiteParoduit, setQuantiteProduit] = useState(0);
@@ -10,6 +11,7 @@ function Vente(props) {
     const [idProduit, setIdProduit] = useState(0);
     const [prixProduit, setPrixProduit] = useState(0);
     const { idList, addId, removeId, resetIds } = storeId();
+    const { message, setMessage } = MessageStore()
     useEffect(() => {
         fetchAPIStock()
         fetchAPI()
@@ -129,12 +131,12 @@ function Vente(props) {
                         <tr onClick={e => {
                             if (quantiteParoduit !== 0) {
                                 addId(e, value?.stockref, quantiteParoduit, value?.prix)
+                                setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${quantiteParoduit}`)
                             }
                         }}>
                             <th>
-                                <button>id
-                                </button>
-                                idStock:{value?.stockref}</th>
+
+                                {value?.stockref}</th>
                             <th>Nom article:{value?.nom}</th>
                             <th>Description Article:{value?.description}</th>
                             <th>Nom Vendeur: {value?.nomVendeur}</th>
@@ -155,7 +157,6 @@ function Vente(props) {
 
 
                 <button onClick={(e) => resetIds(e)}>Réinitialiser la liste</button>
-                <button onClick={(e) => acheter(e, quantiteParoduit, prixProduit)}>Acheter definitif</button>
 
             </div>
 

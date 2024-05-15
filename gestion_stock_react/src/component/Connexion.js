@@ -2,7 +2,8 @@ import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import lien from "../Lien";
 import Article from "./Article";
-import '../css/form.css'
+import {MessageStore} from "./messageInfo/MessageStore";
+
 const Connexion = () => {
     const [messageLog, setMessageLog] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -12,6 +13,7 @@ const Connexion = () => {
     const [probleme, setProbleme] = useState("non connecte");
     const [catcha, setCatcha] = useState("");
     const [catchaColler, setCatchaColler] = useState("");
+    const { message, setMessage } = MessageStore()
     useEffect(() => {
         fetchUerToken();
     }, []);
@@ -23,6 +25,7 @@ const Connexion = () => {
             return (true)
         }
         setEmailError("You have entered an invalid email address!")
+        setMessage("You have entered an invalid email address!")
         return (false)
     }
 
@@ -66,6 +69,7 @@ const Connexion = () => {
         let response = null;
         if (password.length < 3) {
             setPasswordError("impossible mot de passe trop court minimum 3 caractere")
+            setMessage("impossible mot de passe trop court minimum 3 caractere")
         } else {
             response = await fetch(
                 lien.url + "connection/login",
@@ -91,14 +95,17 @@ const Connexion = () => {
                     setMessageLog("Code Bon");
                     localStorage.setItem('jwt2', data?.jwt);
                     setProbleme('connecte')
+                    setMessage("Vous êtes connecté")
                 } else {
                     setMessageLog("Combinaison code et mot de passe incorrect")
+                    setMessage("Combinaison code et mot de passe incorrect")
 
                 }
 
             })
         }catch (e){
             setMessageLog("Un probleme est survenu ou les identifiants ne sont pas corrects")
+            setMessage("Un probleme est survenu ou les identifiants ne sont pas corrects")
         }
     });
 
@@ -118,6 +125,7 @@ const Connexion = () => {
                                 setEmail(e.target.value);
                                 if (ValidateEmail(email)) {
                                     setEmailError("")
+                                    setMessage("")
                                 }
                             }}
                                    type={'text'}/>
@@ -138,7 +146,7 @@ const Connexion = () => {
 
                             <h2 id="blur">{catcha}</h2>
 
-                           <button onClick={fetchConnection} id='btnLogin'>LOGIN</button>
+                           <button onClick={fetchConnection} id='btnLogin'>Connexion</button>
                             <h1>{(probleme !== 'connecte' ? '' : 'connecte')}</h1>
                         </form>
                     </div>

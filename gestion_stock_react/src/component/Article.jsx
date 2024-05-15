@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import lien from "../Lien";
 
 import'../css/article.css'
+import {MessageStore} from "./messageInfo/MessageStore";
 function Article(props) {
     const [nom, setNom] = useState('');
     const [description, setDescription] = useState('');
@@ -12,8 +13,9 @@ function Article(props) {
     const [dateCalendar, setDateCalendar] = useState(new Date());
     const [article, setArticle]=useState([])
     const [idArticle, setIdArticle]=useState(-1)
-
     const [modalDescription, setModalDescription] = useState(false);
+    const { message, setMessage } = MessageStore()
+
     useEffect( ()=>{
         fetchAPI()
 
@@ -45,6 +47,7 @@ function Article(props) {
             }
         );
         await fetchAPI();
+        setMessage("Article supprimé")
 
         const resbis = await response;
     });
@@ -54,6 +57,7 @@ function Article(props) {
         const response = await fetch(lien.url + "article/byuser/" + idUser,{headers:{Authorization: `Bearer ${str}`}});
         const resbis = await response.json();
         await setArticle(resbis);
+        setMessage("Actualisation de la liste des articles")
 
         return resbis;
     }, [setArticle]);
@@ -80,9 +84,11 @@ function Article(props) {
                     "Content-Type": "application/json",
                 },
             }
+
         );
         const resbis = await response;
         await fetchAPI();
+        setMessage("Article modifié")
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
@@ -105,7 +111,9 @@ function Article(props) {
                 },
             }
         );
+
         await fetchAPI();
+        setMessage("Article crée")
     });
 
 

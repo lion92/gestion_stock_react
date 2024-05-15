@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import lien from "../Lien";
 import Article from "./Article";
+import {MessageStore} from "./messageInfo/MessageStore";
 
 const ChangePassword = () => {
     const [messageLog, setMessageLog] = useState("");
@@ -14,6 +15,7 @@ const ChangePassword = () => {
     const [probleme, setProbleme] = useState("non connecte");
     const [catcha, setCatcha] = useState("");
     const [catchaColler, setCatchaColler] = useState("");
+    const { message, setMessage } = MessageStore()
     useEffect(() => {
         fetchUerToken();
     }, []);
@@ -24,6 +26,7 @@ const ChangePassword = () => {
             return (true)
         }
         setEmailError("You have entered an invalid email address!")
+        setMessage("You have entered an invalid email address!")
         return (false)
     }
 
@@ -51,8 +54,10 @@ const ChangePassword = () => {
                     localStorage.setItem("nom", data?.nom)
                     setMessageLog("Code Bon");
                     setProbleme('connecte')
+                    setMessage("connecte")
                 } else {
                     setMessageLog("Deconnecter")
+                    setMessage("Deconnecter")
 
                 }
             } else {
@@ -67,10 +72,13 @@ const ChangePassword = () => {
         let response = null;
         if (password.length < 3) {
             setPasswordError("impossible mot de passe trop court minimum 3 caractere")
+            setMessage("impossible mot de passe trop court minimum 3 caractere")
         } else if (password2.length < 3) {
             setPasswordError("impossible mot de passe trop court minimum 3 caractere")
+            setMessage("impossible mot de passe trop court minimum 3 caractere")
         } else if ("" + password2 !== "" + password3) {
             setPasswordError("impossible mot de passe trop court minimum 3 caractere")
+            setMessage("impossible mot de passe trop court minimum 3 caractere")
         } else {
             response = await fetch(
                 lien.url + "connection/change-pass",
@@ -88,8 +96,10 @@ const ChangePassword = () => {
                     value.text()).then((val)=>{
                 if (""+val === "ok") {
                     setMessageLog("PasswordChangé")
+                    setMessage("PasswordChangé")
                 } else {
                     setMessageLog("Un probleme est survenu")
+                    setMessage("Un probleme est survenu")
                 }
             })
         }
@@ -113,6 +123,7 @@ const ChangePassword = () => {
                                 setEmail(e.target.value);
                                 if (ValidateEmail(email)) {
                                     setEmailError("")
+                                    setMessage("Email ok")
                                 }
                             }}
                                    type={'text'}/>
@@ -122,8 +133,10 @@ const ChangePassword = () => {
                                        if (e.target.value.length < 3) {
                                            setPassword(e.target.value);
                                            setPasswordError("Le mot de passe doit être d'au moins 3 caractère")
+                                           setMessage("Le mot de passe doit être d'au moins 3 caractère")
                                        } else {
                                            setPasswordError("")
+                                           setMessage("")
                                            setPassword(e.target.value)
                                        }
                                    }} type={'password'}/>
@@ -133,8 +146,10 @@ const ChangePassword = () => {
                                        if (e.target.value.length < 3) {
                                            setPassword2(e.target.value);
                                            setPasswordError("Le mot de passe doit être d'au moins 3 caractère")
+                                           setMessage("Le mot de passe doit être d'au moins 3 caractère")
                                        } else {
                                            setPasswordError("")
+                                           setMessage("")
                                            setPassword2(e.target.value)
                                        }
                                    }} type={'password'}/>
@@ -144,8 +159,10 @@ const ChangePassword = () => {
                                        if (e.target.value.length < 3) {
                                            setPassword3(e.target.value);
                                            setPasswordError("Le mot de passe doit être d'au moins 3 caractère")
+                                           setMessage("Le mot de passe doit être d'au moins 3 caractère")
                                        } else {
                                            setPasswordError("")
+                                           setMessage("")
                                            setPassword3(e.target.value)
                                        }
                                    }} type={'password'}/>
@@ -155,7 +172,7 @@ const ChangePassword = () => {
 
                             <h2 id="blur">{catcha}</h2>
 
-                            <button onClick={fetchChangePassword} id='btnLogin'>LOGIN</button>
+                            <button onClick={fetchChangePassword} id='btnLogin'>Changer</button>
                             <h1>{(probleme !== 'connecte' ? '' : 'connecte')}</h1>
                         </form>
                     </div>
