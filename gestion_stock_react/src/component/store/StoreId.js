@@ -3,15 +3,15 @@ import create from 'zustand';
 // Créer le magasin Zustand
 export const storeId = create((set) => ({
     // Initialiser la liste des IDs
-    idList: [],
+    idList:[],
 
     // Ajouter un ID à la liste
-    addId: (id) => set((state) => ({ idList: [...state.idList, id] })),
+    addId: (e,id, quantite, prix) => set((state) => ({ idList: [...state.idList, {e:e,id:id, quantite:quantite, prix:prix}] })),
 
     // Supprimer un ID de la liste
-    removeId: (id) =>
-        set((state) => ({ idList: state.idList.filter((item) => item !== id) })),
+    removeId: (e,id) =>
+        set((state) => ({ e:e ,idList: state.idList.filter((item) => item.id !==  id) })),
 
     // Réinitialiser la liste des IDs
-    resetIds: () => set({ idList: [] }),
+    resetIds: (e) => set({ e:e,idList: [] }),
 }));

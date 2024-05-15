@@ -9,7 +9,6 @@ function Vente(props) {
     const [listPanier, setListPanier] = useState(0);
     const [idProduit, setIdProduit] = useState(0);
     const [prixProduit, setPrixProduit] = useState(0);
-    const {bears, increasePopulation} = storeId()
     const { idList, addId, removeId, resetIds } = storeId();
     useEffect(() => {
         fetchAPIStock()
@@ -28,9 +27,8 @@ function Vente(props) {
 
     }, [setListStock]);
 
-    const acheter = async (e, item, quantite) => {
-
-
+    const acheter = async (e, id, quantite, prix) => {
+        e.preventDefault();
         if (window.confirm("Voulez vous acheter ?")) {
 
 
@@ -51,9 +49,10 @@ function Vente(props) {
                     },
                 }
             );
-            await fetchAPIStock()
-            await fetchAPI()
         }
+        await fetchAPIStock()
+            await fetchAPI()
+
     }
 
     let fetchdelete = useCallback(async (e, id) => {
@@ -94,94 +93,72 @@ function Vente(props) {
     }, [setListPanier]);
 
 
-    function getId(e, stockref, prix) {
+    function getId(e, stockref,quantity) {
         e.preventDefault();
         setIdProduit(stockref);
-        setPrixProduit(prix)
+        setQuantiteProduit(quantity);
     }
 
     return (
         <div style={{display: "flex", flexWrap: "wrap", alignItems: "center"}}>
-
+            <label>Quantité à commander:</label>
+            <input type="number" placeholder="quantite" value={quantiteParoduit}
+                   onChange={(e) => setQuantiteProduit(parseInt(e.target.value))}/>
             <h2>Article</h2>
             <div style={{
                 border: "1px solid black",
                 borderRadius: "10px",
-                fontSize:"0.8em"
+                fontSize: "0.8em"
             }}>
 
                 {listStock.length > 0 ? listStock?.map(value =>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>IdStock</th>
-                                <th>Article</th>
-                                <th>Description</th>
-                                <th>Nom vendeur</th>
-                                <th>Prenom vendeur</th>
-                                <th>Id vendeur</th>
-                                <th>Prix</th>
-                                <th>Quantite</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr onClick={e=>getId(e,value?.stockref,value?.prix)}>
-                                <th><button>id
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>IdStock</th>
+                            <th>Article</th>
+                            <th>Description</th>
+                            <th>Nom vendeur</th>
+                            <th>Prenom vendeur</th>
+                            <th>Id vendeur</th>
+                            <th>Prix</th>
+                            <th>Quantite</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr onClick={e => {
+                            if (quantiteParoduit !== 0) {
+                                addId(e, value?.stockref, quantiteParoduit, value?.prix)
+                            }
+                        }}>
+                            <th>
+                                <button>id
                                 </button>
-                                    idStock:{value?.stockref}</th>
-                                <th>Nom article:{value?.nom}</th>
-                                <th>Description Article:{value?.description}</th>
-                                <th>Nom Vendeur: {value?.nomVendeur}</th>
-                                <th>Prenom Vendeur: {value?.prenomVendeur}</th>
-                                <th>IdUser: {value?.userId}</th>
-                                <th>Prix article: {value?.prix}</th>
-                                <th>quantite en stock: {value?.quantite}</th>
+                                idStock:{value?.stockref}</th>
+                            <th>Nom article:{value?.nom}</th>
+                            <th>Description Article:{value?.description}</th>
+                            <th>Nom Vendeur: {value?.nomVendeur}</th>
+                            <th>Prenom Vendeur: {value?.prenomVendeur}</th>
+                            <th>IdUser: {value?.userId}</th>
+                            <th>Prix article: {value?.prix}</th>
+                            <th>quantite en stock: {value?.quantite}</th>
 
-                            </tr>
-                            </tbody>
-                        </table>
+                        </tr>
+                        </tbody>
+                    </table>
                 ) : []
                 }
 
             </div>
             <div style={{alignItems: "center"}}>
                 <p>Id sélectionné: {idProduit}</p>
-                <label>Quantité à commander:</label>
-                <input type="number" placeholder="quantite" value={quantiteParoduit}
-                       onChange={(e) => setQuantiteProduit(parseInt(e.target.value))}/>
-                <button onClick={() => addId(idProduit)}>Ajouter un ID</button>
-                <button onClick={resetIds}>Réinitialiser la liste</button>
-                <button onClick={e => acheter(e, idProduit, quantiteParoduit)}>Acheter</button>
+
+
+                <button onClick={(e) => resetIds(e)}>Réinitialiser la liste</button>
+                <button onClick={(e) => acheter(e, quantiteParoduit, prixProduit)}>Acheter definitif</button>
+
             </div>
 
-
-            <div>
-
-                <h2>Achat</h2>
-                {idList.length > 0 ? idList?.map(value =>
-                    <div style={{
-                        border: "1px solid black",
-                        borderRadius: "10px",
-                        fontSize:"0.8em"
-                    }}>
-
-
-                        <table style={{}}>
-                            <thead>
-                            <tr>
-                                <th>IdProduit</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>{value}</tr>
-                            </tbody>
-                        </table>
-
-
-                    </div>
-                ) : []
-                }
-            </div>
 
         </div>
     )

@@ -7,6 +7,7 @@ import {PaginatedItems2} from "./PaginatedItems2";
 import BarGraph from "./BarGraph";
 import {IoBasketOutline} from "react-icons/io5";
 import {CiMenuBurger} from "react-icons/ci";
+import PanierList from "./PanierList";
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
@@ -125,36 +126,40 @@ function DashBoard(props) {
                 <button style={{backgroundColor: "red"}}>Deconnexion</button>
             </Link>
             <NavLink to={"/vente"}>
-                <div style={{position: "absolute", fontSize:"2em", top: "10px", right: "30px", backgroundColor:"lightyellow"}}>Panier<IoBasketOutline/></div>
+                <div style={{position: "absolute", fontSize:"1.2em", height:"50%", top: "10px", right: "30px", width:"15%"}}>Panier <PanierList/><IoBasketOutline/></div>
             </NavLink>
+
             <div><a style={{color: "black"}} rel="noreferrer" href="https://projet.krissclotilde.com/" target="_blank">Qui
                 suis
                 je?</a></div>
-            <ul className={showMenuClass}>
-                <h1>Bienvenue</h1>
-                <h2>Projet personnel</h2>
-                <h2>Menu</h2>
-                <li><NavLink to={"/"}>
-                    Bienvenue
-                </NavLink></li>
-                <li><NavLink to={"/inscription"}>
-                    Inscription
-                </NavLink></li>
-                <li><NavLink to={"/changepass"}>
-                    Changer son mot de passe
-                </NavLink></li>
-                <li><NavLink to={"/ajoutArticle"}>
-                    Article
-                </NavLink></li>
-                <li><NavLink to={"/stock"}>
-                    Sock
-                </NavLink></li>
+            <div style={{alignItems:"center"}}>
+                <ul className={showMenuClass}>
+                    <h1>Bienvenue</h1>
+                    <h2>Projet personnel</h2>
+                    <h2>Menu</h2>
+                    <li><NavLink to={"/"}>
+                        Bienvenue
+                    </NavLink></li>
+                    <li><NavLink to={"/inscription"}>
+                        Inscription
+                    </NavLink></li>
+                    <li><NavLink to={"/changepass"}>
+                        Changer son mot de passe
+                    </NavLink></li>
+                    <li><NavLink to={"/ajoutArticle"}>
+                        Article
+                    </NavLink></li>
+                    <li><NavLink to={"/stock"}>
+                        Sock
+                    </NavLink></li>
 
 
-            </ul>
+                </ul>
+
+            </div>
 
 
-            <div style={{display: "flex", flexDirection: "column"}}>
+            <div style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
 
                 <div className="parent">
 
