@@ -3,6 +3,7 @@ import '../css/form.css'
 import lien from "../Lien";
 import Article from "./Article";
 import {MessageStore} from "./messageInfo/MessageStore";
+import {PaginatedItems} from "./PaginatedItems";
 
 const Connexion = () => {
     const [messageLog, setMessageLog] = useState("");
@@ -111,7 +112,7 @@ const Connexion = () => {
 
     return (
         <div>
-            {(probleme === "connecte") ? (<Article></Article>) : ''
+            {(probleme === "connecte") ? (<div><Article/><PaginatedItems/></div>) : ''
             }
             {(probleme !== "connecte") ? (
                 <>

@@ -4,6 +4,6 @@
 import create from "zustand";
 
 export const MessageStore = create((set) => ({
-    message: "Bienvenue",
+    message: "Bienvenu",
     setMessage: (newMessage) => set({ message: newMessage }),
 }));

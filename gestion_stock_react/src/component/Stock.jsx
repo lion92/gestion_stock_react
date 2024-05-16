@@ -112,7 +112,7 @@ function Stock(props) {
         const response = await fetch(lien.url + "article/byuser/" + idUser,{headers:{Authorization: `Bearer ${str}`}});
         const resbis = await response.json();
         await setArticle(resbis);
-        setMessage("List d'article actualisé")
+        setMessage("Articles actualisés")
         return resbis;
     }, [setArticle]);
     const ajouter = (e) => {

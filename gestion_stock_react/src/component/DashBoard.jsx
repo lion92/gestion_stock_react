@@ -123,7 +123,7 @@ function DashBoard(props) {
 
                 <h2>Menu</h2>
                 <li><NavLink to={"/"}>
-                    Bienvenue
+                    Bienvenu
                 </NavLink></li>
                 <li><NavLink to={"/inscription"}>
                     Inscription
@@ -178,7 +178,7 @@ function DashBoard(props) {
                                 target="_blank">Qui
                             suis
                             je?</a>
-                        <h1>Bienvenue</h1>
+                        <h1>Bienvenu</h1>
                         <h2>Projet personnel</h2>
 
 
