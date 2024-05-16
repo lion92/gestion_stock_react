@@ -1640,23 +1640,27 @@ thead th {
 
 
 .menu {
-    background: rgba(74, 220, 208, 0.5); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+    background: rgba(4, 250, 183, 0.76);/* Dégradé de vert (#00ff00) à bleu (#0000ff) */
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
     border-radius: 10px;
+    width: 80%;
+    padding: 10px;
 
 }
 
 @media only screen and (max-width: 980px) {
     .menu {
-        background: rgba(74, 220, 208, 0.5); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+        background: rgba(4, 250, 183, 0.76); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
         display: flex;
         align-items: center;
         flex-direction: column;
         justify-content: space-between;
         border-radius: 10px;
+        padding: 5px;
+        font-size: 1.2em;
 
     }
 
@@ -1667,15 +1671,15 @@ thead th {
 
     .menu li {
         color: white; /* Couleur du texte */
-        font-size: 12px; /* Taille de la police */
+        font-size: 1.5em; /* Taille de la police */
     }
 
     .menu li:hover {
         background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond au survol */
     }
 
-    h1, h2 {
-        font-size: 1em;
+    h1, h2, li, a, label {
+        font-size: 3em;
         font-weight: bold;
     }
 
@@ -1715,12 +1719,18 @@ thead th {
     }
 
     th {
-        font-size: 0.7em;
+        font-size: 1.2em;
     }
 
     .divCentrer {
         display: none;
     }
+input, button{
+    width: 100%;
+    height: 5em;
+    border-radius: 10px;
+    font-size: 3em;
+}
 
 
 }

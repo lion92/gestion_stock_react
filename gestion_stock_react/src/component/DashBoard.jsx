@@ -8,6 +8,8 @@ import BarGraph from "./BarGraph";
 import {IoBasketOutline} from "react-icons/io5";
 import PanierList from "./PanierList";
 import {MessageStore} from "./messageInfo/MessageStore";
+import {CiMenuBurger} from "react-icons/ci";
+import {MenuShow} from "./storeMenu/MenuShow";
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
@@ -15,6 +17,7 @@ function DashBoard(props) {
     const [listStock, setListStock] = useState([]);
     const [showMenu, setShowMenu] = useState(true);
     const { message, setMessage } = MessageStore()
+    const { toggle, toggleState } = MenuShow()
     useEffect(() => {
         fetchAPITotal()
         fetchUerToken()
@@ -118,36 +121,44 @@ function DashBoard(props) {
     }, []);
     return (
         <div>
-            <h1 style={{color:"red", textAlign:"center"}}>{message}</h1>
-            <ul className="menu" >
 
-                <h2>Menu</h2>
-                <li><NavLink to={"/"}>
-                    Bienvenu
-                </NavLink></li>
-                <li><NavLink to={"/inscription"}>
-                    Inscription
-                </NavLink></li>
-                <li><NavLink to={"/changepass"}>
-                    Changer son mot de passe
-                </NavLink></li>
-                <li><NavLink to={"/ajoutArticle"}>
-                    Article
-                </NavLink></li>
-                <li><NavLink to={"/stock"}>
-                    Stock
-                </NavLink></li>
+            <CiMenuBurger style={{width: "3em", height: "3em", textAlign: "center", margin: "1em"}}
+                          onClick={() => toggleState()}/>
+
+            {toggle ?
+                <ul className="menu">
+
+                    <h2>Menu</h2>
+                    <li><NavLink to={"/"}>
+                        Bienvenu
+                    </NavLink></li>
+                    <li><NavLink to={"/inscription"}>
+                        Inscription
+                    </NavLink></li>
+                    <li><NavLink to={"/changepass"}>
+                        Changer son mot de passe
+                    </NavLink></li>
+                    <li><NavLink to={"/ajoutArticle"}>
+                        Article
+                    </NavLink></li>
+                    <li><NavLink to={"/stock"}>
+                        Stock
+                    </NavLink></li>
 
 
-            </ul>
+                </ul> : ""}
+            <h1 style={{color: "red", textAlign: "center"}}>{message}</h1>
+
             <Link style={{width: '20px', margin: '0'}} onClick={() => {
                 localStorage.removeItem('jwt2');
                 localStorage.removeItem("utilisateur");
                 setUtilisa("Deconnecté");
                 localStorage.removeItem("nom");
             }} to="/">
-                <button style={{backgroundColor: "red"}}>Deconnexion</button>
+
             </Link>
+
+
             <NavLink to={"/vente"}>
                 <div style={{
                     position: "absolute",
@@ -167,6 +178,7 @@ function DashBoard(props) {
                     <div className="div1">
 
                         <h2>Utilisateur: {utilisa}</h2>
+                        <button style={{backgroundColor: "red", color: "red", margin: "1em"}}>Deconnexion</button>
 
                         <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
 
@@ -174,8 +186,8 @@ function DashBoard(props) {
                         <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
                         <h1 style={{textAlign: "center"}}>Kriss CLOTILDE Stock</h1>
                         <a style={{color: "black", textAlign: "center"}} rel="noreferrer"
-                                href="https://projet.krissclotilde.com/"
-                                target="_blank">Qui
+                           href="https://projet.krissclotilde.com/"
+                           target="_blank">Qui
                             suis
                             je?</a>
                         <h1>Bienvenu</h1>
@@ -184,7 +196,7 @@ function DashBoard(props) {
 
                     </div>
                     <div className={props.titre !== "Vente" ? "div2" : "div2"}>
-                        <h1 style={{textAlign:"center"}}>{props.titre}</h1>
+                    <h1 style={{textAlign: "center"}}>{props.titre}</h1>
 
                         {props.contenue}</div>
 

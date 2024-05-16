@@ -122,7 +122,7 @@ const Connexion = () => {
                             {"" + probleme}
                             <div>{messageLog}</div>
                             <div id="iconLogin"/>
-                            <input id='email' value={email} placeholder={'email'} onChange={e => {
+                            <input value={email} placeholder={'email'} onChange={e => {
                                 setEmail(e.target.value);
                                 if (ValidateEmail(email)) {
                                     setEmailError("")
@@ -131,7 +131,7 @@ const Connexion = () => {
                             }}
                                    type={'text'}/>
                             <p className="error">{mailError}</p>
-                            <input id='password'  value={password} placeholder={'password'}
+                            <input value={password} placeholder={'password'}
                                    onChange={e => {
                                        if (e.target.value.length < 3) {
                                            setPassword(e.target.value);

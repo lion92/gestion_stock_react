@@ -11,15 +11,12 @@
 }
 
 
-input {
-    width: 10em;
-}
 
 button {
     background-image: url("../../src/image/bouton.png");
     background-size: cover;
     text-align: center;
-    font-size: 0.9em;
+    font-size: 1.5em;
     color: black;
     border: 3px solid darkcyan;
 }
@@ -37,11 +34,7 @@ button {
 
 }
 
-input {
-    width: 10em;
-    color: #1c1455;
 
-}
 
 th {
     text-align: center;
