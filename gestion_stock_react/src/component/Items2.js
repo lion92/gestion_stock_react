@@ -50,13 +50,13 @@ function Items2( {currentItems}) {
                                 <th>{item.userId}</th>
                                 <th>{item.nom}</th>
                                 <th>{item.description}</th>
-                                {item.quantite > 0 ?<span  style={{width:"0.7em", backgroundColor:"green",opacity:"0.5"}}>{item.quantite}</span>:<span style={{width:"0.7em", backgroundColor:"red", opacity:"0.5"}}>{item.quantite}</span>}
+                                {item.quantite > 0 ?<span  style={{fontSize:"2em",width:"40px", height:"20px", backgroundColor:"green",opacity:"0.5"}}>{item.quantite}</span>:<span style={{width:"40px",fontSize:"2em", height:"20px", backgroundColor:"red", opacity:"0.5"}}>{item.quantite}</span>}
                                 {
                                     item.quantite > 0 ?
-                                        <input type="number" style={{width:"3em", backgroundColor:"green",opacity:"0.5"}} value={unite} onChange={(e) => setUnite(parseInt(e.target.value))}/> : <input type="number" style={{width:"3em", backgroundColor:"red",opacity:"0.5"}} value={unite} onChange={(e) => setUnite(parseInt(e.target.value))}/>
+                                        <input type="number" style={{fontSize:"2em",width:"40px", height:"20px",backgroundColor:"green",opacity:"0.5"}} value={unite} onChange={(e) => setUnite(parseInt(e.target.value))}/> : <input type="number" style={{width:"40px",fontSize:"2em", height:"20px", backgroundColor:"red",opacity:"0.5"}} value={unite} onChange={(e) => setUnite(parseInt(e.target.value))}/>
 
                                 }
-                                <button onClick={(e)=>{FetchAPIupdate(e,item)}}>ok</button>
+                                <button style={{width:"10px", height:"3em"}} onClick={(e)=>{FetchAPIupdate(e,item)}}>ok</button>
 
                                     <th>{item.prix}</th>
                                         <th>{new Date(""+item?.dateAjout).toLocaleDateString()}</th>
