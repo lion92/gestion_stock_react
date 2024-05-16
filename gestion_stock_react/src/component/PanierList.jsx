@@ -3,11 +3,9 @@ import {storeId} from "./store/StoreId";
 
 function PanierList(props) {
 
-    const { idList, addId, removeId, resetIds } = storeId();
+    const {idList, addId, removeId, resetIds} = storeId();
     return (
         <div>
-
-            <h2>Achat</h2>
             {idList.length > 0 ? idList?.map(value =>
                 <div style={{
                     border: "1px solid black",
@@ -27,17 +25,17 @@ function PanierList(props) {
                         <tbody>
                         <tr
 
-                            >
+                        >
                             <th>{value?.id}
-                                <button onClick={(e)=>removeId(e,value?.id)}>X</button>
+                                <button onClick={(e) => removeId(e, value?.id)}>X</button>
                             </th>
                             <th>{value?.quantite}</th>
                             <th>{value?.prix}</th>
                         </tr>
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
 
 
                 </div>

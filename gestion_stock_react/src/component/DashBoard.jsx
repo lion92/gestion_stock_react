@@ -121,6 +121,15 @@ function DashBoard(props) {
     }, []);
     return (
         <div>
+            <NavLink to={"/vente"}>
+                <div style={{
+                    position: "absolute",
+                    fontSize: "2em",
+                  width:"5em",
+                    right: "30px",
+
+                }}>Panier <PanierList/><IoBasketOutline/></div>
+            </NavLink>
 
             <CiMenuBurger style={{width: "3em", height: "3em", textAlign: "center", margin: "1em"}}
                           onClick={() => toggleState()}/>
@@ -159,16 +168,7 @@ function DashBoard(props) {
             </Link>
 
 
-            <NavLink to={"/vente"}>
-                <div style={{
-                    position: "absolute",
-                    fontSize: "1.2em",
-                    height: "50%",
-                    top: "5em",
-                    right: "30px",
-                    width: "15%"
-                }}>Panier <PanierList/><IoBasketOutline/></div>
-            </NavLink>
+
 
 
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
