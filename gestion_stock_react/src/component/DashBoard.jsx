@@ -120,7 +120,7 @@ function DashBoard(props) {
         })
     }, []);
     return (
-        <div>
+        <div className="pricipale">
             <NavLink to={"/vente"}>
                 <div style={{
                     position: "absolute",
@@ -145,7 +145,7 @@ function DashBoard(props) {
                         Inscription
                     </NavLink></li>
                     <li><NavLink to={"/changepass"}>
-                        Changer son mot de passe
+                        Modifier Mot de Passe
                     </NavLink></li>
                     <li><NavLink to={"/ajoutArticle"}>
                         Article

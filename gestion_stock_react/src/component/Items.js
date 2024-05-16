@@ -4,21 +4,21 @@ import React from "react";
 function Items({ currentItems }) {
 
     return (
-        <>
+        <><div>
+            <table>
+                <thead>
+                <tr>
+                    <th>IdArticle</th>
+                    <th>UserId</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Date d'ajout</th>
+                </tr>
+                </thead>
             {currentItems &&
                 currentItems.map((item) => (
-                    <div>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>IdArticle</th>
-                                <th>UserId</th>
-                                <th>Nom</th>
-                                <th>Description</th>
-                                <th>Prix</th>
-                                <th>Date d'ajout</th>
-                            </tr>
-                            </thead>
+
                             <tbody>
                                     <tr>
                                         <th>{item.id}</th>
@@ -30,9 +30,9 @@ function Items({ currentItems }) {
 
                                     </tr>
                             </tbody>
-                        </table>
-                    </div>
-                ))}
+
+                ))}     </table>
+        </div>
         </>
     );
  }
