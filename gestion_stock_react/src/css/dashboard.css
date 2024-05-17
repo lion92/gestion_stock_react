@@ -1712,6 +1712,9 @@ button:hover {
     a {
         color: #50c7b6;
     }
+    label{
+        font-size: 0.8em;
+    }
 
     .divCentrer {
         display: none;
@@ -1770,6 +1773,9 @@ li :hover {
         font-size: 0.6em;
         padding: 1px;
         margin: 5px;
+    }
+    label{
+        font-size: 0.8em;
     }
 
     button {

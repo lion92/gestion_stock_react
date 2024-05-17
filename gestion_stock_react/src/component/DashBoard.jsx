@@ -119,19 +119,31 @@ function DashBoard(props) {
             }
         })
     }, []);
-    return (
-        <div className="pricipale">
-            <NavLink to={"/vente"}>
+    return (<>
+
+    <div className="pricipale">
+
+        <NavLink to={"/vente"}>
                 <div style={{
                     position: "absolute",
                     fontSize: "2em",
-                  width:"5em",
-                    right: "5px",
+                    width: "3em",
+                    right: "3px",
+                    top: "4px",
+                    textAlign:"center"
 
                 }}>Panier <PanierList/><IoBasketOutline/></div>
             </NavLink>
 
-            <CiMenuBurger style={{position:"absolute", top:"10px", left:"5px",width: "3em", height: "3em", textAlign: "center", margin: "1em"}}
+            <CiMenuBurger style={{
+                position: "absolute",
+                top: "10px",
+                left: "5px",
+                width: "3em",
+                height: "3em",
+                textAlign: "center",
+                margin: "1em"
+            }}
                           onClick={() => toggleState()}/>
 
             {toggle ?
@@ -156,19 +168,6 @@ function DashBoard(props) {
 
 
                 </ul> : ""}
-            <h1 style={{color: "red", textAlign: "center"}}>{message}</h1>
-
-            <Link style={{width: '20px', margin: '0'}} onClick={() => {
-                localStorage.removeItem('jwt2');
-                localStorage.removeItem("utilisateur");
-                setUtilisa("Deconnecté");
-                localStorage.removeItem("nom");
-            }} to="/">
-
-            </Link>
-
-
-
 
 
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
@@ -177,8 +176,15 @@ function DashBoard(props) {
 
                     <div className="div1">
 
-                        <h2>Utilisateur: {utilisa}</h2>
-                        <button style={{ color: "red", margin: "1em"}}>Deconnexion</button>
+                        <h2>Utilisateur: {utilisa}</h2>  <Link onClick={() => {
+                        localStorage.removeItem('jwt2');
+                        localStorage.removeItem("utilisateur");
+                        setUtilisa("Deconnecté");
+                        localStorage.removeItem("nom");
+                    }} to="/">
+                        <button style={{color: "red", margin: "1em"}}>Deconnexion</button>
+                    </Link>
+
 
                         <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
 
@@ -195,7 +201,8 @@ function DashBoard(props) {
 
                     </div>
                     <div className={props.titre !== "Vente" ? "div2" : "div2"}>
-                    <h1 style={{textAlign: "center"}}>{props.titre}</h1>
+                        <h1 style={{color: "red", textAlign: "center"}}>{message}</h1>
+                        <h1 style={{textAlign: "center"}}>{props.titre}</h1>
 
                         {props.contenue}</div>
 
@@ -218,6 +225,7 @@ function DashBoard(props) {
 
             </div>
         </div>
+        </>
     );
 }
 
