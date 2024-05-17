@@ -12,15 +12,6 @@
 
 
 
-button {
-    background-image: url("../../src/image/bouton.png");
-    background-size: cover;
-    text-align: center;
-    font-size: 1.5em;
-    color: black;
-    border: 3px solid darkcyan;
-}
-
 .form {
     display: flex;
     align-items: center;

@@ -58,20 +58,21 @@ export function PaginatedItems2({itemsPerPage = 3}) {
     };
 
     return (
-        <div style={{color: "black"}}>
-            <button onClick={fetchAPIStock}>Actualiser stock</button>
-            <button  onClick={fetchAPIStockByName}>Actualiser Nom</button>
-            <button onClick={fetchAPIStockByQuantite}>Actualiser Quantite</button>
-                <Items2 currentItems={currentItems}/>
-            <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< previous"
-                renderOnZeroPageCount={null}
-            />
+        <div style={{color: "black", marginTop:"5em"}}>
+            <div className="pricipale">
+                <button onClick={fetchAPIStock}>Actualiser stock</button>
+                <button onClick={fetchAPIStockByName}>Actualiser Nom</button>
+                <button onClick={fetchAPIStockByQuantite}>Actualiser Quantite</button>
+            </div>
+            <div style={{fontSize:"1em"}}><Items2 currentItems={currentItems}/>
+                <ReactPaginate
+                    breakLabel="..."
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    renderOnZeroPageCount={null}
+                /></div>
+
         </div>
     );
 }

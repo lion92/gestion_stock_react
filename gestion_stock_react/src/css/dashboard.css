@@ -18,9 +18,7 @@
     --code: #000;
     --animation-duration: 0.1s;
     --button-base: #d0cfcf;
-    --button-hover: white;
     --scrollbar-thumb: rgb(170, 170, 170);
-    --scrollbar-thumb-hover: var(--button-hover);
     --form-placeholder: #949494;
     --form-text: #1d1d1d;
     --variable: #39a33c;
@@ -43,8 +41,6 @@
         --code: #ffbe85;
         --animation-duration: 0.1s;
         --button-base: #0c151c;
-        --button-hover: white;
-        --scrollbar-thumb: var(--button-hover);
         --scrollbar-thumb-hover: rgb(0, 0, 0);
         --form-placeholder: #a9a9a9;
         --form-text: #fff;
@@ -484,8 +480,6 @@ input {
 button {
     color: #1d1d1d;
     color: var(--form-text);
-    background-color: #efefef;
-    background-color: var(--background);
     font-family: inherit;
     font-size: inherit;
     margin-right: 6px;
@@ -496,21 +490,6 @@ button {
     outline: none;
 }
 
-@media (prefers-color-scheme: dark) {
-
-    button {
-        background-color: #161f27;
-        background-color: var(--background);
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-
-    button {
-        color: #fff;
-        color: var(--form-text);
-    }
-}
 
 textarea {
     color: #1d1d1d;
@@ -572,12 +551,6 @@ select {
         color: #fff;
         color: var(--form-text);
     }
-}
-
-button {
-
-    padding-right: 30px;
-    padding-left: 30px;
 }
 
 
@@ -1224,31 +1197,6 @@ tbody tr:nth-child(even) {
     }
 }
 
-tbody tr:nth-child(even) button {
-    background-color: #f7f7f7;
-    background-color: var(--background-alt);
-}
-
-@media (prefers-color-scheme: dark) {
-
-    tbody tr:nth-child(even) button {
-        background-color: #1a242f;
-        background-color: var(--background-alt);
-    }
-}
-
-tbody tr:nth-child(even) button:hover {
-    background-color: #fff;
-    background-color: var(--background-body);
-}
-
-@media (prefers-color-scheme: dark) {
-
-    tbody tr:nth-child(even) button:hover {
-        background-color: #202b38;
-        background-color: var(--background-body);
-    }
-}
 
 ::-webkit-scrollbar {
     height: 10px;
@@ -1291,18 +1239,6 @@ tbody tr:nth-child(even) button:hover {
     }
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #9b9b9b;
-    background: var(--scrollbar-thumb-hover);
-}
-
-@media (prefers-color-scheme: dark) {
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: rgb(0, 0, 0);
-        background: var(--scrollbar-thumb-hover);
-    }
-}
 
 @media (prefers-color-scheme: dark) {
 
@@ -1518,13 +1454,11 @@ body > footer {
     code,
     summary,
     details,
-    button,
     input,
     textarea {
         background-color: #fff;
     }
 
-    button,
     input,
     textarea {
         border: 1px solid #000;
@@ -1642,7 +1576,7 @@ thead th {
 
 
 .menu {
-    background: rgba(4, 250, 183, 0.76); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+    background-color: rgba(4, 250, 183, 0.76); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -1651,30 +1585,61 @@ thead th {
     width: 80%;
     padding: 10px;
 
+
+}
+.pricipale {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+}
+button {
+    text-align: center;
+    font-size: 1.5em;
+    color: black;
+    border: 3px solid #cae0e0;
 }
 
-@media only screen and (max-width: 980px) {
+input {
+    text-align: center;
+}
+
+button:hover {
+    background-color: #86eae2;
+}
+
+@media only screen and (max-width: 1300px) {
     .menu {
-        background: rgba(4, 250, 183, 0.76); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
+        background-color: rgba(4, 250, 183, 0.2); /* Dégradé de vert (#00ff00) à bleu (#0000ff) */
         display: flex;
         align-items: center;
         flex-direction: column;
         justify-content: center;
         border-radius: 10px;
         padding: 5px;
+        color: #41adff;
 
     }
-    body{
+
+    body {
         width: 100vw;
         height: 100vh;
+    }
+
+    button {
+        width: 250px;
+        height: 100px;
     }
 
     .pricipale {
         display: flex;
         justify-content: center;
-        flex: wrap;
         align-items: center;
         flex-direction: column;
+        align-content: center;
+        flex-wrap: wrap;
     }
 
     .menu ul {
@@ -1690,11 +1655,7 @@ thead th {
         background-color: black
     }
 
-    .menu li:hover {
-        background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond au survol */
-    }
-
-    h1, h2, li, a, label,a {
+    h1, h2, li, a, label, a {
         font-size: 1.9em;
         font-weight: bold;
     }
@@ -1739,19 +1700,23 @@ thead th {
         font-size: 1em;
 
     }
-    h1{
-        color: #9152b7;
+
+    h1 {
+        color: #a639d2;
     }
-    h2{
-        color: #762479;
+
+    h2 {
+        color: #8538b9;
     }
-    a{
-        color: #b22184;
+
+    a {
+        color: #50c7b6;
     }
 
     .divCentrer {
         display: none;
     }
+
 
     input {
         width: 55%;
@@ -1765,9 +1730,65 @@ select, option {
 }
 
 a {
-    text-align: center
+    font-size: 1em;
+    color: #1c76c5;
+}
+
+li {
+    color: #1c76c5;
+}
+
+button {
+    text-align: center;
+    height: 100px;
+    width: 250px;
+    padding: 2px;
+    margin: 1px;
+
 }
 
 li :hover {
-    background-color: darkcyan;
+    background-color: #5cb0b0;
+
+}
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.2em;
+    }
+
+    h2 {
+        font-size: 1em;
+    }
+
+    a {
+        font-size: 1em;
+        color: #1c76c5;
+    }
+
+    th {
+        font-size: 0.6em;
+        padding: 1px;
+        margin: 5px;
+    }
+
+    button {
+        height: 60px;
+        width: 250px;
+        text-align: center;
+        padding: 10px;
+        font-size: 1em;
+        color: #234946;
+
+    }
+
+    li {
+        color: darkcyan;
+    }
+
+    .menu {
+        font-size: 0.8em;
+        color: #1c76c5;
+    }
+
 }

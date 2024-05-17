@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import Items from "./Items";
 import lien from "../Lien";
 import '../css/pagination.css'
+import Items2 from "./Items2";
 
 
 export function PaginatedItems({ itemsPerPage=3}) {
@@ -72,7 +73,8 @@ export function PaginatedItems({ itemsPerPage=3}) {
     };
 
     return (
-        <div style={{color: "black"}}>
+        <div style={{color: "black", marginTop:"5em"}}>
+            <div className="pricipale">
             <button  onClick={fetchAPI}>Actualiser Article</button>
             <button  onClick={fetchAPIByNom}>Filtrer ordre alphabetique: Nom</button>
             <button  onClick={fetchAPIByDescription}>Filtrer ordre alphabetique:
@@ -80,16 +82,18 @@ export function PaginatedItems({ itemsPerPage=3}) {
             </button>
             <button  onClick={fetchAPIByPrice}>Filtrer Prix</button>
             <button onClick={fetchAPIByDescriptionByDate}>Filtrer Date</button>
+            </div>
+            <div style={{fontSize:"1em"}}><Items2 currentItems={currentItems}/>
             <Items currentItems={currentItems}/>
             <ReactPaginate
                 breakLabel="..."
-                nextLabel="next >"
+
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
                 pageCount={pageCount}
-                previousLabel="< previous"
                 renderOnZeroPageCount={null}
             />
+            </div>
         </div>
     );
 }

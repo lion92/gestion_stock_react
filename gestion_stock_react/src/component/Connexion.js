@@ -147,7 +147,7 @@ const Connexion = () => {
 
                             <h2 id="blur">{catcha}</h2>
 
-                           <button onClick={fetchConnection} id='btnLogin'>Connexion</button>
+                           <button style={{color:"green"}} onClick={fetchConnection} id='btnLogin'>Connexion</button>
                             <h1>{(probleme !== 'connecte' ? '' : 'connecte')}</h1>
                         </form>
                     </div>

@@ -126,12 +126,12 @@ function DashBoard(props) {
                     position: "absolute",
                     fontSize: "2em",
                   width:"5em",
-                    right: "30px",
+                    right: "5px",
 
                 }}>Panier <PanierList/><IoBasketOutline/></div>
             </NavLink>
 
-            <CiMenuBurger style={{width: "3em", height: "3em", textAlign: "center", margin: "1em"}}
+            <CiMenuBurger style={{position:"absolute", top:"10px", left:"5px",width: "3em", height: "3em", textAlign: "center", margin: "1em"}}
                           onClick={() => toggleState()}/>
 
             {toggle ?
@@ -145,7 +145,7 @@ function DashBoard(props) {
                         Inscription
                     </NavLink></li>
                     <li><NavLink to={"/changepass"}>
-                        Modifier Mot de Passe
+                        Modifier psw
                     </NavLink></li>
                     <li><NavLink to={"/ajoutArticle"}>
                         Article
@@ -178,7 +178,7 @@ function DashBoard(props) {
                     <div className="div1">
 
                         <h2>Utilisateur: {utilisa}</h2>
-                        <button style={{backgroundColor: "red", color: "red", margin: "1em"}}>Deconnexion</button>
+                        <button style={{ color: "red", margin: "1em"}}>Deconnexion</button>
 
                         <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
 
@@ -190,7 +190,6 @@ function DashBoard(props) {
                            target="_blank">Qui
                             suis
                             je?</a>
-                        <h1>Bienvenu</h1>
                         <h2>Projet personnel</h2>
 
 
