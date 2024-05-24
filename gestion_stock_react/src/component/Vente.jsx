@@ -135,9 +135,10 @@ function Vente(props) {
                                        console.log(idList);
                                             if(idList.filter(val=>val.id===value?.stockref).length>0){
                                                 updateQuantity(e, value?.stockref, parseInt(e.target.value))
+                                                setMessage(`Produit modifié au panier ${value?.stockref} quantite ${e.target.value}`)
                                             }else{
                                                 addId(e, value?.stockref, parseInt(e.target.value), value?.prix)
-                                                setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${quantiteParoduit}`)
+                                                setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${e.target.value}`)
                                             }
 
 
