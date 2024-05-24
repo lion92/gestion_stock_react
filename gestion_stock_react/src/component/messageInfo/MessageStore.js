@@ -1,5 +1,3 @@
-
-
 // Créer le magasin Zustand
 import create from "zustand";
 

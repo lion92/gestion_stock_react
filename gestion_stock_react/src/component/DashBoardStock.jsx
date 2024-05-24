@@ -1,6 +1,5 @@
 import React from 'react';
 import DashBoard from "./DashBoard";
-import Article from "./Article";
 import Stock from "./Stock";
 
 function DashBoardArticle(props) {

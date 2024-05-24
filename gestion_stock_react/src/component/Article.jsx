@@ -3,8 +3,9 @@ import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
 
-import'../css/article.css'
+import '../css/article.css'
 import {MessageStore} from "./messageInfo/MessageStore";
+
 function Article(props) {
     const [nom, setNom] = useState('');
     const [description, setDescription] = useState('');

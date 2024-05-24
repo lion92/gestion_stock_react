@@ -1,5 +1,4 @@
 import React from 'react';
-import Article from "./Article";
 import DashBoard from "./DashBoard";
 import Vente from "./Vente";
 

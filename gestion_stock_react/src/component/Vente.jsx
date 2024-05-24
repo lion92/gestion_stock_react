@@ -4,7 +4,7 @@ import "../css/vente.css"
 import {storeId} from "./store/StoreId";
 import '../css/catalogue.css';
 import {MessageStore} from "./messageInfo/MessageStore";
-import stock from "./Stock";
+
 function Vente(props) {
     const [listStock, setListStock] = useState([]);
     const [quantiteParoduit, setQuantiteProduit] = useState(0);
@@ -78,8 +78,6 @@ function Vente(props) {
 
         const resbis = await response;
     });
-
-
 
 
     const fetchAPI = useCallback(async () => {

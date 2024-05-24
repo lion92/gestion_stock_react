@@ -2,7 +2,6 @@ import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
-import BarGraph from "./BarGraph";
 import {MessageStore} from "./messageInfo/MessageStore";
 
 
