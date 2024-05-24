@@ -10,7 +10,7 @@ function Vente(props) {
     const [listPanier, setListPanier] = useState(0);
     const [idProduit, setIdProduit] = useState(0);
     const [prixProduit, setPrixProduit] = useState(0);
-    const { idList, addId, removeId, resetIds } = storeId();
+    const { idList,containsId,updateQuantity, addId, removeId, resetIds } = storeId();
     const { message, setMessage } = MessageStore()
     useEffect(() => {
         fetchAPIStock()
@@ -104,8 +104,7 @@ function Vente(props) {
     return (
         <div style={{display: "flex", flexWrap: "wrap", alignItems: "center"}}>
             <label>Quantité à commander:</label>
-            <input type="number" placeholder="quantite" value={quantiteParoduit}
-                   onChange={(e) => setQuantiteProduit(parseInt(e.target.value))}/>
+
             <h2>Article</h2>
             <div style={{
                 border: "1px solid black",
@@ -128,12 +127,26 @@ function Vente(props) {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr onClick={e => {
-                            if (quantiteParoduit !== 0) {
-                                addId(e, value?.stockref, quantiteParoduit, value?.prix)
-                                setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${quantiteParoduit}`)
-                            }
-                        }}>
+                        <tr>
+
+                            <input type="number" placeholder="quantite" defaultValue="0"
+                                   onChange={(e) => { if (parseInt(e.target.value) > 0) {
+                                       console.log(idList);
+                                       if(idList.length>0){
+                                           if(containsId(e,value?.stockref)) {
+                                           updateQuantity(e, value?.stockref, parseInt(e.target.value))
+                                               setMessage(`Produit modifié ${value?.stockref} quantite ${quantiteParoduit}`)
+                                           }
+
+                                       }else{
+
+                                           addId(e, value?.stockref, quantiteParoduit, value?.prix)
+                                           setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${quantiteParoduit}`)
+                                       }
+
+                                   }}}/>
+
+
                             <th>
 
                                 {value?.stockref}</th>

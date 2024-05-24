@@ -9,7 +9,6 @@ import DashBoardStock from "./component/DashBoardStock";
 import DashBoardInscription from "./component/DashBoardInscription";
 import DashBoardVente from "./component/DashBoardVente";
 import DashBoardChangePassword from "./component/DashBoardChangePassword";
-
 const Root = () => (
     <Router>
         <Switch>

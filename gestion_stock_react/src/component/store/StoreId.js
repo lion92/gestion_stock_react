@@ -4,7 +4,13 @@ import create from 'zustand';
 export const storeId = create((set) => ({
     // Initialiser la liste des IDs
     idList:[],
+    containsId: (e,id) => (state) => state.idList.some((item) => item.id === id),
 
+    updateQuantity: (e,id, newQuantite) => set((state) => ({
+        idList: state.idList.map((item) =>
+            item.id === id ? { ...item, quantite: newQuantite } : item
+        )
+    })),
     // Ajouter un ID à la liste
     addId: (e,id, quantite, prix) => set((state) => ({ idList: [...state.idList, {e:e,id:id, quantite:quantite, prix:prix}] })),
 

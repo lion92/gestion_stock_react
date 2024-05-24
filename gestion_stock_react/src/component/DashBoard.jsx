@@ -13,7 +13,7 @@ import {MenuShow} from "./storeMenu/MenuShow";
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
-    const [utilisa, setUtilisa] = useState("Déconnnecté");
+
     const [listStock, setListStock] = useState([]);
     const [showMenu, setShowMenu] = useState(true);
     const { message, setMessage } = MessageStore()
@@ -22,7 +22,7 @@ function DashBoard(props) {
         fetchAPITotal()
         fetchUerToken()
         fetchAPIStock()
-        setUtilisa("" + localStorage.getItem("nom") === "null" ? "Veuillez vous connecter" : "" + localStorage.getItem("nom"))
+
     }, []);
     const fetchAPIStock = useCallback(async () => {
         let idUser = parseInt("" + localStorage.getItem("utilisateur"))
@@ -111,6 +111,7 @@ function DashBoard(props) {
                     localStorage.setItem("utilisateur", data?.id);
                     localStorage.setItem("nom", data?.nom)
 
+
                 } else {
 
                 }
@@ -176,10 +177,10 @@ function DashBoard(props) {
 
                     <div className="div1">
 
-                        <h2>Utilisateur: {utilisa}</h2>  <Link onClick={() => {
+                        <Link onClick={() => {
                         localStorage.removeItem('jwt2');
                         localStorage.removeItem("utilisateur");
-                        setUtilisa("Deconnecté");
+
                         localStorage.removeItem("nom");
                     }} to="/">
                         <button style={{color: "red", margin: "1em"}}>Deconnexion</button>

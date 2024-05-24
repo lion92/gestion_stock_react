@@ -14,11 +14,10 @@ const Connexion = () => {
     const [probleme, setProbleme] = useState("non connecte");
     const [catcha, setCatcha] = useState("");
     const [catchaColler, setCatchaColler] = useState("");
-    const { message, setMessage } = MessageStore()
+    const {message, setMessage} = MessageStore()
     useEffect(() => {
         fetchUerToken();
     }, []);
-
 
 
     function ValidateEmail(mail) {
@@ -46,7 +45,7 @@ const Connexion = () => {
                 },
             })
         await response?.json().then(data => {
-            if(!data?.id) {
+            if (!data?.id) {
 
 
                 if (!isNaN(data?.id)) {
@@ -58,10 +57,10 @@ const Connexion = () => {
                     setMessageLog("Deconnecter")
 
                 }
-            }else{
+            } else {
                 console.log("error token")
             }
-        }).catch(e=>console.log(e))
+        }).catch(e => console.log(e))
     });
 
 
@@ -97,6 +96,7 @@ const Connexion = () => {
                     localStorage.setItem('jwt2', data?.jwt);
                     setProbleme('connecte')
                     setMessage("Vous êtes connecté")
+
                 } else {
                     setMessageLog("Combinaison code et mot de passe incorrect")
                     setMessage("Combinaison code et mot de passe incorrect")
@@ -104,7 +104,7 @@ const Connexion = () => {
                 }
 
             })
-        }catch (e){
+        } catch (e) {
             setMessageLog("Un probleme est survenu ou les identifiants ne sont pas corrects")
             setMessage("Un probleme est survenu ou les identifiants ne sont pas corrects")
         }
@@ -147,7 +147,7 @@ const Connexion = () => {
 
                             <h2 id="blur">{catcha}</h2>
 
-                           <button style={{color:"green"}} onClick={fetchConnection} id='btnLogin'>Connexion</button>
+                            <button style={{color: "green"}} onClick={fetchConnection} id='btnLogin'>Connexion</button>
                             <h1>{(probleme !== 'connecte' ? '' : 'connecte')}</h1>
                         </form>
                     </div>
