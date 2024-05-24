@@ -4,6 +4,7 @@ import "../css/vente.css"
 import {storeId} from "./store/StoreId";
 import '../css/catalogue.css';
 import {MessageStore} from "./messageInfo/MessageStore";
+import stock from "./Stock";
 function Vente(props) {
     const [listStock, setListStock] = useState([]);
     const [quantiteParoduit, setQuantiteProduit] = useState(0);
@@ -129,20 +130,16 @@ function Vente(props) {
                         <tbody>
                         <tr>
 
-                            <input type="number" placeholder="quantite" defaultValue="0"
+                            <input type="number" placeholder="quantite" defaultValue=""
                                    onChange={(e) => { if (parseInt(e.target.value) > 0) {
                                        console.log(idList);
-                                       if(idList.length>0){
-                                           if(containsId(e,value?.stockref)) {
-                                           updateQuantity(e, value?.stockref, parseInt(e.target.value))
-                                               setMessage(`Produit modifié ${value?.stockref} quantite ${quantiteParoduit}`)
-                                           }
+                                            if(idList.filter(val=>val.id===value?.stockref).length>0){
+                                                updateQuantity(e, value?.stockref, parseInt(e.target.value))
+                                            }else{
+                                                addId(e, value?.stockref, parseInt(e.target.value), value?.prix)
+                                                setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${quantiteParoduit}`)
+                                            }
 
-                                       }else{
-
-                                           addId(e, value?.stockref, quantiteParoduit, value?.prix)
-                                           setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${quantiteParoduit}`)
-                                       }
 
                                    }}}/>
 

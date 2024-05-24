@@ -1,0 +1,16 @@
+
+.panier {
+
+    width: 10em;
+    position: relative;
+    right: 12em;
+}
+
+@media only screen and (max-width: 600px) {
+    .panier {
+
+        width: 5em;
+        position: relative;
+        right: 2em;
+    }
+}
