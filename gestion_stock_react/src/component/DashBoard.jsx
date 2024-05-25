@@ -76,6 +76,17 @@ function DashBoard(props) {
                 window.open(file, "_blank")
             });
     }
+    const getInvoicePdf = async (e) => {
+        e.preventDefault();
+        let idUser = parseInt("" + localStorage.getItem("utilisateur"));
+        fetch(lien.url + "article/generate-invoice-pdf/" + idUser)
+            .then(res => res.blob())
+            .then(blob => {
+                var file = window.URL.createObjectURL(blob);
+                window.open(file, "_blank")
+            });
+    }
+
 
     const fetchAPITotal = useCallback(async () => {
         let str = "" + localStorage.getItem('jwt2')
@@ -191,6 +202,7 @@ function DashBoard(props) {
 
                         <button className="raise" onClick={getExportExcel}>Download Excel</button>
                         <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
+                        <button className="raise" onClick={getInvoicePdf}>Télécharger la facture d'achats</button>
                         <h1 style={{textAlign: "center"}}>Kriss CLOTILDE Stock</h1>
                         <a style={{color: "black", textAlign: "center"}} rel="noreferrer"
                            href="https://projet.krissclotilde.com/"
@@ -209,12 +221,11 @@ function DashBoard(props) {
 
                     {!(props.titre === 'Panier' || props.titre === 'Connexion' || props.titre === 'Inscription' || props.titre === 'Changer son password') ?
                         <div className="div3">
-                            <PaginatedItems></PaginatedItems>
+
 
                             <br/>
                             <br/>
                             <br/>
-
                             <PaginatedItems2></PaginatedItems2>
 
                             <BarGraph data={data}></BarGraph>

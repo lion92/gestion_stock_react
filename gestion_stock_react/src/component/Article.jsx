@@ -5,6 +5,8 @@ import lien from "../Lien";
 
 import '../css/article.css'
 import {MessageStore} from "./messageInfo/MessageStore";
+import {PaginatedItems2} from "./PaginatedItems2";
+import {PaginatedItems} from "./PaginatedItems";
 
 function Article(props) {
     const [nom, setNom] = useState('');
@@ -166,6 +168,7 @@ function Article(props) {
                 <button onClick={fetchAPIupdate}>Modifier</button>
                 <button onClick={fetchdelete}>Supprimer</button>
                 <button onClick={toggleDescription}>Calendrier</button>
+                <PaginatedItems></PaginatedItems>
             </form>
 
         </div>

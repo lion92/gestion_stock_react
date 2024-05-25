@@ -1,8 +1,8 @@
 // Example items, to simulate fetching from another resources.
-import React from "react";
+import React, {useCallback} from "react";
+import lien from "../Lien";
 
 function Items({ currentItems }) {
-
     return (
         <><div>
             <table>

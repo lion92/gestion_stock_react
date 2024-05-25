@@ -76,9 +76,8 @@ export function PaginatedItems({ itemsPerPage=3}) {
         <div style={{color: "black", marginTop:"5em"}}>
             <div className="pricipale">
             <button  onClick={fetchAPI}>Actualiser Article</button>
-            <button  onClick={fetchAPIByNom}>Filtrer ordre alphabetique: Nom</button>
-            <button  onClick={fetchAPIByDescription}>Filtrer ordre alphabetique:
-                Description
+            <button  onClick={fetchAPIByNom}>A-Z nom</button>
+            <button  onClick={fetchAPIByDescription}>A-Z desc
             </button>
             <button  onClick={fetchAPIByPrice}>Filtrer Prix</button>
             <button onClick={fetchAPIByDescriptionByDate}>Filtrer Date</button>
