@@ -5,3 +5,23 @@
     padding: 3em;
     background-image: url("../image/vert.png")
 }
+.cardContainer{
+    display: flex;
+    margin: 10px;
+    padding: 1px;
+    gap: 1em;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+.card__body {
+    background-color: #61b6a9;
+    border: 1px solid #234c75;
+    border-radius: 5px;
+    box-shadow: 3px 2px 8px #4d53bd;
+    color: #216b57;
+    padding: 10px;
+    width: 200px;
+    height: 300px;
+}

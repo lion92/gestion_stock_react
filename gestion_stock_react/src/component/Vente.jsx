@@ -12,9 +12,12 @@ function Vente(props) {
     const [idProduit, setIdProduit] = useState(0);
     const [prixProduit, setPrixProduit] = useState(0);
     const [idDelete, setIdDelete] = useState(0);
-    const { idList,containsId,updateQuantity, addId, removeId, resetIds } = storeId();
-    const { message, setMessage } = MessageStore()
+    const {idList, containsId, updateQuantity, addId, removeId, resetIds} = storeId();
+    const {message, setMessage} = MessageStore()
     const [panier, setListPanier2] = useState([]);
+    const [nomValue, setNomValue] = useState("");
+    const [nomVendeur, setNomVendeur] = useState("");
+    const [descriptionValue, setDescriptionValue] = useState("");
     useEffect(() => {
         fetchAPIStock()
         fetchAPI()
@@ -24,10 +27,58 @@ function Vente(props) {
 
     const fetchAPIStock = useCallback(async () => {
 
-            const response = await fetch(lien.url + "article/all-stock");
-            const resbis = await response.json();
+        const response = await fetch(lien.url + "article/all-stock");
+        const resbis = await response.json();
+        await setListStock(resbis);
+        return resbis;
+
+    }, [setListStock]);
+
+    const fetchAPIBynom = useCallback(async (e, nom) => {
+        e.preventDefault()
+
+        const response = await fetch(lien.url + "article/all-stock-bynom/" + nom);
+
+        let resbis =null;
+        console.log(nom)
+        if (nom === "") {
+            await fetchAPIStock()
+        } else {
+            resbis = await response?.json();
             await setListStock(resbis);
-            return resbis;
+        }
+
+        return resbis;
+
+    }, [setListStock]);
+
+    const fetchAPIByDescription = useCallback(async (e,description) => {
+        e.preventDefault()
+        const response = await fetch(lien.url + "article/all-stock-bydescription/" + description);
+        let resbis =null;
+        if (description === "") {
+            await fetchAPIStock()
+        } else {
+            resbis = await response?.json();
+            await setListStock(resbis);
+        }
+
+        return resbis;
+
+    }, [setListStock]);
+
+    const fetchAPIByNomVendeur = useCallback(async (e,nom) => {
+        e.preventDefault()
+        const response = await fetch(lien.url + "article/all-stock-bynomvendeur/" + nom);
+
+        let resbis =null;
+        if (nom === "") {
+            await fetchAPIStock()
+        } else {
+            resbis = await response?.json();
+            await setListStock(resbis);
+        }
+        return resbis;
 
     }, [setListStock]);
 
@@ -43,8 +94,6 @@ function Vente(props) {
             console.log(resbis)
             return resbis;
         }
-
-
     });
 
     const acheter = async (e) => {
@@ -68,7 +117,8 @@ function Vente(props) {
                             "Content-Type": "application/json",
                         },
                     }
-                ); await fetchAPIStock()
+                );
+                await fetchAPIStock()
                 await fetchAPI()
                 await fetchPanier()
             }
@@ -115,15 +165,14 @@ function Vente(props) {
     }, [setListPanier]);
 
 
-    function getId(e, stockref,quantity) {
+    function getId(e, stockref, quantity) {
         e.preventDefault();
         setIdProduit(stockref);
         setQuantiteProduit(quantity);
     }
 
     return (
-        <div style={{display: "flex", flexWrap: "wrap", alignItems: "center"}}>
-            <label>Quantité à commander:</label>
+        <div style={{display: "flex", alignItems: "center", flexDirection:"column"}}>
 
             <h2>Article</h2>
             <div style={{
@@ -131,14 +180,32 @@ function Vente(props) {
                 borderRadius: "10px",
                 fontSize: "0.8em"
             }}>
+                <input placeholder="nom filtre" defaultValue="" onChange={async (e) => {
+                    await fetchAPIBynom(e, e.target.value)
+                }}/>
+                <input placeholder="description filtre" defaultValue="" onChange={async (e) => {
+                    await fetchAPIByDescription(e, e.target.value)
+                }}/>
+                <input placeholder="nom vendeur filtre" defaultValue="" onChange={async (e) => {
+                    await fetchAPIByNomVendeur(e, e.target.value)
+                }}/>
+                <div style={{alignItems: "center", display: "flex", flexWrap: "wrap"}}>
+                    <p>Id sélectionné: {idProduit}</p>
+                    <button onClick={(e) => acheter(e)}>Acheter</button>
+
+                    <button onClick={(e) => resetIds(e)}>Réinitialiser la liste</button>
+
+
+                </div>
 
                 {listStock.length > 0 ? listStock?.map(value =>
                     <table>
                         <thead>
                         <tr>
                             <th>IdStock</th>
+                            <th>Id Article</th>
                             <th>Article</th>
-                            <th>Nom Article</th>
+
                             <th>Description</th>
                             <th>Nom vendeur</th>
                             <th>Prenom vendeur</th>
@@ -150,63 +217,80 @@ function Vente(props) {
                         </thead>
                         <tbody>
                         <tr>
-
-                            <input type="number" placeholder="quantite" defaultValue=""
-                                   onChange={(e) => { if (parseInt(e.target.value) > 0) {
-                                       console.log(idList);
-                                            if(idList.filter(val=>val.id===value?.stockref).length>0){
-                                                updateQuantity(e, value?.stockref, parseInt(e.target.value))
-                                                setMessage(`Produit modifié au panier ${value?.stockref} quantite ${e.target.value}`)
-                                            }else{
-                                                addId(e, value?.stockref, parseInt(e.target.value), value?.prix)
-                                                setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${e.target.value}`)
-                                            }
-
-
-                                   }}}/>
-
-
                             <th>
 
-                                {value?.stockref}</th>
-                            <th>Nom article:{value?.nom}</th>
-                            <th>Nom article:{value?.nom}</th>
-                            <th>Description Article:{value?.description}</th>
-                            <th>Nom Vendeur: {value?.nomVendeur}</th>
-                            <th>Prenom Vendeur: {value?.prenomVendeur}</th>
-                            <th>IdUser: {value?.userId}</th>
-                            <th>Prix article: {value?.prix}</th>
-                            <th>quantite en stock: {value?.quantite}</th>
-                            <th>quantite en stock: {value?.dateAjout}</th>
+                                {value?.stockref}
+
+                            </th>
+                            <th>{value?.id}</th>
+                            <th>{value?.nom}</th>
+
+                            <th>{value?.description}</th>
+                            <th>{value?.nomVendeur}</th>
+                            <th>{value?.prenomVendeur}</th>
+                            <th>{value?.userId}</th>
+                            <th>{value?.prix}</th>
+                            <th>{value?.quantite}
+                                <span>qté à acheter</span>
+                                <input type="number" style={{width: "3em"}} placeholder="quantite" defaultValue=""
+                                       onChange={(e) => {
+                                           if (parseInt(e.target.value) > 0) {
+                                               console.log(idList);
+                                               if (idList.filter(val => val.id === value?.stockref).length > 0) {
+                                                   updateQuantity(e, value?.stockref, parseInt(e.target.value))
+                                                   setMessage(`Produit modifié au panier ${value?.stockref} quantite ${e.target.value}`)
+                                               } else {
+                                                   addId(e, value?.stockref, parseInt(e.target.value), value?.prix)
+                                                   setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${e.target.value}`)
+                                               }
+
+
+                                           }
+                                       }}/>
+                            </th>
+                            <th>{value?.dateAjout}</th>
 
                         </tr>
                         </tbody>
                     </table>
                 ) : []
                 }
+                <div className="cardContainer">
+                    {listStock.length > 0 ? listStock.map(value =>
+
+                        <div className="card__body"><p>Acheter:</p>
+                            <input type="number" style={{width: "3em", padding: "10px"}} placeholder="qte"
+                                   defaultValue=""
+                                   onChange={(e) => {
+                                       if (parseInt(e.target.value) > 0) {
+                                           console.log(idList);
+                                           if (idList.filter(val => val.id === value?.stockref).length > 0) {
+                                               updateQuantity(e, value?.stockref, parseInt(e.target.value))
+                                               setMessage(`Produit modifié au panier ${value?.stockref} quantite ${e.target.value}`)
+                                           } else {
+                                               addId(e, value?.stockref, parseInt(e.target.value), value?.prix)
+                                               setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${e.target.value}`)
+                                           }
+
+
+                                       }
+                                   }}/>
+                            <h1>{value?.nom}</h1>
+                            <h2>{value?.prix}</h2>
+
+                        </div>
+                    ) : []}
+                </div>
 
             </div>
 
 
-
-
-            <div style={{alignItems: "center"}}>
-                <p>Id sélectionné: {idProduit}</p>
-                <button onClick={(e) => acheter(e)}>Acheter</button>
-
-                <button onClick={(e) => resetIds(e)}>Réinitialiser la liste</button>
-
-
-
-
-            </div>
-
-            {panier?.length>0?panier.map(val=>
+            {panier?.length > 0 ? panier.map(val =>
                 <div style={{display: "flex", flexDirection: "row", textAlign: "center", justifyContent: "center"}}>
                     <table>
                         <thead>
                         <tr>
-                         <th>IdPanier</th>
+                            <th>IdPanier</th>
                             <th>Prix</th>
                             <th>Quantite</th>
                             <th>Nom article</th>
@@ -218,14 +302,15 @@ function Vente(props) {
                         <tbody>
                         <tr>
                             <th>IdPanier: {val?.id}
-                                <p style={{backgroundColor:"red", fontSize:"1em", width:"2em", textAlign:"center"}} onClick={(e) => fetchdelete(e, val?.id)}>x</p>
+                                <p style={{backgroundColor: "red", fontSize: "1em", width: "2em", textAlign: "center"}}
+                                   onClick={(e) => fetchdelete(e, val?.id)}>x</p>
                             </th>
                             <th>Prix article: {val?.prix}</th>
                             <th>Quantite en stock: {val?.quantite}</th>
                             <th>Nom article: {val?.nomArticle}</th>
                             <th>Description article: {val?.descriptionArticle}</th>
                             <th>Id Vendeur: {val?.userId}</th>
-                            <th>nom article: {val?.dateAjout}</th>
+                            <th>Date: {val?.dateAjout}</th>
 
                         </tr>
                         </tbody>

@@ -154,7 +154,8 @@ function DashBoard(props) {
                 width: "3em",
                 height: "3em",
                 textAlign: "center",
-                margin: "1em"
+                margin: "1em",
+                color:"black"
             }}
                           onClick={() => toggleState()}/>
 
@@ -200,9 +201,9 @@ function DashBoard(props) {
 
                         <h2>Total prix du stock:{total?.length > 0 ? total[0].prix : ""}</h2>
 
-                        <button className="raise" onClick={getExportExcel}>Download Excel</button>
-                        <button className="raise" onClick={getDataPdf}>DownloadPDFBilan</button>
-                        <button className="raise" onClick={getInvoicePdf}>Télécharger la facture d'achats</button>
+                        <button className="raise" onClick={getExportExcel}>Excel stock</button>
+                        <button className="raise" onClick={getDataPdf}>PDF Bilan stock</button>
+                        <button className="raise" onClick={getInvoicePdf}>Facture d'achats</button>
                         <h1 style={{textAlign: "center"}}>Kriss CLOTILDE Stock</h1>
                         <a style={{color: "black", textAlign: "center"}} rel="noreferrer"
                            href="https://projet.krissclotilde.com/"
@@ -223,10 +224,7 @@ function DashBoard(props) {
                         <div className="div3">
 
 
-                            <br/>
-                            <br/>
-                            <br/>
-                            <PaginatedItems2></PaginatedItems2>
+
 
                             <BarGraph data={data}></BarGraph>
                         </div> : ""

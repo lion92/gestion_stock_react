@@ -29,8 +29,6 @@ function PanierList(props) {
                                 {value?.id}<p style={{
                                 backgroundColor: "red",
                                 textAlign: "center",
-                                width: "100%",
-                                height: "100%",
                                 position: "relative",
                                 bottom: "-50",
                                 left: "0",

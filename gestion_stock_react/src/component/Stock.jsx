@@ -3,6 +3,7 @@ import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
 import {MessageStore} from "./messageInfo/MessageStore";
+import {PaginatedItems2} from "./PaginatedItems2";
 
 
 function Stock(props) {
@@ -177,7 +178,7 @@ function Stock(props) {
                 <button onClick={fetchdelete}>Supprimer</button>
                 <button onClick={toggleDescription}>Calendrier</button>
             </form>
-
+            <PaginatedItems2></PaginatedItems2>
         </div>
     );
 }

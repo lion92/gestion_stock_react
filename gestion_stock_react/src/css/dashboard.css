@@ -1508,9 +1508,6 @@ body > footer {
     grid-row-gap: 0px;
 }
 
-* {
-    color: black;
-}
 
 .div1 {
     grid-area: 1 / 1 / 6 / 2;
@@ -1587,6 +1584,7 @@ thead th {
 
 
 }
+
 .pricipale {
     display: flex;
     justify-content: center;
@@ -1595,6 +1593,7 @@ thead th {
     align-content: center;
     flex-wrap: wrap;
 }
+
 button {
     text-align: center;
     font-size: 1.5em;
@@ -1712,7 +1711,8 @@ button:hover {
     a {
         color: #50c7b6;
     }
-    label{
+
+    label {
         font-size: 0.8em;
     }
 
@@ -1742,12 +1742,25 @@ li {
 }
 
 button {
-    text-align: center;
-    height: 90px;
-    width: 250px;
-    margin: 1px;
-
+    width: 190px;
+    height: 60px;
+    padding: 1px;
+    color: #fff;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgb(55, 27, 234),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+    border: none;
+    background-color: #150223;
 }
+
 
 li :hover {
     background-color: #5cb0b0;
@@ -1773,7 +1786,8 @@ li :hover {
         padding: 1px;
         margin: 5px;
     }
-    label{
+
+    label {
         font-size: 0.8em;
     }
 
@@ -1783,7 +1797,6 @@ li :hover {
         text-align: center;
         padding: 10px;
         font-size: 1em;
-        color: #234946;
 
     }
 

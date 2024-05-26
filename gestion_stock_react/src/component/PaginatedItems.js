@@ -3,7 +3,6 @@ import ReactPaginate from 'react-paginate';
 import Items from "./Items";
 import lien from "../Lien";
 import '../css/pagination.css'
-import Items2 from "./Items2";
 
 
 export function PaginatedItems({ itemsPerPage=3}) {
@@ -82,8 +81,7 @@ export function PaginatedItems({ itemsPerPage=3}) {
             <button  onClick={fetchAPIByPrice}>Filtrer Prix</button>
             <button onClick={fetchAPIByDescriptionByDate}>Filtrer Date</button>
             </div>
-            <div style={{fontSize:"1em"}}><Items2 currentItems={currentItems}/>
-            <Items currentItems={currentItems}/>
+            <div style={{fontSize:"1em"}}><Items currentItems={currentItems}/>
             <ReactPaginate
                 breakLabel="..."
 
