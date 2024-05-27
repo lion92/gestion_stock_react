@@ -164,7 +164,7 @@ function DashBoard(props) {
 
                     <h2>Menu</h2>
                     <li><NavLink to={"/"}>
-                        Bienvenu
+                        Bienvenue
                     </NavLink></li>
                     <li><NavLink to={"/inscription"}>
                         Inscription
@@ -227,6 +227,8 @@ function DashBoard(props) {
 
 
                             <BarGraph data={data}></BarGraph>
+                            <PaginatedItems></PaginatedItems>
+                            <PaginatedItems2></PaginatedItems2>
                         </div> : ""
                     }
 

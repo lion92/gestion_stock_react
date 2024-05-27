@@ -168,7 +168,7 @@ function Article(props) {
                 <button onClick={fetchAPIupdate}>Modifier</button>
                 <button onClick={fetchdelete}>Supprimer</button>
                 <button onClick={toggleDescription}>Calendrier</button>
-                <PaginatedItems></PaginatedItems>
+
             </form>
 
         </div>

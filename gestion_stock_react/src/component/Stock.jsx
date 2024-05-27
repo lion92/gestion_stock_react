@@ -178,7 +178,7 @@ function Stock(props) {
                 <button onClick={fetchdelete}>Supprimer</button>
                 <button onClick={toggleDescription}>Calendrier</button>
             </form>
-            <PaginatedItems2></PaginatedItems2>
+
         </div>
     );
 }
