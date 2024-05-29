@@ -7,16 +7,16 @@ import {PaginatedItems2} from "./PaginatedItems2";
 import BarGraph from "./BarGraph";
 import {IoBasketOutline} from "react-icons/io5";
 import PanierList from "./PanierList";
-import {MessageStore} from "./messageInfo/MessageStore";
 import {CiMenuBurger} from "react-icons/ci";
 import {MenuShow} from "./storeMenu/MenuShow";
+import ToastMessage from "./ToastMessage";
+import {Bounce, toast} from "react-toastify";
 
 function DashBoard(props) {
     const [total, setTotal] = useState([]);
 
     const [listStock, setListStock] = useState([]);
     const [showMenu, setShowMenu] = useState(true);
-    const { message, setMessage } = MessageStore()
     const { toggle, toggleState } = MenuShow()
     useEffect(() => {
         fetchAPITotal()
@@ -178,12 +178,15 @@ function DashBoard(props) {
                     <li><NavLink to={"/stock"}>
                         Stock
                     </NavLink></li>
+                    <li><NavLink to={"/vente"}>
+                        Vente
+                    </NavLink></li>
 
 
                 </ul> : ""}
 
 
-            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
 
                 <div className="parent">
 
@@ -194,6 +197,17 @@ function DashBoard(props) {
                         localStorage.removeItem("utilisateur");
 
                         localStorage.removeItem("nom");
+                            toast.success("Deconnexion", {
+                                position: "bottom-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                                transition: Bounce
+                            });
                     }} to="/">
                         <button style={{color: "red", margin: "1em"}}>Deconnexion</button>
                     </Link>
@@ -215,7 +229,7 @@ function DashBoard(props) {
 
                     </div>
                     <div className={props.titre !== "Vente" ? "div2" : "div2"}>
-                        <h1 style={{color: "red", textAlign: "center"}}>{message}</h1>
+                        <ToastMessage></ToastMessage>
                         <h1 style={{textAlign: "center"}}>{props.titre}</h1>
 
                         {props.contenue}</div>
@@ -236,6 +250,15 @@ function DashBoard(props) {
                 </div>
 
             </div>
+        <footer><p style={{color: "black", fontSize: "1em", backgroundColor: "lightgrey"}}>Cette application est un
+            projet que je me suis fixé. Il
+            reproduit un mini site de gestion ecommerce.<br/>
+            On peut ajouter:<br/>
+            -des articles,<br/>
+            -leur ajouter une quantité<br/>
+            -gérer les stocks<br/>
+            -faire une simulation de vente avec mis à jour des stocks<br/>
+            -télécharger des factures,<br/>ou des pdf de stocks</p></footer>
         </div>
         </>
     );

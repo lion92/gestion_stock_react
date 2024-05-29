@@ -3,7 +3,7 @@ import lien from "../Lien";
 import "../css/vente.css"
 import {storeId} from "./store/StoreId";
 import '../css/catalogue.css';
-import {MessageStore} from "./messageInfo/MessageStore";
+import {Bounce, toast} from "react-toastify";
 
 function Vente(props) {
     const [listStock, setListStock] = useState([]);
@@ -13,7 +13,6 @@ function Vente(props) {
     const [prixProduit, setPrixProduit] = useState(0);
     const [idDelete, setIdDelete] = useState(0);
     const {idList, containsId, updateQuantity, addId, removeId, resetIds} = storeId();
-    const {message, setMessage} = MessageStore()
     const [panier, setListPanier2] = useState([]);
     const [nomValue, setNomValue] = useState("");
     const [nomVendeur, setNomVendeur] = useState("");
@@ -238,10 +237,32 @@ function Vente(props) {
                                                console.log(idList);
                                                if (idList.filter(val => val.id === value?.stockref).length > 0) {
                                                    updateQuantity(e, value?.stockref, parseInt(e.target.value))
-                                                   setMessage(`Produit modifié au panier ${value?.stockref} quantite ${e.target.value}`)
+                                                   toast.success(`Produit modifié au panier ${value?.stockref} quantite ${e.target.value}`, {
+                                                       position: "bottom-right",
+                                                       autoClose: 5000,
+                                                       hideProgressBar: false,
+                                                       closeOnClick: true,
+                                                       pauseOnHover: true,
+                                                       draggable: true,
+                                                       progress: undefined,
+                                                       theme: "light",
+                                                       transition: Bounce
+                                                   });
+
                                                } else {
                                                    addId(e, value?.stockref, parseInt(e.target.value), value?.prix)
-                                                   setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${e.target.value}`)
+
+                                                   toast.success(`Produit ajouté au panier ${value?.stockref} quantite ${e.target.value}`, {
+                                                       position: "bottom-right",
+                                                       autoClose: 5000,
+                                                       hideProgressBar: false,
+                                                       closeOnClick: true,
+                                                       pauseOnHover: true,
+                                                       draggable: true,
+                                                       progress: undefined,
+                                                       theme: "light",
+                                                       transition: Bounce
+                                                   });
                                                }
 
 
@@ -266,10 +287,31 @@ function Vente(props) {
                                            console.log(idList);
                                            if (idList.filter(val => val.id === value?.stockref).length > 0) {
                                                updateQuantity(e, value?.stockref, parseInt(e.target.value))
-                                               setMessage(`Produit modifié au panier ${value?.stockref} quantite ${e.target.value}`)
+
+                                               toast.success(`Produit modifié au panier ${value?.stockref} quantite ${e.target.value}`, {
+                                                   position: "bottom-right",
+                                                   autoClose: 5000,
+                                                   hideProgressBar: false,
+                                                   closeOnClick: true,
+                                                   pauseOnHover: true,
+                                                   draggable: true,
+                                                   progress: undefined,
+                                                   theme: "light",
+                                                   transition: Bounce
+                                               });
                                            } else {
                                                addId(e, value?.stockref, parseInt(e.target.value), value?.prix)
-                                               setMessage(`Produit ajouté au panier ${value?.stockref} quantite ${e.target.value}`)
+                                               toast.success(`Produit ajouté au panier ${value?.stockref} quantite ${e.target.value}`, {
+                                                   position: "bottom-right",
+                                                   autoClose: 5000,
+                                                   hideProgressBar: false,
+                                                   closeOnClick: true,
+                                                   pauseOnHover: true,
+                                                   draggable: true,
+                                                   progress: undefined,
+                                                   theme: "light",
+                                                   transition: Bounce
+                                               });
                                            }
 
 

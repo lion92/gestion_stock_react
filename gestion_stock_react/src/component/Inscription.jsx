@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
-import {MessageStore} from "./messageInfo/MessageStore";
+import {Bounce, toast} from "react-toastify";
 
 function Inscription(props) {
 
@@ -18,7 +18,7 @@ function Inscription(props) {
     const [emailError, setEmailError] = useState("");
     const [confirError, setConfirmError] = useState("");
     const [modalDescription, setModalDescription] = useState(false);
-    const { message, setMessage } = MessageStore()
+
 
 
 
@@ -35,11 +35,32 @@ function Inscription(props) {
     function validateEmail(mail) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             setEmailError("")
-            setMessage("")
+             toast.success("ok", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
             return (true)
         }
         setEmailError("You have entered an invalid email address!")
-        setMessage("You have entered an invalid email address!")
+
+         toast.success("You have entered an invalid email address!", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
         return (false)
     }
 
@@ -47,18 +68,48 @@ function Inscription(props) {
         e.preventDefault();
         if (nom === "") {
             setNomError("le nom est vide")
-            setMessage("le nom est vide")
+            toast.error("le nom est vide", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
             return
         }
         if (prenom === "") {
             setPrenomError("Le prenom est vide")
-            setMessage("Le prenom est vide")
+             toast.error("Le prenom est vide", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
             return
         }
 
         if (mdp !== confirmPassword) {
             setConfirmError("Les mots de passes doivent être semblables.")
-            setMessage("Les mots de passes doivent être semblables.")
+             toast.error("Les mots de passes doivent être semblables.", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
             return
         }
 
@@ -68,7 +119,17 @@ function Inscription(props) {
 
         if (confirError.length > 8) {
             setConfirmError("Le password doit comporter au moins 9 caracteres")
-            setMessage("Le password doit comporter au moins 9 caracteres")
+             toast.error("Le password doit comporter au moins 9 caracteres", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
             return
         }
 
@@ -91,10 +152,31 @@ function Inscription(props) {
         );
         if (response.ok) {
             setInscriptionError("Inscription ok")
-            setMessage("Inscription ok")
+
+             toast.success("\"Inscription ok\"", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
         } else {
             setInscriptionError("une erreur s'est produite");
-            setMessage("une erreur s'est produite");
+             toast.success("\"une erreur s'est produite\"", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
         }
     });
 

@@ -2,8 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import Calendar from 'react-calendar';
 import lien from "../Lien";
-import {MessageStore} from "./messageInfo/MessageStore";
-import {PaginatedItems2} from "./PaginatedItems2";
+import {Bounce, toast} from "react-toastify";
 
 
 function Stock(props) {
@@ -15,7 +14,7 @@ function Stock(props) {
     const [article, setArticle]=useState([])
 
     const [modalDescription, setModalDescription] = useState(false);
-    const { message, setMessage } = MessageStore()
+
 
     useEffect(() => {
         fetchAPI()
@@ -36,8 +35,19 @@ function Stock(props) {
         const response = await fetch(lien.url + "article/stockBy/" + idUser);
         const resbis = await response.json();
         await setListStock(resbis);
-        setMessage("Stock actualisé")
+
         return resbis;
+         toast.success("Actualisation stock", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
     }, [setListStock]);
 
     let fetchdelete = useCallback(async (e) => {
@@ -57,7 +67,18 @@ function Stock(props) {
         );
         await fetchAPI();
         await fetchAPIStock();
-        setMessage("Element du stock supprimé"+idStock)
+
+         toast.success("Element supprimé", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
 
         const resbis = await response;
     });
@@ -82,7 +103,18 @@ function Stock(props) {
         const resbis = await response;
         await fetchAPI();
         await fetchAPIStock();
-        setMessage("Element du stock modifié"+idStock)
+
+         toast.success("Element modifié", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
@@ -103,7 +135,18 @@ function Stock(props) {
         );
         await fetchAPI();
         await fetchAPIStock();
-        setMessage("Element du stock crée")
+
+         toast.success("Element crée", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
 
     });
     const fetchAPI = useCallback(async () => {
@@ -112,7 +155,18 @@ function Stock(props) {
         const response = await fetch(lien.url + "article/byuser/" + idUser,{headers:{Authorization: `Bearer ${str}`}});
         const resbis = await response.json();
         await setArticle(resbis);
-        setMessage("Articles actualisés")
+
+         toast.success("Actualisation", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
         return resbis;
     }, [setArticle]);
     const ajouter = (e) => {

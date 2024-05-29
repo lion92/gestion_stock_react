@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import lien from "../Lien";
 import Article from "./Article";
-import {MessageStore} from "./messageInfo/MessageStore";
+import {Bounce, toast} from "react-toastify";
 
 const ChangePassword = () => {
     const [messageLog, setMessageLog] = useState("");
@@ -15,7 +15,6 @@ const ChangePassword = () => {
     const [probleme, setProbleme] = useState("non connecte");
     const [catcha, setCatcha] = useState("");
     const [catchaColler, setCatchaColler] = useState("");
-    const { message, setMessage } = MessageStore()
     useEffect(() => {
         fetchUerToken();
     }, []);
@@ -25,8 +24,6 @@ const ChangePassword = () => {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             return (true)
         }
-        setEmailError("You have entered an invalid email address!")
-        setMessage("You have entered an invalid email address!")
         return (false)
     }
 
@@ -54,12 +51,34 @@ const ChangePassword = () => {
                     localStorage.setItem("nom", data?.nom)
                     setMessageLog("Code Bon");
                     setProbleme('connecte')
-                    setMessage("connecte")
+                    toast.success("Connecter", {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce
+                    });
                 } else {
+
                     setMessageLog("Deconnecter")
-                    setMessage("Deconnecter")
+                    toast.success("Deconnecter", {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce
+                    });
 
                 }
+
             } else {
                 console.log("error token")
             }
@@ -71,14 +90,46 @@ const ChangePassword = () => {
         e.preventDefault();
         let response = null;
         if (password.length < 3) {
-            setPasswordError("impossible mot de passe trop court minimum 3 caractere")
-            setMessage("impossible mot de passe trop court minimum 3 caractere")
+            setPasswordError("impossible mot de passe trop court min   imum 3 caractere")
+            toast.error("impossible mot de passe trop court min   imum 3 caractere", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
+
         } else if (password2.length < 3) {
-            setPasswordError("impossible mot de passe trop court minimum 3 caractere")
-            setMessage("impossible mot de passe trop court minimum 3 caractere")
+            setPasswordError("impossible mot de passe trop court min   imum 3 caractere")
+            toast.error("impossible mot de passe trop court min   imum 3 caractere", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
+
         } else if ("" + password2 !== "" + password3) {
-            setPasswordError("impossible mot de passe trop court minimum 3 caractere")
-            setMessage("impossible mot de passe trop court minimum 3 caractere")
+            setPasswordError("impossible mot de passe trop court min   imum 3 caractere")
+            toast.error("\"impossible mot de passe trop court min   imum 3 caractere\"", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
         } else {
             response = await fetch(
                 lien.url + "connection/change-pass",
@@ -93,14 +144,38 @@ const ChangePassword = () => {
                         "Content-Type": "application/json",
                     },
                 }).then(value =>
-                    value.text()).then((val)=>{
-                if (""+val === "ok") {
+                value.text()).then((val) => {
+                if ("" + val === "ok") {
                     setMessageLog("PasswordChangé")
-                    setMessage("PasswordChangé")
+
+
+
                 } else {
                     setMessageLog("Un probleme est survenu")
-                    setMessage("Un probleme est survenu")
+                    toast.error("\"Un probleme est survenu\"", {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce
+                    });
+
                 }
+                toast.success(this.message, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce
+                });
             })
         }
 
@@ -123,7 +198,29 @@ const ChangePassword = () => {
                                 setEmail(e.target.value);
                                 if (ValidateEmail(email)) {
                                     setEmailError("")
-                                    setMessage("Email ok")
+                                    toast.success("Email ok", {
+                                        position: "bottom-right",
+                                        autoClose: 5000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        theme: "light",
+                                        transition: Bounce
+                                    });
+                                } else {
+                                    toast.error("Email invalid", {
+                                        position: "bottom-right",
+                                        autoClose: 5000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        theme: "light",
+                                        transition: Bounce
+                                    });
                                 }
                             }}
                                    type={'text'}/>
@@ -133,10 +230,30 @@ const ChangePassword = () => {
                                        if (e.target.value.length < 3) {
                                            setPassword(e.target.value);
                                            setPasswordError("Le mot de passe doit être d'au moins 3 caractère")
-                                           setMessage("Le mot de passe doit être d'au moins 3 caractère")
+                                           toast.success("\"Le mot de passe doit être d'au moins 3 caractère\"", {
+                                               position: "bottom-right",
+                                               autoClose: 5000,
+                                               hideProgressBar: false,
+                                               closeOnClick: true,
+                                               pauseOnHover: true,
+                                               draggable: true,
+                                               progress: undefined,
+                                               theme: "light",
+                                               transition: Bounce
+                                           });
                                        } else {
                                            setPasswordError("")
-                                           setMessage("")
+                                           toast.success("ok", {
+                                               position: "bottom-right",
+                                               autoClose: 5000,
+                                               hideProgressBar: false,
+                                               closeOnClick: true,
+                                               pauseOnHover: true,
+                                               draggable: true,
+                                               progress: undefined,
+                                               theme: "light",
+                                               transition: Bounce
+                                           });
                                            setPassword(e.target.value)
                                        }
                                    }} type={'password'}/>
@@ -146,10 +263,31 @@ const ChangePassword = () => {
                                        if (e.target.value.length < 3) {
                                            setPassword2(e.target.value);
                                            setPasswordError("Le mot de passe doit être d'au moins 3 caractère")
-                                           setMessage("Le mot de passe doit être d'au moins 3 caractère")
+                                           toast.error('Le mot de passe doit être d\'au moins 3 caractère', {
+                                               position: "bottom-right",
+                                               autoClose: 5000,
+                                               hideProgressBar: false,
+                                               closeOnClick: true,
+                                               pauseOnHover: true,
+                                               draggable: true,
+                                               progress: undefined,
+                                               theme: "light",
+                                               transition: Bounce
+                                           });
                                        } else {
                                            setPasswordError("")
-                                           setMessage("")
+
+                                           toast.success("ok", {
+                                               position: "bottom-right",
+                                               autoClose: 5000,
+                                               hideProgressBar: false,
+                                               closeOnClick: true,
+                                               pauseOnHover: true,
+                                               draggable: true,
+                                               progress: undefined,
+                                               theme: "light",
+                                               transition: Bounce
+                                           });
                                            setPassword2(e.target.value)
                                        }
                                    }} type={'password'}/>
@@ -159,10 +297,30 @@ const ChangePassword = () => {
                                        if (e.target.value.length < 3) {
                                            setPassword3(e.target.value);
                                            setPasswordError("Le mot de passe doit être d'au moins 3 caractère")
-                                           setMessage("Le mot de passe doit être d'au moins 3 caractère")
+                                           toast.error('"Le mot de passe doit être d\'au moins 3 caractère"', {
+                                               position: "bottom-right",
+                                               autoClose: 5000,
+                                               hideProgressBar: false,
+                                               closeOnClick: true,
+                                               pauseOnHover: true,
+                                               draggable: true,
+                                               progress: undefined,
+                                               theme: "light",
+                                               transition: Bounce
+                                           });
                                        } else {
                                            setPasswordError("")
-                                           setMessage("")
+                                           toast.success("ok", {
+                                               position: "bottom-right",
+                                               autoClose: 5000,
+                                               hideProgressBar: false,
+                                               closeOnClick: true,
+                                               pauseOnHover: true,
+                                               draggable: true,
+                                               progress: undefined,
+                                               theme: "light",
+                                               transition: Bounce
+                                           });
                                            setPassword3(e.target.value)
                                        }
                                    }} type={'password'}/>

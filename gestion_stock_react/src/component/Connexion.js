@@ -2,8 +2,8 @@ import React, {useCallback, useEffect, useState} from 'react';
 import '../css/form.css'
 import lien from "../Lien";
 import Article from "./Article";
-import {MessageStore} from "./messageInfo/MessageStore";
 import {PaginatedItems} from "./PaginatedItems";
+import {Bounce, toast} from "react-toastify";
 
 const Connexion = () => {
     const [messageLog, setMessageLog] = useState("");
@@ -14,7 +14,6 @@ const Connexion = () => {
     const [probleme, setProbleme] = useState("non connecte");
     const [catcha, setCatcha] = useState("");
     const [catchaColler, setCatchaColler] = useState("");
-    const {message, setMessage} = MessageStore()
     useEffect(() => {
         fetchUerToken();
     }, []);
@@ -22,11 +21,36 @@ const Connexion = () => {
 
     function ValidateEmail(mail) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            setEmailError("email ok")
+            toast.success("email valid", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
             return (true)
+        }else{
+
+            toast.error("email invalid", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
+            return (false)
         }
-        setEmailError("You have entered an invalid email address!")
-        setMessage("You have entered an invalid email address!")
-        return (false)
+
+
     }
 
     let fetchUerToken = useCallback(async (e) => {
@@ -69,7 +93,17 @@ const Connexion = () => {
         let response = null;
         if (password.length < 3) {
             setPasswordError("impossible mot de passe trop court minimum 3 caractere")
-            setMessage("impossible mot de passe trop court minimum 3 caractere")
+             toast.error("impossible mot de passe trop court minimum 3 caractere", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
         } else {
             response = await fetch(
                 lien.url + "connection/login",
@@ -95,18 +129,37 @@ const Connexion = () => {
                     setMessageLog("Code Bon");
                     localStorage.setItem('jwt2', data?.jwt);
                     setProbleme('connecte')
-                    setMessage("Vous êtes connecté")
+                     toast.success("Vous êtes connecté", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
 
                 } else {
                     setMessageLog("Combinaison code et mot de passe incorrect")
-                    setMessage("Combinaison code et mot de passe incorrect")
+                     toast.error("Combinaison code et mot de passe incorrect", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
 
                 }
 
             })
         } catch (e) {
             setMessageLog("Un probleme est survenu ou les identifiants ne sont pas corrects")
-            setMessage("Un probleme est survenu ou les identifiants ne sont pas corrects")
         }
     });
 
@@ -126,7 +179,8 @@ const Connexion = () => {
                                 setEmail(e.target.value);
                                 if (ValidateEmail(email)) {
                                     setEmailError("")
-                                    setMessage("")
+
+
                                 }
                             }}
                                    type={'text'}/>

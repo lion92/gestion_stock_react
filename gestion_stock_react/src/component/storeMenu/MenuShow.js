@@ -1,6 +1,6 @@
 import create from "zustand";
 
 export const MenuShow = create((set) => ({
-    toggle: false,
+    toggle: true,
     toggleState: () => set((state) => ({ toggle: !state.toggle })),
 }));

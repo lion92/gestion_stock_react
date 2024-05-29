@@ -4,9 +4,7 @@ import Calendar from 'react-calendar';
 import lien from "../Lien";
 
 import '../css/article.css'
-import {MessageStore} from "./messageInfo/MessageStore";
-import {PaginatedItems2} from "./PaginatedItems2";
-import {PaginatedItems} from "./PaginatedItems";
+import {Bounce, toast} from "react-toastify";
 
 function Article(props) {
     const [nom, setNom] = useState('');
@@ -17,7 +15,6 @@ function Article(props) {
     const [article, setArticle]=useState([])
     const [idArticle, setIdArticle]=useState(-1)
     const [modalDescription, setModalDescription] = useState(false);
-    const { message, setMessage } = MessageStore()
 
     useEffect( ()=>{
         fetchAPI()
@@ -50,7 +47,17 @@ function Article(props) {
             }
         );
         await fetchAPI();
-        setMessage("Article supprimé")
+        toast.success("\"Article supprimé\"", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce
+        });
 
         const resbis = await response;
     });
@@ -60,7 +67,18 @@ function Article(props) {
         const response = await fetch(lien.url + "article/byuser/" + idUser,{headers:{Authorization: `Bearer ${str}`}});
         const resbis = await response.json();
         await setArticle(resbis);
-        setMessage("Actualisation de la liste des articles")
+
+         toast.success("Actualisation des articles", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
 
         return resbis;
     }, [setArticle]);
@@ -91,7 +109,17 @@ function Article(props) {
         );
         const resbis = await response;
         await fetchAPI();
-        setMessage("Article modifié")
+         toast.success("\"Article modifié\"", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
@@ -116,7 +144,17 @@ function Article(props) {
         );
 
         await fetchAPI();
-        setMessage("Article crée")
+         toast.success("\"Article crée\"", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            });
     });
 
 
