@@ -1,0 +1,64 @@
+/* src/ProfileDashboard.css */
+.profile-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-info, .recent-activities, .profile-settings {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info h3, .recent-activities h3, .profile-settings h3 {
+    margin-top: 0;
+}
+
+.profile-info p, .recent-activities ul {
+    margin: 10px 0;
+}
+
+.recent-activities ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recent-activities ul li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.recent-activities ul li:last-child {
+    border-bottom: none;
+}
+
+.profile-settings button {
+    margin: 10px 5px 0;
+    padding: 10px 20px;
+    background-color: #1e90ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-settings button:hover {
+    background-color: #1c86ee;
+}

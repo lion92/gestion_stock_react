@@ -74,7 +74,7 @@ const Connexion = () => {
 
                 if (!isNaN(data?.id)) {
                     localStorage.setItem("utilisateur", data?.id);
-                    localStorage.setItem("nom", data?.nom)
+
                     setMessageLog("Code Bon");
                     setProbleme('connecte')
                 } else {
@@ -126,6 +126,8 @@ const Connexion = () => {
 
                 if (!isNaN(data?.id)) {
                     localStorage.setItem("utilisateur", data?.id);
+                    localStorage.setItem("email",email)
+                    localStorage.setItem("nom", data?.nom)
                     setMessageLog("Code Bon");
                     localStorage.setItem('jwt2', data?.jwt);
                     setProbleme('connecte')

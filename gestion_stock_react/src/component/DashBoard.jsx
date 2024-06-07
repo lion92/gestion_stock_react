@@ -169,9 +169,6 @@ function DashBoard(props) {
                     <li><NavLink to={"/inscription"}>
                         Inscription
                     </NavLink></li>
-                    <li><NavLink to={"/changepass"}>
-                        Modifier psw
-                    </NavLink></li>
                     <li><NavLink to={"/ajoutArticle"}>
                         Article
                     </NavLink></li>
@@ -180,6 +177,9 @@ function DashBoard(props) {
                     </NavLink></li>
                     <li><NavLink to={"/vente"}>
                         Vente
+                    </NavLink></li>
+                    <li><NavLink to={"/profil"}>
+                        Profil
                     </NavLink></li>
 
 
@@ -197,6 +197,7 @@ function DashBoard(props) {
                         localStorage.removeItem("utilisateur");
 
                         localStorage.removeItem("nom");
+                        localStorage.removeItem("email")
                             toast.success("Deconnexion", {
                                 position: "bottom-right",
                                 autoClose: 5000,

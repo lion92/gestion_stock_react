@@ -9,6 +9,8 @@ import DashBoardStock from "./component/DashBoardStock";
 import DashBoardInscription from "./component/DashBoardInscription";
 import DashBoardVente from "./component/DashBoardVente";
 import DashBoardChangePassword from "./component/DashBoardChangePassword";
+import ProfileDashboard from "./component/ProfileDashboard";
+
 
 const Root = () => (
     <Router>
@@ -19,6 +21,7 @@ const Root = () => (
             <Route exact path="/inscription" component={DashBoardInscription}/>
             <Route exact path="/vente" component={DashBoardVente}/>
             <Route exact path="/changepass" component={DashBoardChangePassword}/>
+            <Route exact path="/profil" component={ProfileDashboard}/>
             <Route component={NotFound}/>
         </Switch>
     </Router>
